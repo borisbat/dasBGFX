@@ -409,7 +409,7 @@ struct bgfx_init_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_init_s>
 	bgfx_init_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_init_s", ml) {
 	}
 	void init () {
-		addField<DAS_BIND_MANAGED_FIELD(type)>("type","type");
+		addField<DAS_BIND_MANAGED_FIELD(type)>("_type","type");
 		addField<DAS_BIND_MANAGED_FIELD(vendorId)>("vendorId","vendorId");
 		addField<DAS_BIND_MANAGED_FIELD(deviceId)>("deviceId","deviceId");
 		addField<DAS_BIND_MANAGED_FIELD(capabilities)>("capabilities","capabilities");

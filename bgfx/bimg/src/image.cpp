@@ -4799,6 +4799,7 @@ namespace bimg
 		case TextureFormat::ASTC10x5:
 			if (BX_ENABLED(BIMG_DECODE_ASTC) )
 			{
+			#if BIMG_DECODE_ASTC
 				if (!astc_codec::ASTCDecompressToRGBA(
 					  (const uint8_t*)_src
 					, imageGetSize(NULL, uint16_t(_width), uint16_t(_height), 0, false, false, 1, _srcFormat)
@@ -4817,6 +4818,10 @@ namespace bimg
 				{
 					imageCheckerboard(_dst, _width, _height, 16, UINT32_C(0xff000000), UINT32_C(0xffffff00) );
 				}
+			#else
+				BX_WARN(false, "ASTC decoder is disabled (BIMG_DECODE_ASTC).");
+				imageCheckerboard(_dst, _width, _height, 16, UINT32_C(0xff000000), UINT32_C(0xff00ff00) );
+			#endif
 			}
 			else
 			{

@@ -125,7 +125,11 @@ namespace bx
 		va_end(argList);
 	}
 
+#ifdef _MSC_VER
+#define DBG_ADDRESS "%p"
+#else
 #define DBG_ADDRESS "%" PRIxPTR
+#endif
 
 	void debugPrintfData(const void* _data, uint32_t _size, const char* _format, ...)
 	{
