@@ -4,8 +4,6 @@ require daslib/safe_addr
 require daslib/math_boost
 require dasbgfx/bgfx_boost
 
-require fio
-
 struct PosColorVertex
     xyz  : float3
 	argb : uint
@@ -35,27 +33,6 @@ let cubeTriList = [[int
 	2; 3; 6;
 	6; 3; 7
 ]]
-
-def load_shader ( fileName:string )
-    var sha : bgfx_shader_handle_s
-    fopen(fileName,"rb") <| $ ( f )
-        if f==null
-            panic("can't open {fileName}")
-        fmap(f) <| $ ( data )
-            var mem = bgfx_alloc(uint(length(data)))
-            var arr : array<uint8>
-            unsafe
-                _builtin_make_temp_array(arr, mem.data, int(mem.size) )
-            for d,s in arr,data
-                d = s
-            sha = bgfx_create_shader(mem)
-    return sha
-
-def bgfx_make_ref ( arr:array<auto(TT)> )
-    return bgfx_make_ref(safe_addr(arr[0]), uint(length(arr)*typeinfo(sizeof type<TT>)))
-
-def bgfx_make_ref ( arr:auto(TT)[] )
-    return bgfx_make_ref(safe_addr(arr[0]), uint(length(arr)*typeinfo(sizeof type<TT>)))
 
 [export]
 def main
@@ -102,8 +79,8 @@ def main
     var vbh = bgfx_create_vertex_buffer(bgfx_make_ref(cubeVertices), safe_addr(pcvl_decl), BGFX_BUFFER_NONE)
     var ibh = bgfx_create_index_buffer(bgfx_make_ref(cubeTriList), BGFX_BUFFER_INDEX32)
 
-    var vsh = load_shader("vs_cubes.bin");
-    var fsh = load_shader("fs_cubes.bin");
+    var vsh = bgfx_load_shader("vs_cubes.bin");
+    var fsh = bgfx_load_shader("fs_cubes.bin");
     var program = bgfx_create_program(vsh, fsh, true)
 
     bgfx_set_view_clear(0u, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x443355FF, 1.0f, 0u)
