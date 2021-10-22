@@ -17,6 +17,7 @@ using namespace das;
 
 #if USE_GENERATED
 #include "bgfx_headers.h"
+#include "bx/math.h"
 
 MAKE_EXTERNAL_TYPE_FACTORY(bgfx_encoder_s,bgfx_encoder_s);
 
@@ -48,6 +49,12 @@ void Das_bgfx_dbg_text_printf(uint16_t _x, uint16_t _y, uint8_t _attr, const cha
     bgfx_dbg_text_printf(_x, _y, _attr, "%s", text );
 }
 
+float4x4 Das_bgfx_projection ( float angleD, float w, float h, float zn, float zf, bool HD, bool lh ) {
+    float4x4 proj;
+    bx::mtxProj((float *)&proj, angleD, w / h, zn, zf, HD, lh ? bx::Handness::Left : bx::Handness::Right);
+    return proj;
+}
+
 #endif
 
 Module_BGFX::Module_BGFX() : Module("bgfx") {
@@ -64,6 +71,9 @@ Module_BGFX::Module_BGFX() : Module("bgfx") {
 
     addExtern<DAS_BIND_FUN(Das_bgfx_dbg_text_printf)>(*this, lib, "bgfx_dbg_text_printf",SideEffects::worstDefault, "Das_bgfx_dbg_text_printf")
         ->args({"_x","_y","_attr","text"});
+
+    addExtern<DAS_BIND_FUN(Das_bgfx_projection), SimNode_ExtFuncCallAndCopyOrMove>(*this, lib, "bgfx_mat_projection",SideEffects::worstDefault, "Das_bgfx_projection")
+        ->args({"angleD","w","h","zn","zf","homogeneousNdc","leftHanded"});
 
     // we are fixing raw 'storage type' arguments
     for ( auto fn : this->functions ) {

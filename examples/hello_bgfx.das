@@ -24,14 +24,14 @@ def main
     pd.nwh = glfwGetWin32Window(window)
     bgfx_set_platform_data(safe_addr(pd))
 
-    var bgfxInit: bgfx_init_s
-    bgfx_init_ctor(safe_addr(bgfxInit))
+    var init: bgfx_init_s
+    bgfx_init_ctor(safe_addr(init))
 
-    bgfxInit._type = bgfx_renderer_type BGFX_RENDERER_TYPE_COUNT
-    bgfxInit.resolution.width = uint(WNDW_WIDTH)
-    bgfxInit.resolution.height = uint(WNDW_HEIGHT)
-    bgfxInit.resolution.reset = BGFX_RESET_VSYNC
-    bgfx_init(safe_addr(bgfxInit))
+    init._type = bgfx_renderer_type BGFX_RENDERER_TYPE_COUNT
+    init.resolution.width = uint(WNDW_WIDTH)
+    init.resolution.height = uint(WNDW_HEIGHT)
+    init.resolution.reset = BGFX_RESET_VSYNC
+    bgfx_init(safe_addr(init))
 
     bgfx_set_view_clear(0u, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x443355FF, 1.0f, 0u)
 
@@ -54,5 +54,6 @@ def main
 		bgfx_dbg_text_printf(1u, 1u, 0x0f, "Hello BGFX")
 
         bgfx_frame(true)
+
 
     bgfx_shutdown()
