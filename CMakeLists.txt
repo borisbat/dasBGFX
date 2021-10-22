@@ -1,0 +1,44 @@
+
+IF (NOT DAS_BGFX_INCLUDED)
+    SET(DAS_BGFX_INCLUDED TRUE)
+    MESSAGE(STATUS "dasBgfx module included.")
+
+	SET(DAS_BGFX_DIR ${CMAKE_SOURCE_DIR}/modules/dasBGFX)
+	SET(DAS_BX_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/modules/dasBGFX/bgfx/bx/include)
+	SET(DAS_BGFX_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/modules/dasBGFX/bgfx/bgfx/include)
+	SET(DAS_BIMG_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/modules/dasBGFX/bgfx/bimg/include)
+
+    LIST(APPEND CMAKE_MODULE_PATH ${DAS_BGFX_DIR})
+
+	# libBGFX
+	SET(LIB_BGFX_SRC
+		${DAS_BGFX_DIR}/bgfx/bgfx/src/amalgamated.cpp
+	)
+
+	# libDasModuleBGFX
+	SET(DAS_BGFX_MODULE_SRC
+		${DAS_BGFX_DIR}/src/dasBGFX.h
+		${DAS_BGFX_DIR}/src/dasBGFX.cpp
+	)
+
+	ADD_MODULE_LIB(libDasModuleBGFX)
+	ADD_MODULE_CPP(BGFX)
+	# ADD_MODULE_NATIVE(stbimage_boost)
+	ADD_LIBRARY(libDasModuleBGFX ${DAS_BGFX_MODULE_SRC} ${LIB_BGFX_SRC})
+	TARGET_LINK_LIBRARIES(libDasModuleBGFX ${BGFX_LIBRARIES})
+	ADD_DEPENDENCIES(libDasModuleBGFX libDaScript)
+	TARGET_INCLUDE_DIRECTORIES(libDasModuleBGFX PUBLIC ${DAS_BX_INCLUDE_DIR} ${DAS_BGFX_INCLUDE_DIR} ${DAS_BIMG_INCLUDE_DIR})
+	SETUP_CPP11(libDasModuleBGFX)
+
+	# GENERATE BGFIX
+	DAS_CPP_BIND_AST(
+		BGFX_GENERATE
+		generate_bgfx.das
+		${DAS_BGFX_DIR}/src/bgfx_headers.h
+		${DAS_BGFX_DIR}/src/module_bgfx
+		${DAS_BGFX_DIR}/src
+		"${DAS_BGFX_INCLUDE_DIR}"
+		"."
+	)
+
+ENDIF()
