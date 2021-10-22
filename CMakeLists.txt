@@ -12,7 +12,7 @@ IF (NOT DAS_BGFX_INCLUDED)
 
 	# libBGFX
 	SET(LIB_BGFX_SRC
-		${DAS_BGFX_DIR}/bgfx/bgfx/src/amalgamated.cpp
+	#	${DAS_BGFX_DIR}/bgfx/bgfx/src/amalgamated.cpp
 	)
 
 	# libDasModuleBGFX

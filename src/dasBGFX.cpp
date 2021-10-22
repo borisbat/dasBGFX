@@ -13,7 +13,7 @@ using namespace das;
         } \
     };
 
-#define USE_GENERATED   1
+#define USE_GENERATED   0
 
 #if USE_GENERATED
 #include "bgfx_headers.h"
