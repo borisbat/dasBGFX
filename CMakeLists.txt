@@ -32,6 +32,14 @@ IF (NOT DAS_BGFX_INCLUDED)
 	SET(DAS_BGFX_MODULE_SRC
 		${DAS_BGFX_DIR}/src/dasBGFX.h
 		${DAS_BGFX_DIR}/src/dasBGFX.cpp
+		${DAS_BGFX_DIR}/src/need_bgfx.h
+		${DAS_BGFX_DIR}/src/module_bgfx.ann.cpp_inc
+		${DAS_BGFX_DIR}/src/module_bgfx.ann.inc
+		${DAS_BGFX_DIR}/src/module_bgfx.enum.cpp_inc
+		${DAS_BGFX_DIR}/src/module_bgfx.enum.inc
+		${DAS_BGFX_DIR}/src/module_bgfx.h
+		${DAS_BGFX_DIR}/src/module_bgfx.inc
+		${DAS_BGFX_DIR}/src/module_bgfx.method.inc
 	)
 
 	ADD_MODULE_LIB(libDasModuleBGFX)
@@ -53,6 +61,8 @@ IF (NOT DAS_BGFX_INCLUDED)
 	)
 	SETUP_CPP11(libDasModuleBGFX)
 
+	ADD_MODULE_DAS(dasbgfx dasbgfx bgfx_boost)
+
 	# GENERATE BGFIX
 	DAS_CPP_BIND_AST(
 		BGFX_GENERATE
@@ -61,7 +71,7 @@ IF (NOT DAS_BGFX_INCLUDED)
 		${DAS_BGFX_DIR}/src/module_bgfx
 		${DAS_BGFX_DIR}/src
 		"${DAS_BGFX_INCLUDE_DIR}"
-		"."
+		"${DAS_BGFX_INCLUDE_DIR}/bgfx/defines.h"
 	)
 
 ENDIF()

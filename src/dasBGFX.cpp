@@ -3,6 +3,8 @@
 #include "daScript/daScript.h"
 #include "daScript/ast/ast_typefactory_bind.h"
 
+#include "need_bgfx.h"
+
 using namespace das;
 
 #define BGFX_CAST_HANDLE_TYPE(tname) \
@@ -12,8 +14,6 @@ using namespace das;
             return *((tname *) x->evalPtr(ctx)); \
         } \
     };
-
-#define USE_GENERATED   1
 
 #if USE_GENERATED
 #include "bgfx_headers.h"
@@ -42,39 +42,45 @@ BGFX_CAST_HANDLE_TYPE(bgfx_shader_handle_t);
 
 namespace das {
 
+#if USE_GENERATED
+
 void Das_bgfx_dbg_text_printf(uint16_t _x, uint16_t _y, uint8_t _attr, const char* text ) {
     bgfx_dbg_text_printf(_x, _y, _attr, "%s", text );
 }
 
-class Module_BGFX : public Module {
-public:
-    Module_BGFX() : Module("bgfx") {
-        ModuleLibrary lib;
-        lib.addModule(this);
-        lib.addBuiltInModule();
-#if USE_GENERATED
-        addAnnotation(make_smart<DummyTypeAnnotation>("bgfx_encoder_s", "bgfx_encoder_s",1,1));
-
-        #include "module_bgfx.enum.inc"
-        #include "module_bgfx.ann.inc"
-        #include "module_bgfx.inc"
-
-        addExtern<DAS_BIND_FUN(Das_bgfx_dbg_text_printf)>(*this, lib, "bgfx_dbg_text_printf",SideEffects::worstDefault, "Das_bgfx_dbg_text_printf")
-            ->args({"_x","_y","_attr","text"});
-
-        addConstant(*this,"BGFX_RESET_VSYNC",BGFX_RESET_VSYNC);
-
-        addConstant(*this,"BGFX_CLEAR_COLOR", BGFX_CLEAR_COLOR);
-        addConstant(*this,"BGFX_CLEAR_DEPTH", BGFX_CLEAR_DEPTH);
-
-        addConstant(*this,"BGFX_DEBUG_TEXT", BGFX_DEBUG_TEXT);
 #endif
+
+Module_BGFX::Module_BGFX() : Module("bgfx") {
+    ModuleLibrary lib;
+    lib.addModule(this);
+    lib.addBuiltInModule();
+#if USE_GENERATED
+    addAnnotation(make_smart<DummyTypeAnnotation>("bgfx_encoder_s", "bgfx_encoder_s",1,1));
+
+    #include "module_bgfx.enum.inc"
+    #include "module_bgfx.ann.inc"
+    #include "module_bgfx.inc"
+    #include "module_bgfx.const_inc"
+
+    addExtern<DAS_BIND_FUN(Das_bgfx_dbg_text_printf)>(*this, lib, "bgfx_dbg_text_printf",SideEffects::worstDefault, "Das_bgfx_dbg_text_printf")
+        ->args({"_x","_y","_attr","text"});
+
+    // we are fixing raw 'storage type' arguments
+    for ( auto fn : this->functions ) {
+        const auto&  pfn = fn.second;
+        for ( auto & arg : pfn->arguments ) {
+            if ( arg->type->isSimpleType(Type::tUInt8) || arg->type->isSimpleType(Type::tUInt16) ) {
+                arg->type->baseType = Type::tUInt;
+            }
+        }
     }
-    virtual ModuleAotType aotRequire ( TextWriter & tw ) const override {
-        tw << "#include \"../modules/dasBGFX/src/dasBGFX.h\"\n";
-        return ModuleAotType::cpp;
-    }
-};
+
+#endif
+}
+ModuleAotType Module_BGFX::aotRequire ( TextWriter & tw ) const {
+    tw << "#include \"../modules/dasBGFX/src/dasBGFX.h\"\n";
+    return ModuleAotType::cpp;
+}
 
 }
 

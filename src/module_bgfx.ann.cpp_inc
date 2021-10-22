@@ -194,7 +194,7 @@ struct bgfx_uniform_info_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(name)>("name","name");
-		addField<DAS_BIND_MANAGED_FIELD(type)>("type","type");
+		addField<DAS_BIND_MANAGED_FIELD(type)>("_type","type");
 		addField<DAS_BIND_MANAGED_FIELD(num)>("num","num");
 	}
 };

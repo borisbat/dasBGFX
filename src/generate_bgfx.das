@@ -53,3 +53,29 @@ def main
     var args <- get_command_line_arguments()
     bindHeaders(args[3], args[4])
 
+    /*
+    const_type_table <- {{
+        "BGFX_STATE_DEPTH_TEST_SHIFT" => "uint64_t";
+        "BGFX_STATE_BLEND_SHIFT" => "uint64_t";
+        "BGFX_STATE_BLEND_EQUATION_SHIFT" => "uint64_t";
+        "BGFX_STATE_CULL_SHIFT" => "uint64_t";
+        "BGFX_STATE_ALPHA_REF_SHIFT" => "uint64_t";
+        "BGFX_STATE_PT_SHIFT" => "uint64_t";
+        "BGFX_STATE_RESERVED_SHIFT" => "uint64_t";
+
+        "BGFX_STENCIL_FUNC_REF_SHIFT" => "uint32_t";
+        "BGFX_STENCIL_FUNC_RMASK_SHIFT" => "uint32_t";
+        "BGFX_STENCIL_TEST_SHIFT" => "uint32_t";
+        "BGFX_STENCIL_OP_FAIL_S_SHIFT" => "uint32_t";
+        "BGFX_STENCIL_OP_FAIL_Z_SHIFT" => "uint32_t";
+        "BGFX_STENCIL_OP_PASS_Z_SHIFT" => "uint32_t"
+    }}
+    */
+
+    const_uint8_type = "uint32_t"
+    const_uint16_type = "uint32_t"
+
+    print("consts headers to bind: ${args[5]}\n")
+    genDefineConstants(split(args[5], ";"), args[4])
+
+
