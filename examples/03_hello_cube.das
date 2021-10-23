@@ -37,6 +37,8 @@ let cubeTriList = [[int
 [export]
 def main
 
+    print("vertex size is {typeinfo(sizeof type<PosColorVertex>)}\n")
+
     let WNDW_WIDTH = 1280
     let WNDW_HEIGHT = 720
 
@@ -72,7 +74,7 @@ def main
             safe_addr(pcvl_decl)
         |>  bgfx_vertex_layout_begin(render_type)
         |>  bgfx_vertex_layout_add(bgfx_attrib BGFX_ATTRIB_POSITION, 3u, bgfx_attrib_type BGFX_ATTRIB_TYPE_FLOAT, false, false)
-        |>  bgfx_vertex_layout_add(bgfx_attrib BGFX_ATTRIB_COLOR0,   4u, bgfx_attrib_type BGFX_ATTRIB_TYPE_UINT8, false, false)
+        |>  bgfx_vertex_layout_add(bgfx_attrib BGFX_ATTRIB_COLOR0,   4u, bgfx_attrib_type BGFX_ATTRIB_TYPE_UINT8, true, false)
         |>  bgfx_vertex_layout_end
     )
 
@@ -94,6 +96,8 @@ def main
         let aspect = display_h!=0 ? float(display_w)/float(display_h) : 1.
 
         bgfx_set_view_rect(0u, 0u, 0u, uint(display_w), uint(display_h))
+
+        // bgfx_touch(0)
 
         let t = glfwGetTime()
         if t > 10lf
