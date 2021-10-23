@@ -63,15 +63,17 @@ IF (NOT DAS_BGFX_INCLUDED)
 
 	ADD_MODULE_DAS(dasbgfx dasbgfx bgfx_boost)
 
-	# GENERATE BGFIX
-	DAS_CPP_BIND_AST(
-		BGFX_GENERATE
-		generate_bgfx.das
-		${DAS_BGFX_DIR}/src/bgfx_headers.h
-		${DAS_BGFX_DIR}/src/module_bgfx
-		${DAS_BGFX_DIR}/src
-		"${DAS_BGFX_INCLUDE_DIR}"
-		"${DAS_BGFX_INCLUDE_DIR}/bgfx/defines.h"
-	)
+	IF(WIN32)
+		# GENERATE BGFIX
+		DAS_CPP_BIND_AST(
+			BGFX_GENERATE
+			generate_bgfx.das
+			${DAS_BGFX_DIR}/src/bgfx_headers.h
+			${DAS_BGFX_DIR}/src/module_bgfx
+			${DAS_BGFX_DIR}/src
+			"${DAS_BGFX_INCLUDE_DIR}"
+			"${DAS_BGFX_INCLUDE_DIR}/bgfx/defines.h"
+		)
+	ENDIF()
 
 ENDIF()
