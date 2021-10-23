@@ -36,9 +36,6 @@ let cubeTriList = [[int
 
 [export]
 def main
-
-    print("vertex size is {typeinfo(sizeof type<PosColorVertex>)}\n")
-
     let WNDW_WIDTH = 1280
     let WNDW_HEIGHT = 720
 
@@ -59,7 +56,8 @@ def main
     var init : bgfx_init_s
     bgfx_init_ctor(safe_addr(init))
 
-    init._type = bgfx_renderer_type BGFX_RENDERER_TYPE_OPENGL // BGFX_RENDERER_TYPE_COUNT
+    // init._type = bgfx_renderer_type BGFX_RENDERER_TYPE_OPENGL
+    init._type = bgfx_renderer_type BGFX_RENDERER_TYPE_COUNT
     init.resolution.width = uint(WNDW_WIDTH)
     init.resolution.height = uint(WNDW_HEIGHT)
     init.resolution.reset = BGFX_RESET_VSYNC
@@ -81,8 +79,13 @@ def main
     var vbh = bgfx_create_vertex_buffer(bgfx_make_ref(cubeVertices), safe_addr(pcvl_decl), BGFX_BUFFER_NONE)
     var ibh = bgfx_create_index_buffer(bgfx_make_ref(cubeTriList), BGFX_BUFFER_INDEX32)
 
-    var vsh = bgfx_load_shader("vs_cubes.bin");
-    var fsh = bgfx_load_shader("fs_cubes.bin");
+    if !bgfx_compile_shader_file ( "vs_cubes.sc", "vs_cubes.bin", "v", render_type )
+        panic("can't compile vs_cubes.sc")
+    if !bgfx_compile_shader_file ( "fs_cubes.sc", "fs_cubes.bin", "f", render_type )
+        panic("can't compile fs_cubes.sc")
+
+    var vsh = bgfx_load_shader_from_bin("vs_cubes.bin");
+    var fsh = bgfx_load_shader_from_bin("fs_cubes.bin");
     var program = bgfx_create_program(vsh, fsh, true)
 
     bgfx_set_view_clear(0u, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x443355FF, 1.0f, 0u)
@@ -120,3 +123,6 @@ def main
         bgfx_frame(true)
 
     bgfx_shutdown()
+
+options debugger
+require daslib/debug
