@@ -11,6 +11,8 @@ require daslib/strings_boost
 require daslib/algorithm
 require fio
 
+require dasbgfx/bgfx_boost_internal public
+
 let VERBOSE_COMPILER = false
 
 def bgfx_create_shader_program ( vs, vd, fs, fd : string; render_type : bgfx_renderer_type )
