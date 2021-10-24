@@ -4,6 +4,21 @@ require daslib/safe_addr
 require daslib/math_boost
 require dasbgfx/bgfx_boost
 
+require dasbgfx/glsl_bgfx
+
+var [[inout, semantics=COLOR0]] v_color0   : float4 = float4(1.,0.,0.,1.)
+var [[in, semantics=POSITION]]  a_position : float3
+var [[in, semantics=COLOR0]]    a_color0   : float4
+
+[bgfx_fragment_program(name="FRAGMENT_SRC",version=330)]
+def fs_cube_main
+    gl_FragColor = v_color0
+
+[bgfx_vertex_program(name="VERTEX_SRC",version=330)]
+def vs_cube_main
+	gl_Position = u_modelViewProj * float4(a_position * 1.25, 1.0)
+	v_color0 = a_color0
+
 struct PosColorVertex
     xyz  : float3
 	argb : uint
@@ -56,7 +71,7 @@ def main
     var init : bgfx_init_s
     bgfx_init_ctor(safe_addr(init))
 
-    // init._type = bgfx_renderer_type BGFX_RENDERER_TYPE_OPENGL
+    //init._type = bgfx_renderer_type BGFX_RENDERER_TYPE_OPENGL
     init._type = bgfx_renderer_type BGFX_RENDERER_TYPE_COUNT
     init.resolution.width = uint(WNDW_WIDTH)
     init.resolution.height = uint(WNDW_HEIGHT)
@@ -79,14 +94,7 @@ def main
     var vbh = bgfx_create_vertex_buffer(bgfx_make_ref(cubeVertices), safe_addr(pcvl_decl), BGFX_BUFFER_NONE)
     var ibh = bgfx_create_index_buffer(bgfx_make_ref(cubeTriList), BGFX_BUFFER_INDEX32)
 
-    if !bgfx_compile_shader_file ( "vs_cubes.sc", "vs_cubes.bin", "v", render_type )
-        panic("can't compile vs_cubes.sc")
-    if !bgfx_compile_shader_file ( "fs_cubes.sc", "fs_cubes.bin", "f", render_type )
-        panic("can't compile fs_cubes.sc")
-
-    var vsh = bgfx_load_shader_from_bin("vs_cubes.bin");
-    var fsh = bgfx_load_shader_from_bin("fs_cubes.bin");
-    var program = bgfx_create_program(vsh, fsh, true)
+    var program = bgfx_create_shader_program(VERTEX_SRC, VERTEX_SRC_DECL, FRAGMENT_SRC, FRAGMENT_SRC_DECL, render_type)
 
     bgfx_set_view_clear(0u, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x443355FF, 1.0f, 0u)
 
@@ -100,7 +108,7 @@ def main
 
         bgfx_set_view_rect(0u, 0u, 0u, uint(display_w), uint(display_h))
 
-        // bgfx_touch(0)
+        bgfx_touch(0u)
 
         let t = glfwGetTime()
         if t > 10lf
@@ -124,5 +132,3 @@ def main
 
     bgfx_shutdown()
 
-options debugger
-require daslib/debug

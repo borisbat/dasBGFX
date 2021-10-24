@@ -62,6 +62,8 @@ IF (NOT DAS_BGFX_INCLUDED)
 	SETUP_CPP11(libDasModuleBGFX)
 
 	ADD_MODULE_DAS(dasbgfx dasbgfx bgfx_boost)
+	ADD_MODULE_DAS(dasbgfx dasbgfx glsl_bgfx)
+	ADD_MODULE_DAS(dasbgfx dasbgfx glsl_internal_bgfx)
 
 	IF(WIN32)
 		# GENERATE BGFIX

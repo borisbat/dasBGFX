@@ -7,10 +7,42 @@ module bgfx_boost shared public
 require bgfx public
 
 require daslib/safe_addr
-
+require daslib/strings_boost
+require daslib/algorithm
 require fio
 
-let VERBOSE_COMPILER = true
+let VERBOSE_COMPILER = false
+
+def bgfx_create_shader_program ( vs, vd, fs, fd : string; render_type : bgfx_renderer_type )
+    var vda <- split(vd,"\n")
+    var pda <- split(fd,"\n")
+    var vpda <- combine(vda, pda)
+    sort_unique(vpda)
+    delete vda
+    delete pda
+    let temp_dir = "{get_das_root()}/temp"
+    mkdir(temp_dir)
+    fopen("{temp_dir}/varying.def.sc","wb") <| $ ( fdef )
+        for t in vpda
+            if length(t)>0
+                fwrite(fdef, "{t}\n")
+    delete vpda
+    let vs_name = "{temp_dir}/vertex.sh"
+    fopen(vs_name,"wb") <| $ ( fvtx )
+        fwrite ( fvtx, vs )
+    let fs_name = "{temp_dir}/fragment.sh"
+    fopen(fs_name,"wb") <| $ ( ffrag )
+        fwrite ( ffrag, fs )
+    let vs_bin_name = "{temp_dir}/vertex.bin"
+    if !bgfx_compile_shader_file ( vs_name, vs_bin_name, "v", render_type )
+        panic("can't compile {vs_name}")
+    let fs_bin_name = "{temp_dir}/fragment.bin"
+    if !bgfx_compile_shader_file ( fs_name, fs_bin_name, "f", render_type )
+        panic("can't compile {fs_name}")
+    var vsh = bgfx_load_shader_from_bin(vs_bin_name);
+    var fsh = bgfx_load_shader_from_bin(fs_bin_name);
+    return bgfx_create_program(vsh, fsh, true)
+
 
 def public bgfx_compile_shader_file ( fin, fout, ftype:string; rt : bgfx_renderer_type )
     var platform = ""
@@ -56,14 +88,17 @@ def public bgfx_compile_shader_file ( fin, fout, ftype:string; rt : bgfx_rendere
     if VERBOSE_COMPILER
         print("{sys}\n")
     unsafe
+        var text : array<string>
         let ex_code = popen(sys) <| $ ( f )
             if f != null
                 while !feof(f)
                     let st = fgets(f)
-                    if VERBOSE_COMPILER
-                        print("{st}")
+                    text |> push(st)
             else
                 print("das: can't open\n")
+        if ex_code!=0 || VERBOSE_COMPILER
+            for t in text
+                print(t)
         if VERBOSE_COMPILER
             print("exit code {ex_code}\n")
         return ex_code==0
