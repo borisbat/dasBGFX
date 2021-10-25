@@ -12,11 +12,20 @@ require daslib/algorithm
 require math
 require fio
 
-require glsl/glsl_common
-
 require dasbgfx/bgfx_boost_internal public
+require dasbgfx/glsl_bgfx public
 
 let VERBOSE_COMPILER = false
+
+def UCOLOR_TO_BGFX_UCOLOR ( col:uint )
+    let r = (col & 0x00ff0000) >> 16u
+    let g = (col & 0x0000ff00) >> 8u
+    let b = (col & 0x000000ff)
+    let a = (col & 0xff000000) >> 24u
+    return (b<<24u) | (g<<16u) | (r<<8u) | (a)
+
+def RGBA_TO_BGFX_UCOLOR(r,g,b,a:float)
+    return pack_float_to_byte(float4(a,b,g,r)*255.)
 
 struct private BgfxUniform
     handle : bgfx_uniform_handle_s
@@ -114,7 +123,6 @@ def public bgfx_create_shader_program ( vs, vd, fs, fd : string; render_type : b
     var vsh = bgfx_load_shader_from_bin(vs_bin_name);
     var fsh = bgfx_load_shader_from_bin(fs_bin_name);
     return bgfx_create_program(vsh, fsh, true)
-
 
 def public bgfx_compile_shader_file ( fin, fout, ftype:string; rt : bgfx_renderer_type )
     var platform = ""

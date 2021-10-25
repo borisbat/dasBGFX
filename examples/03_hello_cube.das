@@ -6,7 +6,7 @@ require dasbgfx/bgfx_boost
 
 require dasbgfx/glsl_bgfx
 
-var [[inout, semantics=COLOR0]] v_color0   : float4 = float4(1.,0.,0.,1.)
+var [[inout, semantics=COLOR0]] v_color0   : float4
 var [[in, semantics=POSITION]]  a_position : float3
 var [[in, semantics=COLOR0]]    a_color0   : float4
 
@@ -112,4 +112,3 @@ def main
 		bgfx_dbg_text_printf(1u, 1u, 0x0f, "Hello BGFX")
         bgfx_frame(true)
     bgfx_shutdown()
-

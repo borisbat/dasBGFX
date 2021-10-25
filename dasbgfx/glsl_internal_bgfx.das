@@ -15,7 +15,8 @@ class GlslBgfxShader : GlslShader
     override output_inout_decl = true
     override output_shader_lines = false
     override replace_hlsl_incompatible_operations = true
-    override restrict_uniform_types = true      // only vec4, mat3x3 and mat4x4
+    override restrict_uniform_types = true                      // only vec4, mat3x3 and mat4x4
+    override restrict_vertex_attribute_names = true             // only a_position, a_color0, etc
     override glsl_prefix = "\n#include <bgfx_shader.sh>\n\n"
     def override generate_bind_uniform_dummy ( var func:FunctionPtr )
         generate_bgfx_bind_uniform_dummy(func)
