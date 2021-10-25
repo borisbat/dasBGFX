@@ -10,9 +10,12 @@ var [[inout, semantics=COLOR0]] v_color0   : float4 = float4(1.,0.,0.,1.)
 var [[in, semantics=POSITION]]  a_position : float3
 var [[in, semantics=COLOR0]]    a_color0   : float4
 
+var [[uniform]] u_colorFactor : float4[2]
+
 [bgfx_fragment_program(name="FRAGMENT_SRC")]
 def fs_cube_main
-    gl_FragColor = v_color0
+    gl_FragColor.xyz = v_color0.xyz * u_colorFactor[0].xyz + u_colorFactor[1].xyz
+    gl_FragColor.w = 1.
 
 [bgfx_vertex_program(name="VERTEX_SRC")]
 def vs_cube_main
@@ -98,8 +101,12 @@ def main
         let v_projection = bgfx_mat_projection(60., 1280., 720., 0.1, 100., bgfx_get_caps().homogeneousDepth,true)
         bgfx_set_view_transform(0u, safe_addr(v_view), safe_addr(v_projection))
         bgfx_set_transform(safe_addr(v_model), 1u)
+        u_colorFactor[0] = float4(1.,2.,3.,4.)
+        u_colorFactor[1] = float4(.25,.25,.25,.25)
         bgfx_set_vertex_buffer(0u, vbh, 0u, uint(length(cubeVertices)))
         bgfx_set_index_buffer(ibh, 0u, uint(length(cubeTriList)))
+        vs_cube_main_bind_uniform()
+        fs_cube_main_bind_uniform()
         bgfx_submit(0u, program, 1u, BGFX_DISCARD_NONE)
 		bgfx_dbg_text_clear(0u, false)
 		bgfx_dbg_text_printf(1u, 1u, 0x0f, "Hello BGFX")

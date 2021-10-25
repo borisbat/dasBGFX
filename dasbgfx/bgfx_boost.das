@@ -9,13 +9,83 @@ require bgfx public
 require daslib/safe_addr
 require daslib/strings_boost
 require daslib/algorithm
+require math
 require fio
+
+require glsl/glsl_common
 
 require dasbgfx/bgfx_boost_internal public
 
 let VERBOSE_COMPILER = false
 
-def bgfx_create_shader_program ( vs, vd, fs, fd : string; render_type : bgfx_renderer_type )
+struct private BgfxUniform
+    handle : bgfx_uniform_handle_s
+    utype  : bgfx_uniform_type
+    ucount : uint
+
+var private g_bgfxUniform : table<string; BgfxUniform>
+
+def private bgfx_cache_uniform ( name:string; utype:bgfx_uniform_type; ucount:uint )
+    assert(ucount!=0u)
+    var unf & = g_bgfxUniform[name]
+    if unf.ucount==0u
+        unf.handle = bgfx_create_uniform(name, utype, ucount)
+        if unf.handle.idx==uint16(0xffff)
+            panic("invalid uniform {name} {utype}[{ucount}]")
+        unf.utype = utype
+        unf.ucount = ucount
+    else
+        if unf.utype!=utype || unf.ucount!=ucount
+            panic("uniform {name} type mismatch. expecting {utype}[{ucount}], got {unf.utype}[{unf.ucount!=ucount}]")
+    return unf.handle
+
+def public bgfx_reset_uniform_cache
+    for val in values(g_bgfxUniform)
+        bgfx_destroy_uniform(val.handle)
+    delete g_bgfxUniform
+
+def public bgfx_any_uniform ( name:string; _value:sampler2D )
+    var value = [[bgfx_texture_handle_s idx=uint16(_value.texture2D)]]
+    var handle = bgfx_cache_uniform(name, bgfx_uniform_type BGFX_UNIFORM_TYPE_SAMPLER, 1u)
+    bgfx_set_uniform(handle, safe_addr(value), 0xffff)
+
+def public bgfx_any_uniform ( name:string; _value:sampler2D[] )
+    var value <- [{for _val in _value; [[bgfx_texture_handle_s idx=uint16(_val.texture2D)]] }]
+    var handle = bgfx_cache_uniform(name, bgfx_uniform_type BGFX_UNIFORM_TYPE_SAMPLER, 1u)
+    bgfx_set_uniform(handle, safe_addr(value[0]), 0xffff)
+    delete value
+
+def public bgfx_any_uniform ( name:string; _value:uint )
+    var value = [[bgfx_texture_handle_s idx=uint16(_value)]]
+    var handle = bgfx_cache_uniform(name, bgfx_uniform_type BGFX_UNIFORM_TYPE_SAMPLER, 1u)
+    bgfx_set_uniform(handle, safe_addr(value), 0xffff)
+
+def public bgfx_any_uniform ( name:string; value:float4 )
+    var handle = bgfx_cache_uniform(name, bgfx_uniform_type BGFX_UNIFORM_TYPE_VEC4, 1u)
+    bgfx_set_uniform(handle, safe_addr(value), 0xffff)
+
+[generic]
+def public bgfx_any_uniform ( name:string; value:float4[] )
+    var handle = bgfx_cache_uniform(name, bgfx_uniform_type BGFX_UNIFORM_TYPE_VEC4, uint(length(value)))
+    bgfx_set_uniform(handle, safe_addr(value), 0xffff)
+
+def public bgfx_any_uniform ( name:string; value:float3x3 )
+    var handle = bgfx_cache_uniform(name, bgfx_uniform_type BGFX_UNIFORM_TYPE_MAT3, 1u)
+    bgfx_set_uniform(handle, safe_addr(value), 0xffff)
+
+def public bgfx_any_uniform ( name:string; value:float3x3[] )
+    var handle = bgfx_cache_uniform(name, bgfx_uniform_type BGFX_UNIFORM_TYPE_MAT3, uint(length(value)))
+    bgfx_set_uniform(handle, safe_addr(value), 0xffff)
+
+def public bgfx_any_uniform ( name:string; value:float4x4 )
+    var handle = bgfx_cache_uniform(name, bgfx_uniform_type BGFX_UNIFORM_TYPE_MAT4, 1u)
+    bgfx_set_uniform(handle, safe_addr(value), 0xffff)
+
+def public bgfx_any_uniform ( name:string; value:float4x4[] )
+    var handle = bgfx_cache_uniform(name, bgfx_uniform_type BGFX_UNIFORM_TYPE_MAT4, uint(length(value)))
+    bgfx_set_uniform(handle, safe_addr(value), 0xffff)
+
+def public bgfx_create_shader_program ( vs, vd, fs, fd : string; render_type : bgfx_renderer_type )
     var vda <- split(vd,"\n")
     var pda <- split(fd,"\n")
     var vpda <- combine(vda, pda)
