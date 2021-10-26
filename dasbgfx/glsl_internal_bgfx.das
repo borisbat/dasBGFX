@@ -8,6 +8,8 @@ require glsl/glsl_internal
 require daslib/ast_boost
 require daslib/strings_boost
 
+require bgfx
+
 class GlslBgfxShader : GlslShader
     override write_version = false
     override output_inout = false
@@ -48,7 +50,23 @@ def private generate_bgfx_bind_uniform(fnMain:FunctionPtr; var fn:FunctionPtr)
                     if vv._type.baseType==Type tStructure
                         if string(vv._type.structType.name) |> find("sampler") != -1
                             let stage = (find_arg("stage",vv.annotation) ?as tInt) ?? 0
+                            var sampler_flags = 0u
+                            for arg in vv.annotation
+                                if arg.name=="sampler" && arg.basicType==Type tString
+                                    if arg.sValue=="U_CLAMP"
+                                        sampler_flags |= BGFX_SAMPLER_U_CLAMP
+                                    elif arg.sValue=="U_MIRROR"
+                                        sampler_flags |= BGFX_SAMPLER_U_MIRROR
+                                    elif arg.sValue=="V_CLAMP"
+                                        sampler_flags |= BGFX_SAMPLER_V_CLAMP
+                                    elif arg.sValue=="V_MIRROR"
+                                        sampler_flags |= BGFX_SAMPLER_V_MIRROR
+                                    elif arg.sValue=="W_CLAMP"
+                                        sampler_flags |= BGFX_SAMPLER_W_CLAMP
+                                    elif arg.sValue=="W_MIRROR"
+                                        sampler_flags |= BGFX_SAMPLER_W_MIRROR
                             cll_uni.arguments |> emplace_new() <| new [[ExprConstUInt() at=vv.at, value=uint(stage)]]
+                            cll_uni.arguments |> emplace_new() <| new [[ExprConstUInt() at=vv.at, value=sampler_flags]]
                     cll_uni.arguments |> emplace_new() <| new [[ExprVar() at=vv.at, name:=vv.name]]
                     blk.list |>emplace(cll_uni)
     fn.body := blk

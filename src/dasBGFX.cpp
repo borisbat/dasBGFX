@@ -55,6 +55,12 @@ float4x4 Das_bgfx_projection ( float angleD, float w, float h, float zn, float z
     return proj;
 }
 
+float4x4 Das_bgfx_ortho ( float l, float r, float b, float t, float zn, float zf, float ofs, bool HD, bool lh ) {
+    float4x4 ortho;
+    bx::mtxOrtho((float *)&ortho, l, r, b, t, zn, zf, ofs, HD, lh ? bx::Handness::Left : bx::Handness::Right);
+    return ortho;
+}
+
 #endif
 
 Module_BGFX::Module_BGFX() : Module("bgfx") {
@@ -74,6 +80,9 @@ Module_BGFX::Module_BGFX() : Module("bgfx") {
 
     addExtern<DAS_BIND_FUN(Das_bgfx_projection), SimNode_ExtFuncCallAndCopyOrMove>(*this, lib, "bgfx_mat_projection",SideEffects::worstDefault, "Das_bgfx_projection")
         ->args({"angleD","w","h","zn","zf","homogeneousNdc","leftHanded"});
+
+    addExtern<DAS_BIND_FUN(Das_bgfx_ortho), SimNode_ExtFuncCallAndCopyOrMove>(*this, lib, "bgfx_mat_ortho",SideEffects::worstDefault, "Das_bgfx_ortho")
+        ->args({"left","right","top","bottom","znear","zfar","offset","homogeneousNdc","leftHanded"});
 
     // we are fixing raw 'storage type' arguments
     for ( auto fn : this->functions ) {

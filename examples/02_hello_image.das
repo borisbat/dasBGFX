@@ -73,9 +73,8 @@ def main
         glfwPollEvents()
         var display_w, display_h : int
         glfwGetFramebufferSize(window, display_w, display_h)
-        // bgfx_touch(0u)   // this breaks OpenGL
         bgfx_set_view_rect(0u, 0u, 0u, uint(display_w), uint(display_h))
-        bgfx_set_vertex_buffer_with_layout(0u, vbh, 0u, uint(length(vertices)), pcvl_handle)
+        bgfx_set_vertex_buffer(0u, vbh, 0u, uint(length(vertices)))
         bgfx_set_index_buffer(ibh, 0u, uint(length(indices)))
         f_tex.texture2D = uint(texture.idx)
         vs_main_bind_uniform()

@@ -18,6 +18,8 @@ require dasbgfx/glsl_bgfx public
 
 let VERBOSE_COMPILER = false
 
+let BGFX_INVALID_HANDLE = uint16(0xffff)
+
 let BGFX_STATE_WRITE_RGB = (0ul
     | BGFX_STATE_WRITE_R
     | BGFX_STATE_WRITE_G
@@ -50,7 +52,7 @@ struct private BgfxUniform
 
 var private g_bgfxUniform : table<string; BgfxUniform>
 
-def private bgfx_cache_uniform ( name:string; utype:bgfx_uniform_type; ucount:uint )
+def public bgfx_cache_uniform ( name:string; utype:bgfx_uniform_type; ucount:uint )
     assert(ucount!=0u)
     var unf & = g_bgfxUniform[name]
     if unf.ucount==0u
@@ -69,9 +71,9 @@ def public bgfx_reset_uniform_cache
         bgfx_destroy_uniform(val.handle)
     delete g_bgfxUniform
 
-def public bgfx_any_uniform ( name:string; stage:uint; value:sampler2D )
+def public bgfx_any_uniform ( name:string; stage:uint; sampler_flags:uint; value:sampler2D )
     var handle = bgfx_cache_uniform(name, bgfx_uniform_type BGFX_UNIFORM_TYPE_SAMPLER, 1u)
-    bgfx_set_texture(stage, handle, [[bgfx_texture_handle_s idx=uint16(value.texture2D)]], 0xffff);
+    bgfx_set_texture(stage, handle, [[bgfx_texture_handle_s idx=uint16(value.texture2D)]], sampler_flags)
 
 def public bgfx_any_uniform ( name:string; _value:uint )
     var value = [[bgfx_texture_handle_s idx=uint16(_value)]]
@@ -218,8 +220,9 @@ def public bgfx_make_ref ( arr:auto(TT)[] )
 
 def bgfx_load_image_from_bytes ( width,height:int; data:void? )
     var mem = bgfx_copy(data, uint(width*height*4))
+    let sampler_flags = BGFX_SAMPLER_U_CLAMP | BGFX_SAMPLER_V_CLAMP
     let handle = bgfx_create_texture_2d(uint(width), uint(height), false, 1u,
-        bgfx_texture_format BGFX_TEXTURE_FORMAT_RGBA8, BGFX_TEXTURE_NONE | uint64(BGFX_SAMPLER_NONE), mem)
+        bgfx_texture_format BGFX_TEXTURE_FORMAT_RGBA8, BGFX_TEXTURE_NONE | uint64(sampler_flags), mem)
     return handle
 
 def bgfx_load_image_from_file ( fname:string implicit; canfail:bool=false )

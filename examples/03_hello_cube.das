@@ -110,9 +110,9 @@ def main
         if t > 10lf
             glfwSetTime(t - 10lf)
         let rot = un_quat_from_unit_vec_ang(normalize(float3(1.,1.,0.)), float(t)*PI*2.*0.1)
-        let v_view = look_at_rh(float3(0,0,5),float3(0,0,0),float3(0,1,0))
+        let v_view = look_at_rh(float3(0,0,10),float3(0,0,0),float3(0,1,0))
         let v_model = compose(float4(0,0,0,0), rot, float4(1.0))
-        let v_projection = bgfx_mat_projection(90., float(display_w), float(display_h), 0.1, 50., bgfx_get_caps().homogeneousDepth,false)
+        let v_projection = bgfx_mat_projection(45., float(display_w), float(display_h), 0.1, 50., bgfx_get_caps().homogeneousDepth,false)
         bgfx_set_view_transform(0u, safe_addr(v_view), safe_addr(v_projection))
         bgfx_set_transform(safe_addr(v_model), 1u)
         bgfx_set_vertex_buffer(0u, vbh, 0u, uint(length(vertices)))
