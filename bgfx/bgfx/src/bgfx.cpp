@@ -5705,62 +5705,90 @@ namespace bgfx
 
 		virtual void fatal(const char* _filePath, uint16_t _line, Fatal::Enum _code, const char* _str) override
 		{
-			m_interface->vtbl->fatal(m_interface, _filePath, _line, (bgfx_fatal_t)_code, _str);
+			if ( m_interface->vtbl->fatal ) {
+				m_interface->vtbl->fatal(m_interface, _filePath, _line, (bgfx_fatal_t)_code, _str);
+			}
 		}
 
 		virtual void traceVargs(const char* _filePath, uint16_t _line, const char* _format, va_list _argList) override
 		{
-			m_interface->vtbl->trace_vargs(m_interface, _filePath, _line, _format, _argList);
+			if ( m_interface->vtbl->trace_vargs ) {
+				m_interface->vtbl->trace_vargs(m_interface, _filePath, _line, _format, _argList);
+			}
 		}
 
 		virtual void profilerBegin(const char* _name, uint32_t _abgr, const char* _filePath, uint16_t _line) override
 		{
-			m_interface->vtbl->profiler_begin(m_interface, _name, _abgr, _filePath, _line);
+			if ( m_interface->vtbl->profiler_begin ) {
+				m_interface->vtbl->profiler_begin(m_interface, _name, _abgr, _filePath, _line);
+			}
 		}
 
 		virtual void profilerBeginLiteral(const char* _name, uint32_t _abgr, const char* _filePath, uint16_t _line) override
 		{
-			m_interface->vtbl->profiler_begin_literal(m_interface, _name, _abgr, _filePath, _line);
+			if ( m_interface->vtbl->profiler_begin_literal ) {
+				m_interface->vtbl->profiler_begin_literal(m_interface, _name, _abgr, _filePath, _line);
+			}
 		}
 
 		virtual void profilerEnd() override
 		{
-			m_interface->vtbl->profiler_end(m_interface);
+			if ( m_interface->vtbl->profiler_end ) {
+				m_interface->vtbl->profiler_end(m_interface);
+			}
 		}
 
 		virtual uint32_t cacheReadSize(uint64_t _id) override
 		{
-			return m_interface->vtbl->cache_read_size(m_interface, _id);
+			if ( m_interface->vtbl->cache_read_size ) {
+				return m_interface->vtbl->cache_read_size(m_interface, _id);
+			} else {
+				return 0;
+			}
 		}
 
 		virtual bool cacheRead(uint64_t _id, void* _data, uint32_t _size) override
 		{
-			return m_interface->vtbl->cache_read(m_interface, _id, _data, _size);
+			if ( m_interface->vtbl->cache_read ) {
+				return m_interface->vtbl->cache_read(m_interface, _id, _data, _size);
+			} else {
+				return false;
+			}
 		}
 
 		virtual void cacheWrite(uint64_t _id, const void* _data, uint32_t _size) override
 		{
-			m_interface->vtbl->cache_write(m_interface, _id, _data, _size);
+			if ( m_interface->vtbl->cache_write ) {
+				m_interface->vtbl->cache_write(m_interface, _id, _data, _size);
+			}
 		}
 
 		virtual void screenShot(const char* _filePath, uint32_t _width, uint32_t _height, uint32_t _pitch, const void* _data, uint32_t _size, bool _yflip) override
 		{
-			m_interface->vtbl->screen_shot(m_interface, _filePath, _width, _height, _pitch, _data, _size, _yflip);
+			if ( m_interface->vtbl->screen_shot ) {
+				m_interface->vtbl->screen_shot(m_interface, _filePath, _width, _height, _pitch, _data, _size, _yflip);
+			}
 		}
 
 		virtual void captureBegin(uint32_t _width, uint32_t _height, uint32_t _pitch, TextureFormat::Enum _format, bool _yflip) override
 		{
-			m_interface->vtbl->capture_begin(m_interface, _width, _height, _pitch, (bgfx_texture_format_t)_format, _yflip);
+			if ( m_interface->vtbl->screen_shot ) {
+				m_interface->vtbl->capture_begin(m_interface, _width, _height, _pitch, (bgfx_texture_format_t)_format, _yflip);
+			}
 		}
 
 		virtual void captureEnd() override
 		{
-			m_interface->vtbl->capture_end(m_interface);
+			if ( m_interface->vtbl->capture_end ) {
+				m_interface->vtbl->capture_end(m_interface);
+			}
 		}
 
 		virtual void captureFrame(const void* _data, uint32_t _size) override
 		{
-			m_interface->vtbl->capture_frame(m_interface, _data, _size);
+			if ( m_interface->vtbl->capture_frame ) {
+				m_interface->vtbl->capture_frame(m_interface, _data, _size);
+			}
 		}
 
 		bgfx_callback_interface_t* m_interface;

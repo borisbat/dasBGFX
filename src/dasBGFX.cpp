@@ -39,6 +39,9 @@ BGFX_CAST_HANDLE_TYPE(bgfx_shader_handle_t);
 #include "module_bgfx.h"
 #include "module_bgfx.enum.cpp_inc"
 #include "module_bgfx.ann.cpp_inc"
+
+#include <bx/debug.h>
+
 #endif
 
 namespace das {
@@ -59,6 +62,31 @@ float4x4 Das_bgfx_ortho ( float l, float r, float b, float t, float zn, float zf
     float4x4 ortho;
     bx::mtxOrtho((float *)&ortho, l, r, b, t, zn, zf, ofs, HD, lh ? bx::Handness::Left : bx::Handness::Right);
     return ortho;
+}
+
+// bgfx callbacks
+
+namespace callbacks {
+    void fatal(bgfx_callback_interface_t* ,const char* _filePath, uint16_t _line, bgfx_fatal_t _code, const char* _str)
+    {
+        printf("%s (%d): ", _filePath, _line);
+        printf("Fatal error: 0x%08x: %s", _code, _str);
+        abort();
+    }
+    void traceVargs(bgfx_callback_interface_t* ,const char* _filePath, uint16_t _line, const char* _format, va_list _argList)
+    {
+        printf("%s (%d): ", _filePath, _line);
+        vprintf(_format, _argList);
+    }
+}
+
+void Das_bgfx_init_debug ( bgfx_init_s & init ) {
+    static bgfx_callback_interface_s interface;
+    static bgfx_callback_vtbl_s vtbl;
+    interface.vtbl = &vtbl;
+    init.callback = &interface;
+    vtbl.fatal = callbacks::fatal;
+    vtbl.trace_vargs = callbacks::traceVargs;
 }
 
 #endif
@@ -83,6 +111,9 @@ Module_BGFX::Module_BGFX() : Module("bgfx") {
 
     addExtern<DAS_BIND_FUN(Das_bgfx_ortho), SimNode_ExtFuncCallAndCopyOrMove>(*this, lib, "bgfx_mat_ortho",SideEffects::worstDefault, "Das_bgfx_ortho")
         ->args({"left","right","top","bottom","znear","zfar","offset","homogeneousNdc","leftHanded"});
+
+    addExtern<DAS_BIND_FUN(Das_bgfx_init_debug)>(*this, lib, "bgfx_init_debug",SideEffects::worstDefault, "Das_bgfx_init_debug")
+        ->arg("init");
 
     // we are fixing raw 'storage type' arguments
     for ( auto fn : this->functions ) {

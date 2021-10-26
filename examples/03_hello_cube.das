@@ -105,7 +105,6 @@ def main
         var display_w, display_h : int
         glfwGetFramebufferSize(window, display_w, display_h)
         bgfx_set_view_rect(0u, 0u, 0u, uint(display_w), uint(display_h))
-        // bgfx_touch(0u)   // NOTE: this introduces artifacts in OpenGL
         let t = glfwGetTime()
         if t > 10lf
             glfwSetTime(t - 10lf)

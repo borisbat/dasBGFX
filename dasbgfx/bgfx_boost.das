@@ -71,6 +71,10 @@ def public bgfx_reset_uniform_cache
         bgfx_destroy_uniform(val.handle)
     delete g_bgfxUniform
 
+def public bgfx_any_uniform ( name:string; stage:uint; access:bgfx_access; value:image2D )
+    bgfx_set_image(stage, [[bgfx_texture_handle_s idx=uint16(value.texture2D)]], 0u,
+        access, bgfx_texture_format BGFX_TEXTURE_FORMAT_COUNT)
+
 def public bgfx_any_uniform ( name:string; stage:uint; sampler_flags:uint; value:sampler2D )
     var handle = bgfx_cache_uniform(name, bgfx_uniform_type BGFX_UNIFORM_TYPE_SAMPLER, 1u)
     bgfx_set_texture(stage, handle, [[bgfx_texture_handle_s idx=uint16(value.texture2D)]], sampler_flags)
@@ -105,6 +109,25 @@ def public bgfx_any_uniform ( name:string; value:float4x4[] )
     var handle = bgfx_cache_uniform(name, bgfx_uniform_type BGFX_UNIFORM_TYPE_MAT4, uint(length(value)))
     bgfx_set_uniform(handle, safe_addr(value), 0xffff)
 
+def private get_temp_dir
+    let temp_dir = "{get_das_root()}/temp"
+    mkdir(temp_dir)
+    return temp_dir
+
+def public bgfx_create_compute_shader_program ( cs : string; render_type : bgfx_renderer_type )
+    let temp_dir = get_temp_dir()
+    let cs_name = "{temp_dir}/compute.sh"
+    fopen(cs_name,"wb") <| $ ( fvtx )
+        fwrite ( fvtx, cs )
+    let cs_bin_name = "{temp_dir}/compute.bin"
+    if !bgfx_compile_shader_file ( cs_name, cs_bin_name, "c", render_type )
+        panic("can't compile {cs_name}")
+    var csh = bgfx_load_shader_from_bin(cs_bin_name)
+    let prog = bgfx_create_compute_program(csh,true)
+    if prog.idx==uint16(0xffff)
+        panic("failed to create compute program")
+    return prog
+
 def public bgfx_create_shader_program ( vs, vd, fs, fd : string; render_type : bgfx_renderer_type )
     var vda <- split(vd,"\n")
     var pda <- split(fd,"\n")
@@ -112,8 +135,7 @@ def public bgfx_create_shader_program ( vs, vd, fs, fd : string; render_type : b
     sort_unique(vpda)
     delete vda
     delete pda
-    let temp_dir = "{get_das_root()}/temp"
-    mkdir(temp_dir)
+    let temp_dir = get_temp_dir()
     fopen("{temp_dir}/varying.def.sc","wb") <| $ ( fdef )
         for t in vpda
             if length(t)>0
@@ -131,8 +153,8 @@ def public bgfx_create_shader_program ( vs, vd, fs, fd : string; render_type : b
     let fs_bin_name = "{temp_dir}/fragment.bin"
     if !bgfx_compile_shader_file ( fs_name, fs_bin_name, "f", render_type )
         panic("can't compile {fs_name}")
-    var vsh = bgfx_load_shader_from_bin(vs_bin_name);
-    var fsh = bgfx_load_shader_from_bin(fs_bin_name);
+    var vsh = bgfx_load_shader_from_bin(vs_bin_name)
+    var fsh = bgfx_load_shader_from_bin(fs_bin_name)
     let prog = bgfx_create_program(vsh, fsh, true)
     if prog.idx==uint16(0xffff)
         panic("failed to create program")
@@ -230,7 +252,7 @@ def bgfx_load_image_from_file ( fname:string implicit; canfail:bool=false )
     let data = stbi_load(fname, safe_addr(x), safe_addr(y), safe_addr(comp), 4)
     if data == null
         if !canfail
-            let reason = stbi_failure_reason();
+            let reason = stbi_failure_reason()
             panic(reason)
         return [[bgfx_texture_handle_s idx=uint16(0xffff)]]
     else

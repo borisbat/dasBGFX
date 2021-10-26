@@ -21,7 +21,14 @@ class GlslBgfxShader : GlslShader
     override restrict_vertex_attribute_names = true             // only a_position, a_color0, etc
     override output_unfirom_macro_declarations = true           // SAMPLER2D(...) instead of unifor sampler2D ...;
     override output_compatibility_constructors = true           // hlsl-compatible numeric constructors
-    override glsl_prefix = "\n#include <bgfx_shader.sh>\n\n"
+    override output_hlsl_style_compute_layout = true            // NUM_THREADS(16,16,1) right before main
+    def override get_glsl_prefix
+        if shaderType==ShaderType compute
+            return "\n#include <bgfx_compute.sh>\n\n"
+        elif shaderType==ShaderType vertex || shaderType==ShaderType fragment
+            return "\n#include <bgfx_shader.sh>\n\n"
+        else
+            return ""
     def override generate_bind_uniform_dummy ( var func:FunctionPtr )
         generate_bgfx_bind_uniform_dummy(func)
     def override generate_bind_uniform(fnMain:FunctionPtr; var fn:FunctionPtr)
@@ -48,7 +55,8 @@ def private generate_bgfx_bind_uniform(fnMain:FunctionPtr; var fn:FunctionPtr)
                     var cll_uni <- new [[ExprCall() at=vv.at, name:="bgfx_any_uniform"]]
                     cll_uni.arguments |> emplace_new() <| new [[ExprConstString() at=vv.at, value:=vv.name]]
                     if vv._type.baseType==Type tStructure
-                        if string(vv._type.structType.name) |> find("sampler") != -1
+                        let sname = string(vv._type.structType.name)
+                        if sname|>find("sampler")!=-1
                             let stage = (find_arg("stage",vv.annotation) ?as tInt) ?? 0
                             var sampler_flags = 0u
                             for arg in vv.annotation
@@ -67,6 +75,17 @@ def private generate_bgfx_bind_uniform(fnMain:FunctionPtr; var fn:FunctionPtr)
                                         sampler_flags |= BGFX_SAMPLER_W_MIRROR
                             cll_uni.arguments |> emplace_new() <| new [[ExprConstUInt() at=vv.at, value=uint(stage)]]
                             cll_uni.arguments |> emplace_new() <| new [[ExprConstUInt() at=vv.at, value=sampler_flags]]
+                        if sname|>find("image")!=-1
+                            let stage = (find_arg("stage",vv.annotation) ?as tInt) ?? 0
+                            var access = "BGFX_ACCESS_READWRITE"
+                            for arg in vv.annotation
+                                if arg.name=="writeonly" && arg.basicType==Type tBool
+                                    access = "BGFX_ACCESS_WRITE"
+                                elif arg.name=="readonly" && arg.basicType==Type tBool
+                                    access = "BGFX_ACCESS_READ"
+                            cll_uni.arguments |> emplace_new() <| new [[ExprConstUInt() at=vv.at, value=uint(stage)]]
+                            let access_enum_t = typeinfo(ast_typedecl type<bgfx_access>).enumType
+                            cll_uni.arguments |> emplace_new() <| new [[ExprConstEnumeration() at=vv.at, enumType:=access_enum_t, value:=access]]
                     cll_uni.arguments |> emplace_new() <| new [[ExprVar() at=vv.at, name:=vv.name]]
                     blk.list |>emplace(cll_uni)
     fn.body := blk

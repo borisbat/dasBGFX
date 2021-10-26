@@ -12,6 +12,14 @@
 #	define BGFX_CONFIG_DEBUG 0
 #endif // BGFX_CONFIG_DEBUG
 
+#ifndef PRIx64
+#define PRIx64       "I64x"
+#endif
+
+#ifndef PRId64
+#define PRId64       "I64d"
+#endif
+
 #if BGFX_CONFIG_DEBUG || BX_COMPILER_CLANG_ANALYZER
 #	define BX_TRACE _BX_TRACE
 #	define BX_WARN  _BX_WARN
