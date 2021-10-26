@@ -11,6 +11,7 @@ require daslib/strings_boost
 require daslib/algorithm
 require math
 require fio
+require stbimage
 
 require dasbgfx/bgfx_boost_internal public
 require dasbgfx/glsl_bgfx public
@@ -53,16 +54,9 @@ def public bgfx_reset_uniform_cache
         bgfx_destroy_uniform(val.handle)
     delete g_bgfxUniform
 
-def public bgfx_any_uniform ( name:string; _value:sampler2D )
-    var value = [[bgfx_texture_handle_s idx=uint16(_value.texture2D)]]
+def public bgfx_any_uniform ( name:string; stage:uint; value:sampler2D )
     var handle = bgfx_cache_uniform(name, bgfx_uniform_type BGFX_UNIFORM_TYPE_SAMPLER, 1u)
-    bgfx_set_uniform(handle, safe_addr(value), 0xffff)
-
-def public bgfx_any_uniform ( name:string; _value:sampler2D[] )
-    var value <- [{for _val in _value; [[bgfx_texture_handle_s idx=uint16(_val.texture2D)]] }]
-    var handle = bgfx_cache_uniform(name, bgfx_uniform_type BGFX_UNIFORM_TYPE_SAMPLER, 1u)
-    bgfx_set_uniform(handle, safe_addr(value[0]), 0xffff)
-    delete value
+    bgfx_set_texture(stage, handle, [[bgfx_texture_handle_s idx=uint16(value.texture2D)]], 0xffff);
 
 def public bgfx_any_uniform ( name:string; _value:uint )
     var value = [[bgfx_texture_handle_s idx=uint16(_value)]]
@@ -203,3 +197,22 @@ def public bgfx_make_ref ( arr:array<auto(TT)> )
 
 def public bgfx_make_ref ( arr:auto(TT)[] )
     return bgfx_make_ref(safe_addr(arr[0]), uint(length(arr)*typeinfo(sizeof type<TT>)))
+
+def bgfx_load_image_from_bytes ( width,height:int; data:void? )
+    var mem = bgfx_copy(data, uint(width*height*4))
+    let handle = bgfx_create_texture_2d(uint(width), uint(height), false, 1u,
+        bgfx_texture_format BGFX_TEXTURE_FORMAT_RGBA8, BGFX_TEXTURE_NONE | uint64(BGFX_SAMPLER_NONE), mem)
+    return handle
+
+def bgfx_load_image_from_file ( fname:string implicit; canfail:bool=false )
+    var x, y, comp : int
+    let data = stbi_load(fname, safe_addr(x), safe_addr(y), safe_addr(comp), 4)
+    if data == null
+        if !canfail
+            let reason = stbi_failure_reason();
+            panic(reason)
+        return [[bgfx_texture_handle_s idx=uint16(0xffff)]]
+    else
+        var texture_id = bgfx_load_image_from_bytes(x, y, data)
+        stbi_image_free(data)
+        return texture_id

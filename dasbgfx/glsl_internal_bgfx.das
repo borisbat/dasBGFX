@@ -17,6 +17,7 @@ class GlslBgfxShader : GlslShader
     override replace_hlsl_incompatible_operations = true
     override restrict_uniform_types = true                      // only vec4, mat3x3 and mat4x4
     override restrict_vertex_attribute_names = true             // only a_position, a_color0, etc
+    override output_unfirom_macro_declarations = true           // SAMPLER2D(...) instead of unifor sampler2D ...;
     override glsl_prefix = "\n#include <bgfx_shader.sh>\n\n"
     def override generate_bind_uniform_dummy ( var func:FunctionPtr )
         generate_bgfx_bind_uniform_dummy(func)
@@ -43,6 +44,10 @@ def private generate_bgfx_bind_uniform(fnMain:FunctionPtr; var fn:FunctionPtr)
                 if "{vv._module.name}" |> find("glsl_") == -1
                     var cll_uni <- new [[ExprCall() at=vv.at, name:="bgfx_any_uniform"]]
                     cll_uni.arguments |> emplace_new() <| new [[ExprConstString() at=vv.at, value:=vv.name]]
+                    if vv._type.baseType==Type tStructure
+                        if string(vv._type.structType.name) |> find("sampler") != -1
+                            let stage = (find_arg("stage",vv.annotation) ?as tInt) ?? 0
+                            cll_uni.arguments |> emplace_new() <| new [[ExprConstUInt() at=vv.at, value=uint(stage)]]
                     cll_uni.arguments |> emplace_new() <| new [[ExprVar() at=vv.at, name:=vv.name]]
                     blk.list |>emplace(cll_uni)
     fn.body := blk
