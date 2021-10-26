@@ -18,6 +18,21 @@ require dasbgfx/glsl_bgfx public
 
 let VERBOSE_COMPILER = false
 
+let BGFX_STATE_WRITE_RGB = (0ul
+    | BGFX_STATE_WRITE_R
+    | BGFX_STATE_WRITE_G
+    | BGFX_STATE_WRITE_B
+)
+
+let BGFX_STATE_DEFAULT = (0ul
+    | BGFX_STATE_WRITE_RGB
+    | BGFX_STATE_WRITE_A
+    | BGFX_STATE_WRITE_Z
+    | BGFX_STATE_DEPTH_TEST_LESS
+    | BGFX_STATE_CULL_CW
+    | BGFX_STATE_MSAA
+)
+
 def UCOLOR_TO_BGFX_UCOLOR ( col:uint )
     let r = (col & 0x00ff0000) >> 16u
     let g = (col & 0x0000ff00) >> 8u
@@ -116,7 +131,10 @@ def public bgfx_create_shader_program ( vs, vd, fs, fd : string; render_type : b
         panic("can't compile {fs_name}")
     var vsh = bgfx_load_shader_from_bin(vs_bin_name);
     var fsh = bgfx_load_shader_from_bin(fs_bin_name);
-    return bgfx_create_program(vsh, fsh, true)
+    let prog = bgfx_create_program(vsh, fsh, true)
+    if prog.idx==uint16(0xffff)
+        panic("failed to create program")
+    return prog
 
 def public bgfx_compile_shader_file ( fin, fout, ftype:string; rt : bgfx_renderer_type )
     var platform = ""
