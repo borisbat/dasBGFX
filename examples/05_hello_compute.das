@@ -14,12 +14,13 @@ var [[uniform, format=rgba8, binding=0, writeonly]] c_destTex : image2D
 var [[uniform, format=rgba32f, binding=1, readwrite]] c_matTex : image2D
 var [[uniform]] c_offset : float4
 var [[uniform]] c_mat_z : float4x4
+var [[uniform]] v_ortho : float4x4
 
 [bgfx_vertex_program(name="VERTEX_SRC")]
 def vs_main
     v_color0 = a_color0
     v_texcoord0 = a_texcoord0
-    gl_Position = float4(a_position, 0.0, 1.0)
+    gl_Position = v_ortho * float4(a_position, 0.0, 1.0)
 
 [bgfx_fragment_program(name="FRAGMENT_SRC")]
 def fs_main
@@ -117,13 +118,9 @@ def main
     if (bgfx_get_caps().supported & BGFX_CAPS_TEXTURE_READ_BACK) != 0ul
         can_read_back = true
     var pcvl_decl = bgfx_create_vertex_layout(type<Vertex>,render_type)
-    var pcvl_handle = bgfx_create_vertex_layout(safe_addr(pcvl_decl))
     var vbh = bgfx_create_vertex_buffer(bgfx_make_ref(vertices), safe_addr(pcvl_decl), BGFX_BUFFER_NONE)
     var ibh = bgfx_create_index_buffer(bgfx_make_ref(indices), BGFX_BUFFER_INDEX32)
-    // this is here as a workaround for the OpenGL bug
-    bgfx_create_uniform("c_offset", bgfx_uniform_type BGFX_UNIFORM_TYPE_VEC4, 1u)
-    bgfx_create_uniform("c_mat_z",  bgfx_uniform_type BGFX_UNIFORM_TYPE_MAT4, 1u)
-    // end of workaround
+    compute_effect_bind_uniform()
     var compute_program = bgfx_create_compute_shader_program(COMPUTE_SRC, render_type)
     var program = bgfx_create_shader_program(VERTEX_SRC, VERTEX_SRC_DECL, FRAGMENT_SRC, FRAGMENT_SRC_DECL, render_type)
     var texture = bgfx_create_texture_2d(256u, 256u, false, 1u,
@@ -135,7 +132,7 @@ def main
         BGFX_TEXTURE_COMPUTE_WRITE  | BGFX_TEXTURE_READ_BACK, null)
     if mat_texture.idx==uint16(0xffff)
         panic("can't create texture")
-    let v_ortho = bgfx_mat_ortho(-1.,1.,-1.,1.,-100.,100.,0.,bgfx_get_caps().homogeneousDepth,false)
+    v_ortho = bgfx_mat_ortho(-1.,1.,-1.,1.,-100.,100.,0.,bgfx_get_caps().homogeneousDepth,false)
     bgfx_set_view_clear(0u, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, RGBA_TO_BGFX_UCOLOR(0.2,0.2,0.2,1.0), 1.0f, 0u)
     var ioffset = 0
     var c_mat_res : CMat
@@ -160,13 +157,13 @@ def main
         c_matTex.texture2D = uint(mat_texture.idx)
         compute_effect_bind_uniform()
         bgfx_dispatch(0u, compute_program, 256u/16u, 256u/16u, 1u, 0u)
-        bgfx_set_view_transform(0u, null, safe_addr(v_ortho))
         bgfx_set_view_rect(0u, 0u, 0u, uint(display_w), uint(display_h))
         bgfx_set_vertex_buffer(0u, vbh, 0u, uint(length(vertices)))
         bgfx_set_index_buffer(ibh, 0u, uint(length(indices)))
         f_tex.texture2D = uint(texture.idx)
         vs_main_bind_uniform()
         fs_main_bind_uniform()
+        bgfx_set_state(BGFX_STATE_DEFAULT, 0u)
         bgfx_submit(0u, program, 1u, BGFX_DISCARD_NONE)
         if c_res_frame==0u
             c_res_frame = get_cmat(mat_texture, c_mat_res)

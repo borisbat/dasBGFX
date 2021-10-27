@@ -22,6 +22,8 @@ class GlslBgfxShader : GlslShader
     override output_unfirom_macro_declarations = true           // SAMPLER2D(...) instead of unifor sampler2D ...;
     override output_compatibility_constructors = true           // hlsl-compatible numeric constructors
     override output_hlsl_style_compute_layout = true            // NUM_THREADS(16,16,1) right before main
+    override output_structure_initializers = true               // produce structure initializers
+    override restrict_array_as_result = true                    // returning float[13] and such is prohibited (hi HLSL)
     def override get_glsl_prefix
         if shaderType==ShaderType compute
             return "\n#include <bgfx_compute.sh>\n\n"
