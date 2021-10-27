@@ -52,14 +52,7 @@ def main
     var pd: bgfx_platform_data_s
     pd.nwh = glfwGetWin32Window(window)
     bgfx_set_platform_data(safe_addr(pd))
-    var init : bgfx_init_s
-    bgfx_init_ctor(safe_addr(init))
-    // init._type = bgfx_renderer_type BGFX_RENDERER_TYPE_OPENGL
-    init._type = bgfx_renderer_type BGFX_RENDERER_TYPE_COUNT
-    init.resolution.width = uint(WNDW_WIDTH)
-    init.resolution.height = uint(WNDW_HEIGHT)
-    init.resolution.reset = BGFX_RESET_VSYNC
-    bgfx_init(safe_addr(init))
+    bgfx_init(WNDW_WIDTH,WNDW_HEIGHT)
     let render_type = bgfx_get_renderer_type()
     print("render_type {render_type}\n")
     var pcvl_decl = bgfx_create_vertex_layout(type<Vertex>,render_type)

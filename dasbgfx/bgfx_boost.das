@@ -101,13 +101,23 @@ def public bgfx_any_uniform ( name:string; value:float3x3[] )
     var handle = bgfx_cache_uniform(name, bgfx_uniform_type BGFX_UNIFORM_TYPE_MAT3, uint(length(value)))
     bgfx_set_uniform(handle, safe_addr(value), 0xffff)
 
-def public bgfx_any_uniform ( name:string; value:float4x4 )
+def public bgfx_any_uniform ( name:string; _value:float4x4 )
     var handle = bgfx_cache_uniform(name, bgfx_uniform_type BGFX_UNIFORM_TYPE_MAT4, 1u)
-    bgfx_set_uniform(handle, safe_addr(value), 0xffff)
+    if transpose_uniform_mat
+        var value = transpose(_value)
+        bgfx_set_uniform(handle, safe_addr(value), 0xffff)
+    else
+        bgfx_set_uniform(handle, safe_addr(_value), 0xffff)
 
-def public bgfx_any_uniform ( name:string; value:float4x4[] )
+def public bgfx_any_uniform ( name:string; _value:float4x4[] )
     var handle = bgfx_cache_uniform(name, bgfx_uniform_type BGFX_UNIFORM_TYPE_MAT4, uint(length(value)))
-    bgfx_set_uniform(handle, safe_addr(value), 0xffff)
+    if transpose_uniform_mat
+        var value : float4x4[length(_value)]
+        for v,_v in value,_value
+            v = transpose(_v)
+        bgfx_set_uniform(handle, safe_addr(value), 0xffff)
+    else
+        bgfx_set_uniform(handle, safe_addr(_value), 0xffff)
 
 def private get_temp_dir
     let temp_dir = "{get_das_root()}/temp"
@@ -259,3 +269,38 @@ def bgfx_load_image_from_file ( fname:string implicit; canfail:bool=false )
         var texture_id = bgfx_load_image_from_bytes(x, y, data)
         stbi_image_free(data)
         return texture_id
+
+var private transpose_uniform_mat = false
+
+def public bgfx_init ( winw,winh:int; rt:bgfx_renderer_type = bgfx_renderer_type BGFX_RENDERER_TYPE_COUNT; dbgfx:bool = false )
+    var init : bgfx_init_s
+    bgfx_init_ctor(safe_addr(init))
+    init._type = rt
+    init.resolution.width = uint(winw)
+    init.resolution.height = uint(winh)
+    init.resolution.reset = BGFX_RESET_VSYNC
+    if dbgfx
+        bgfx_init_debug(init)
+    bgfx_init(safe_addr(init))
+    let render_type = bgfx_get_renderer_type()
+    if render_type==bgfx_renderer_type BGFX_RENDERER_TYPE_DIRECT3D11
+        transpose_uniform_mat = true
+    elif render_type==bgfx_renderer_type BGFX_RENDERER_TYPE_DIRECT3D12
+        transpose_uniform_mat = true
+    else
+        transpose_uniform_mat = false
+
+/*
+TODO: which of this transpose uniform mat?
+    BGFX_RENDERER_TYPE_DIRECT3D9
+    BGFX_RENDERER_TYPE_NOOP,
+    BGFX_RENDERER_TYPE_AGC,
+    BGFX_RENDERER_TYPE_DIRECT3D9,
+    BGFX_RENDERER_TYPE_GNM,
+    BGFX_RENDERER_TYPE_METAL,
+    BGFX_RENDERER_TYPE_NVN,
+    BGFX_RENDERER_TYPE_OPENGLES,
+    BGFX_RENDERER_TYPE_OPENGL,
+    BGFX_RENDERER_TYPE_VULKAN,
+    BGFX_RENDERER_TYPE_WEBGPU,
+*/

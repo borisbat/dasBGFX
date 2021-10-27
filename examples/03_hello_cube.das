@@ -15,6 +15,11 @@ var [[inout, semantics=TEXCOORD0]] v_texcoord0 : float2
 
 var [[uniform, stage=0]] f_tex : sampler2D
 
+var [[uniform]] v_model : float4x4
+var [[uniform]] v_view : float4x4
+var [[uniform]] v_projection : float4x4
+var [[uniform]] v_pvm : float4x4
+
 [bgfx_fragment_program(name="FRAGMENT_SRC")]
 def fs_cube_main
     gl_FragColor.xyz = texture2D(f_tex,v_texcoord0).xyz * v_color
@@ -23,8 +28,8 @@ def fs_cube_main
 [bgfx_vertex_program(name="VERTEX_SRC")]
 def vs_cube_main
     let light = normalize(float3(1,-1,-1))
-    let norm = normalize ( float3x3(u_modelView) * a_normal )
-	gl_Position = u_modelViewProj * float4(a_position, 1.0)
+    let norm = normalize ( float3x3(v_model) * a_normal )
+    gl_Position = v_projection * v_view * v_model * float4(a_position, 1.0)
     v_color = float3(saturate(-dot(norm,light)))
     v_texcoord0 = a_texcoord0
 
@@ -84,14 +89,9 @@ def main
     var pd: bgfx_platform_data_s
     pd.nwh = glfwGetWin32Window(window)
     bgfx_set_platform_data(safe_addr(pd))
-    var init : bgfx_init_s
-    bgfx_init_ctor(safe_addr(init))
-    init._type = bgfx_renderer_type BGFX_RENDERER_TYPE_OPENGL
-    // init._type = bgfx_renderer_type BGFX_RENDERER_TYPE_COUNT
-    init.resolution.width = uint(WNDW_WIDTH)
-    init.resolution.height = uint(WNDW_HEIGHT)
-    init.resolution.reset = BGFX_RESET_VSYNC
-    bgfx_init(safe_addr(init))
+    bgfx_init(WNDW_WIDTH,WNDW_HEIGHT)
+    // bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type BGFX_RENDERER_TYPE_DIRECT3D12)
+    // bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type BGFX_RENDERER_TYPE_OPENGL)
     let render_type = bgfx_get_renderer_type()
     print("render_type {render_type}\n")
     var pcvl_decl = bgfx_create_vertex_layout(type<Vertex>,render_type)
@@ -109,11 +109,10 @@ def main
         if t > 10lf
             glfwSetTime(t - 10lf)
         let rot = un_quat_from_unit_vec_ang(normalize(float3(1.,1.,0.)), float(t)*PI*2.*0.1)
-        let v_view = look_at_rh(float3(0,0,10),float3(0,0,0),float3(0,1,0))
-        let v_model = compose(float4(0,0,0,0), rot, float4(1.0))
-        let v_projection = bgfx_mat_projection(45., float(display_w), float(display_h), 0.1, 50., bgfx_get_caps().homogeneousDepth,false)
-        bgfx_set_view_transform(0u, safe_addr(v_view), safe_addr(v_projection))
-        bgfx_set_transform(safe_addr(v_model), 1u)
+        v_view = look_at_rh(float3(0,0,10),float3(0,0,0),float3(0,1,0))
+        v_model = compose(float4(0,0,0,0), rot, float4(1.0))
+        v_projection = bgfx_mat_projection(45., float(display_w), float(display_h), 0.1, 50., bgfx_get_caps().homogeneousDepth,false)
+        v_pvm = v_projection * v_view * v_model
         bgfx_set_vertex_buffer(0u, vbh, 0u, uint(length(vertices)))
         bgfx_set_index_buffer(ibh, 0u, uint(length(indices)))
         f_tex.texture2D = uint(texture.idx)

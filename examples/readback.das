@@ -15,6 +15,11 @@ var [[uniform, format=rgba32f, binding=1, readwrite]] c_matTex : image2D
 var [[uniform]] c_offset : float4
 var [[uniform]] c_mat_z : float4x4
 
+var [[uniform]] v_model : float4x4
+var [[uniform]] v_view : float4x4
+var [[uniform]] v_projection : float4x4
+var [[uniform]] v_pvm : float4x4
+
 [bgfx_vertex_program(name="VERTEX_SRC")]
 def vs_main
     v_color0 = a_color0
@@ -35,37 +40,49 @@ def compute_effect
     else
         imageStore(c_destTex,storePos, float4(1.,.5,.25,1.))
     if gl_GlobalInvocationID.xy==uint2(0u,0u)
-        var c_mat_a, c_mat_b : float4x4
+        var c_model, c_view, c_projection : float4x4
         // unpack
-        c_mat_a[0] = imageLoad(c_matTex, int2(0,0))
-        c_mat_a[1] = imageLoad(c_matTex, int2(1,0))
-        c_mat_a[2] = imageLoad(c_matTex, int2(2,0))
-        c_mat_a[3] = imageLoad(c_matTex, int2(3,0))
-        c_mat_b[0] = imageLoad(c_matTex, int2(0,1))
-        c_mat_b[1] = imageLoad(c_matTex, int2(1,1))
-        c_mat_b[2] = imageLoad(c_matTex, int2(2,1))
-        c_mat_b[3] = imageLoad(c_matTex, int2(3,1))
-        let a_times_b = c_mat_a * c_mat_b
-        let b_times_a = c_mat_b * c_mat_a
-        let a_times_1234 = c_mat_a * float4(1,2,3,4)
-        let b_times_1234 = c_mat_b * float4(1,2,3,4)
+        c_model[0] = imageLoad(c_matTex, int2(0,0))
+        c_model[1] = imageLoad(c_matTex, int2(1,0))
+        c_model[2] = imageLoad(c_matTex, int2(2,0))
+        c_model[3] = imageLoad(c_matTex, int2(3,0))
+        c_view[0] = imageLoad(c_matTex, int2(0,1))
+        c_view[1] = imageLoad(c_matTex, int2(1,1))
+        c_view[2] = imageLoad(c_matTex, int2(2,1))
+        c_view[3] = imageLoad(c_matTex, int2(3,1))
+        c_projection[0] = imageLoad(c_matTex, int2(0,2))
+        c_projection[1] = imageLoad(c_matTex, int2(1,2))
+        c_projection[2] = imageLoad(c_matTex, int2(2,2))
+        c_projection[3] = imageLoad(c_matTex, int2(3,2))
+        let c_pvm = c_projection * c_view * c_model
+        let x_pvm = v_projection * v_view * c_model
         // pack
-        imageStore(c_matTex, int2(0,2), a_times_b[0])
-        imageStore(c_matTex, int2(1,2), a_times_b[1])
-        imageStore(c_matTex, int2(2,2), a_times_b[2])
-        imageStore(c_matTex, int2(3,2), a_times_b[3])
-        imageStore(c_matTex, int2(0,3), b_times_a[0])
-        imageStore(c_matTex, int2(1,3), b_times_a[1])
-        imageStore(c_matTex, int2(2,3), b_times_a[2])
-        imageStore(c_matTex, int2(3,3), b_times_a[3])
-        imageStore(c_matTex, int2(0,4), a_times_1234)
-        imageStore(c_matTex, int2(1,4), b_times_1234)
-        imageStore(c_matTex, int2(2,4), float4(0,0,0,0))
-        imageStore(c_matTex, int2(3,4), float4(0,0,0,0))
-        imageStore(c_matTex, int2(0,5), c_mat_z[0])
-        imageStore(c_matTex, int2(1,5), c_mat_z[1])
-        imageStore(c_matTex, int2(2,5), c_mat_z[2])
-        imageStore(c_matTex, int2(3,5), c_mat_z[3])
+        imageStore(c_matTex, int2(0,4), x_pvm[0])
+        imageStore(c_matTex, int2(1,4), x_pvm[1])
+        imageStore(c_matTex, int2(2,4), x_pvm[2])
+        imageStore(c_matTex, int2(3,4), x_pvm[3])
+
+        imageStore(c_matTex, int2(0,5), c_pvm[0])
+        imageStore(c_matTex, int2(1,5), c_pvm[1])
+        imageStore(c_matTex, int2(2,5), c_pvm[2])
+        imageStore(c_matTex, int2(3,5), c_pvm[3])
+
+        imageStore(c_matTex, int2(0,6), v_model[0])
+        imageStore(c_matTex, int2(1,6), v_model[1])
+        imageStore(c_matTex, int2(2,6), v_model[2])
+        imageStore(c_matTex, int2(3,6), v_model[3])
+
+        imageStore(c_matTex, int2(0,7), v_view[0])
+        imageStore(c_matTex, int2(1,7), v_view[1])
+        imageStore(c_matTex, int2(2,7), v_view[2])
+        imageStore(c_matTex, int2(3,7), v_view[3])
+
+        imageStore(c_matTex, int2(0,8), v_projection[0])
+        imageStore(c_matTex, int2(1,8), v_projection[1])
+        imageStore(c_matTex, int2(2,8), v_projection[2])
+        imageStore(c_matTex, int2(3,8), v_projection[3])
+
+
 
 [bgfx_vertex_buffer]
 struct Vertex
@@ -83,11 +100,11 @@ let vertices = [[Vertex
 let indices = [[int 0; 2; 1; 2; 0; 3]]
 
 struct CMat
-    a, b, c, d, e, z : float4x4
+    a, b, c, d, e, z, cm, cv, cp : float4x4
 
 def set_cmat ( var tex:bgfx_texture_handle_s; m : CMat )
     var mem = bgfx_copy(safe_addr(m), uint(typeinfo(sizeof m)))
-    bgfx_update_texture_2d(tex, 0u, 0u, 0u, 0u, 4u, 6u, mem, uint(4*4*typeinfo(sizeof type<float>)))
+    bgfx_update_texture_2d(tex, 0u, 0u, 0u, 0u, 4u, 9u, mem, uint(4*4*typeinfo(sizeof type<float>)))
 
 def get_cmat ( var tex:bgfx_texture_handle_s; var m : CMat )
     return bgfx_read_texture(tex, safe_addr(m), 0u)
@@ -108,8 +125,11 @@ def main
     var pd: bgfx_platform_data_s
     pd.nwh = glfwGetWin32Window(window)
     bgfx_set_platform_data(safe_addr(pd))
-    //    bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type BGFX_RENDERER_TYPE_DIRECT3D12)
-    bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type BGFX_RENDERER_TYPE_OPENGL)
+
+    bgfx_init(WNDW_WIDTH,WNDW_HEIGHT)
+    // bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type BGFX_RENDERER_TYPE_DIRECT3D12)
+    // bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type BGFX_RENDERER_TYPE_OPENGL)
+
     let render_type = bgfx_get_renderer_type()
     print("render_type {render_type}\n")
     var can_read_back = false
@@ -119,17 +139,22 @@ def main
     var pcvl_handle = bgfx_create_vertex_layout(safe_addr(pcvl_decl))
     var vbh = bgfx_create_vertex_buffer(bgfx_make_ref(vertices), safe_addr(pcvl_decl), BGFX_BUFFER_NONE)
     var ibh = bgfx_create_index_buffer(bgfx_make_ref(indices), BGFX_BUFFER_INDEX32)
+
     // this is here as a workaround for the OpenGL bug
     bgfx_create_uniform("c_offset", bgfx_uniform_type BGFX_UNIFORM_TYPE_VEC4, 1u)
-    bgfx_create_uniform("c_mat_z",  bgfx_uniform_type BGFX_UNIFORM_TYPE_MAT4, 1u)
-    // end of workaround
+
+    bgfx_create_uniform("v_model",  bgfx_uniform_type BGFX_UNIFORM_TYPE_MAT4, 1u)
+    bgfx_create_uniform("v_view",  bgfx_uniform_type BGFX_UNIFORM_TYPE_MAT4, 1u)
+    bgfx_create_uniform("v_projection",  bgfx_uniform_type BGFX_UNIFORM_TYPE_MAT4, 1u)
+    bgfx_create_uniform("v_pvm",  bgfx_uniform_type BGFX_UNIFORM_TYPE_MAT4, 1u)
+
     var compute_program = bgfx_create_compute_shader_program(COMPUTE_SRC, render_type)
     var program = bgfx_create_shader_program(VERTEX_SRC, VERTEX_SRC_DECL, FRAGMENT_SRC, FRAGMENT_SRC_DECL, render_type)
     var texture = bgfx_create_texture_2d(256u, 256u, false, 1u,
         bgfx_texture_format BGFX_TEXTURE_FORMAT_RGBA8, BGFX_TEXTURE_COMPUTE_WRITE, null)
     if texture.idx==uint16(0xffff)
         panic("can't create texture")
-    var mat_texture = bgfx_create_texture_2d(4u, 6u, false, 1u,
+    var mat_texture = bgfx_create_texture_2d(4u, 9u, false, 1u,
         bgfx_texture_format BGFX_TEXTURE_FORMAT_RGBA32F,
         BGFX_TEXTURE_COMPUTE_WRITE | BGFX_TEXTURE_READ_BACK, null)
     if mat_texture.idx==uint16(0xffff)
@@ -144,22 +169,27 @@ def main
         var display_w, display_h : int
         glfwGetFramebufferSize(window, display_w, display_h)
         var c_mat : CMat
-        let rot = un_quat_from_unit_vec_ang(normalize(float3(1.,0.,0.)), PI*0.25)
-        c_mat.a = compose(float4(0.), rot, float4(1.))
-        c_mat.b = translation(float3(1.,2.,3.))
-        identity(c_mat.c)
-        identity(c_mat.d)
+
+        let t = glfwGetTime()
+        if t > 10lf
+            glfwSetTime(t - 10lf)
+        v_view = look_at_rh(float3(0,0,10),float3(0,0,0),float3(0,1,0))
+        v_model = compose(float4(0,0,0,0), float4(0,0,0,0), float4(1.0))
+        v_projection = bgfx_mat_projection(45., float(display_w), float(display_h), 0.1, 50., bgfx_get_caps().homogeneousDepth,false)
+        v_pvm = v_projection * v_view * v_model
+
+        c_mat.a = v_model
+        c_mat.b = v_view
+        c_mat.c = v_projection
+        c_mat.d = v_pvm
+
         set_cmat(mat_texture, c_mat)
-        c_mat_z[0] = float4(1,2,3,4)
-        c_mat_z[1] = float4(5,6,7,8)
-        c_mat_z[2] = float4(9,10,11,12)
-        c_mat_z[3] = float4(13,14,15,16)
+
         c_offset.x = float(ioffset++)
         c_destTex.texture2D = uint(texture.idx)
         c_matTex.texture2D = uint(mat_texture.idx)
         compute_effect_bind_uniform()
         bgfx_dispatch(0u, compute_program, 256u/16u, 256u/16u, 1u, 0u)
-        bgfx_set_view_transform(0u, null, safe_addr(v_ortho))
         bgfx_set_view_rect(0u, 0u, 0u, uint(display_w), uint(display_h))
         bgfx_set_vertex_buffer(0u, vbh, 0u, uint(length(vertices)))
         bgfx_set_index_buffer(ibh, 0u, uint(length(indices)))
@@ -167,26 +197,23 @@ def main
         vs_main_bind_uniform()
         fs_main_bind_uniform()
         bgfx_submit(0u, program, 1u, BGFX_DISCARD_NONE)
+
         if c_res_frame==0u
             c_res_frame = get_cmat(mat_texture, c_mat_res)
         let n_frame = bgfx_frame(false)
         if n_frame>=c_res_frame && c_res_frame!=0u
-            var e_mat = c_mat
-            e_mat.c = e_mat.a * e_mat.b
-            e_mat.d = e_mat.b * e_mat.a
-            e_mat.e[0] = e_mat.a * float4(1,2,3,4)
-            e_mat.e[1] = e_mat.b * float4(1,2,3,4)
-            e_mat.z = c_mat_z
-            if can_read_back
-                if c_mat_res.c[0].x!=0.
-                    assert(c_mat_res.c==e_mat.c)
-                    assert(c_mat_res.d==e_mat.d)
-                    assert(c_mat_res.e[0]==e_mat.e[0])
-                    assert(c_mat_res.e[1]==e_mat.e[1])
-                    assert(c_mat_res.z==c_mat_z)
-                else
-                    print("c_res_frame vs n_frame = {c_res_frame} vs {n_frame}\n")
-                    print("c_mat_res = {c_mat_res}\n")
-                    print("e_mat     = {e_mat}\n")
+            print("c_pvm = {c_mat_res.z}\n")
+            print("x_pvm = {c_mat_res.e}\n")
+            print("v_pvm = {v_pvm}\n")
+
+            print("v_model       = {v_model}\n")
+            print("c_model       = {c_mat_res.cm}\n")
+
+            print("v_view        = {v_view}\n")
+            print("c_view        = {c_mat_res.cv}\n")
+
+            print("v_projection  = {v_projection}\n")
+            print("c_projection  = {c_mat_res.cp}\n")
             c_res_frame = 0u
+
     bgfx_shutdown()

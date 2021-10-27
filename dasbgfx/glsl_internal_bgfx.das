@@ -76,7 +76,7 @@ def private generate_bgfx_bind_uniform(fnMain:FunctionPtr; var fn:FunctionPtr)
                             cll_uni.arguments |> emplace_new() <| new [[ExprConstUInt() at=vv.at, value=uint(stage)]]
                             cll_uni.arguments |> emplace_new() <| new [[ExprConstUInt() at=vv.at, value=sampler_flags]]
                         if sname|>find("image")!=-1
-                            let stage = (find_arg("stage",vv.annotation) ?as tInt) ?? 0
+                            let stage = (find_arg("binding",vv.annotation) ?as tInt) ?? 0
                             var access = "BGFX_ACCESS_READWRITE"
                             for arg in vv.annotation
                                 if arg.name=="writeonly" && arg.basicType==Type tBool
