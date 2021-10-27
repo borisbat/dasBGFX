@@ -35,6 +35,23 @@ let BGFX_STATE_DEFAULT = (0ul
     | BGFX_STATE_MSAA
 )
 
+let BGFX_STATE_BLEND_ALPHA = BGFX_STATE_BLEND_FUNC(BGFX_STATE_BLEND_SRC_ALPHA, BGFX_STATE_BLEND_INV_SRC_ALPHA)
+
+def BGFX_STATE_BLEND_FUNC_SEPARATE(_srcRGB, _dstRGB, _srcA, _dstA : uint64)
+    return ( 0ul
+	    | (  _srcRGB|(_dstRGB<<4ul))
+	    | (( _srcA  |(_dstA  <<4ul))<<8ul)
+	)
+
+def BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA : uint64)
+    return  _equationRGB | (_equationA<<3ul)
+
+def BGFX_STATE_BLEND_FUNC(_src, _dst : uint64)
+    return BGFX_STATE_BLEND_FUNC_SEPARATE(_src, _dst, _src, _dst)
+
+def BGFX_STATE_BLEND_EQUATION(_equation : uint64)
+    return  BGFX_STATE_BLEND_EQUATION_SEPARATE(_equation, _equation)
+
 def UCOLOR_TO_BGFX_UCOLOR ( col:uint )
     let r = (col & 0x00ff0000) >> 16u
     let g = (col & 0x0000ff00) >> 8u

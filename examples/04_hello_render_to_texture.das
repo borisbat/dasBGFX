@@ -91,13 +91,13 @@ def main
     var texture = bgfx_load_image_from_file("{get_das_root()}/modules/dasBgfx/examples/image.png")
     var frame_buffer = bgfx_create_frame_buffer(uint(WNDW_WIDTH), uint(WNDW_HEIGHT),
         bgfx_texture_format BGFX_TEXTURE_FORMAT_RGBA8, BGFX_TEXTURE_NONE)
-    v_ortho = bgfx_mat_ortho(-1.,1.,-1.,1.,0.,100.,0.,bgfx_get_caps().homogeneousDepth,false)
     bgfx_set_view_name(VIEW_MAIN, "main")
     bgfx_set_view_clear(VIEW_MAIN, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, RGBA_TO_BGFX_UCOLOR(0.2,0.2,0.2,1.0), 1.0f, 0u)
     bgfx_set_view_frame_buffer(VIEW_MAIN, [[bgfx_frame_buffer_handle_s idx=BGFX_INVALID_HANDLE]])
     bgfx_set_view_name(VIEW_FB, "fb")
     bgfx_set_view_clear(VIEW_FB, BGFX_CLEAR_COLOR, 0u, 1.0f, 0u)
     bgfx_set_view_frame_buffer(VIEW_FB,frame_buffer)
+    v_ortho = bgfx_mat_ortho(-1.,1.,-1.,1.,-100.,100.,0.,bgfx_get_caps().homogeneousDepth,false)
     while glfwWindowShouldClose(window)==0
         glfwPollEvents()
         var display_w, display_h : int

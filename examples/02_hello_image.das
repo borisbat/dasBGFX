@@ -10,12 +10,13 @@ var [[in, semantics=TEXCOORD0]]    a_texcoord0 : float2
 var [[inout, semantics=COLOR0]]    v_color0    : float3
 var [[inout, semantics=TEXCOORD0]] v_texcoord0 : float2
 var [[uniform, stage=0]] f_tex : sampler2D
+var [[uniform]] v_ortho : float4x4
 
 [bgfx_vertex_program(name="VERTEX_SRC")]
 def vs_main
     v_color0 = a_color0
     v_texcoord0 = a_texcoord0
-    gl_Position = float4(a_position, 0.0, 1.0)
+    gl_Position = v_ortho * float4(a_position, 0.0, 1.0)
 
 [bgfx_fragment_program(name="FRAGMENT_SRC")]
 def fs_main
@@ -62,6 +63,7 @@ def main
     var program = bgfx_create_shader_program(VERTEX_SRC, VERTEX_SRC_DECL, FRAGMENT_SRC, FRAGMENT_SRC_DECL, render_type)
     var texture = bgfx_load_image_from_file("{get_das_root()}/modules/dasBgfx/examples/image.png")
     bgfx_set_view_clear(0u, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, RGBA_TO_BGFX_UCOLOR(0.2,0.2,0.2,1.0), 1.0f, 0u)
+    v_ortho = bgfx_mat_ortho(-1.,1.,-1.,1.,-100.,100.,0.,bgfx_get_caps().homogeneousDepth,false)
     while glfwWindowShouldClose(window)==0
         glfwPollEvents()
         var display_w, display_h : int

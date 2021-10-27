@@ -63,6 +63,7 @@ IF (NOT DAS_BGFX_INCLUDED)
 
 	ADD_MODULE_DAS(dasbgfx dasbgfx bgfx_boost)
 	ADD_MODULE_DAS(dasbgfx dasbgfx bgfx_boost_internal)
+	ADD_MODULE_DAS(dasbgfx dasbgfx bgfx_ttf)
 	ADD_MODULE_DAS(dasbgfx dasbgfx glsl_bgfx)
 	ADD_MODULE_DAS(dasbgfx dasbgfx glsl_internal_bgfx)
 

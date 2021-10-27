@@ -108,7 +108,8 @@ def main
     var pd: bgfx_platform_data_s
     pd.nwh = glfwGetWin32Window(window)
     bgfx_set_platform_data(safe_addr(pd))
-    //    bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type BGFX_RENDERER_TYPE_DIRECT3D12)
+    // bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type BGFX_RENDERER_TYPE_DIRECT3D11,true)
+    // bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type BGFX_RENDERER_TYPE_DIRECT3D12)
     bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type BGFX_RENDERER_TYPE_OPENGL)
     let render_type = bgfx_get_renderer_type()
     print("render_type {render_type}\n")
@@ -131,10 +132,10 @@ def main
         panic("can't create texture")
     var mat_texture = bgfx_create_texture_2d(4u, 6u, false, 1u,
         bgfx_texture_format BGFX_TEXTURE_FORMAT_RGBA32F,
-        BGFX_TEXTURE_COMPUTE_WRITE | BGFX_TEXTURE_READ_BACK, null)
+        BGFX_TEXTURE_COMPUTE_WRITE  | BGFX_TEXTURE_READ_BACK, null)
     if mat_texture.idx==uint16(0xffff)
         panic("can't create texture")
-    let v_ortho = bgfx_mat_ortho(-1.,1.,-1.,1.,0.,100.,0.,bgfx_get_caps().homogeneousDepth,false)
+    let v_ortho = bgfx_mat_ortho(-1.,1.,-1.,1.,-100.,100.,0.,bgfx_get_caps().homogeneousDepth,false)
     bgfx_set_view_clear(0u, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, RGBA_TO_BGFX_UCOLOR(0.2,0.2,0.2,1.0), 1.0f, 0u)
     var ioffset = 0
     var c_mat_res : CMat
