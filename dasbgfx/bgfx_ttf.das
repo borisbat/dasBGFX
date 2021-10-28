@@ -9,27 +9,27 @@ require ttf/stb_ttf_common public
 require daslib/safe_addr
 require daslib/math_boost
 
-var [[in, semantics=POSITION]] a_position : float2
-var [[in, semantics=TEXCOORD0]] a_texcoord0 : float2
-var [[inout, semantics=TEXCOORD0]] v_texcoord : float2
+var [[in]] a_position : float2
+var [[in]] a_texcoord0 : float2
+var [[inout]] v_texcoord0 : float2
 var [[uniform, stage=0]] f_tex : sampler2D
 var [[uniform]] v_mvp : float4x4
 var [[uniform]] f_tint : float4
 
 [bgfx_vertex_program(name="TTF_VERTEX_SRC")]
 def TTF_vs_main
-    v_texcoord = a_texcoord0
+    v_texcoord0 = a_texcoord0
     gl_Position = v_mvp * float4(a_position, 0.0, 1.0)
 
 [bgfx_fragment_program(name="TTF_FRAGMENT_SRC")]
 def TTF_fs_main
-    let tex = texture2D(f_tex,v_texcoord)
+    let tex = texture2D(f_tex,v_texcoord0)
     gl_FragColor = float4(f_tint.xyz,tex.w)
 
 [bgfx_vertex_buffer]
 struct TTF_FontVertex
-    [[type=FLOAT, size=2, semantics=POSITION ]] xy : float2
-    [[type=FLOAT, size=2, semantics=TEXCOORD0]] uv : float2
+    position  : float2
+    texcoord0 : float2
 
 class BGFXTTFApiAdapter : TTFApiAdapter
     def override create_font_texture ( dim:int2; data:array<uint8> ) : uint64

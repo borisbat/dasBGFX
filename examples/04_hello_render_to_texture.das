@@ -4,12 +4,12 @@ require daslib/defer
 require daslib/math_boost
 require daslib/safe_addr
 
-var [[in, semantics=POSITION]]     a_position  : float2
-var [[in, semantics=COLOR0]]       a_color0    : float3
-var [[in, semantics=TEXCOORD0]]    a_texcoord0 : float2
-var [[inout, semantics=COLOR0]]    v_color0    : float3
-var [[inout, semantics=TEXCOORD0]] v_texcoord0 : float2
-var [[uniform, stage=0]] f_tex : sampler2D
+var [[in]] a_position : float2
+var [[in]] a_color0 : float3
+var [[in]] a_texcoord0 : float2
+var [[inout]] v_color0 : float3
+var [[inout]] v_texcoord0 : float2
+var [[uniform]] f_tex : sampler2D
 var [[uniform]] f_offset : float4
 var [[uniform]] v_ortho : float4x4
 
@@ -45,15 +45,15 @@ def fs_display_main
 
 [bgfx_vertex_buffer]
 struct Vertex
-    [[type=FLOAT, size=2, semantics=POSITION]]   xy : float2
-    [[type=FLOAT, size=3, semantics=COLOR0]]    rgb : float3
-    [[type=FLOAT, size=2, semantics=TEXCOORD0]]  uv : float2
+    position  : float2
+    color0    : float3
+    texcoord0 : float2
 
 let vertices = [[Vertex
-        xy=float2(-1.0, 1.0), rgb=float3(0.0,0.0,0.0), uv=float2(0.0,0.0);
-        xy=float2( 1.0, 1.0), rgb=float3(1.0,1.0,0.0), uv=float2(1.0,0.0);
-        xy=float2( 1.0,-1.0), rgb=float3(1.0,0.0,0.0), uv=float2(1.0,1.0);
-        xy=float2(-1.0,-1.0), rgb=float3(1.0,1.0,0.0), uv=float2(0.0,1.0)
+    position=float2(-1.0, 1.0), color0=float3(0.0,0.0,0.0), texcoord0=float2(0.0,0.0);
+    position=float2( 1.0, 1.0), color0=float3(1.0,1.0,0.0), texcoord0=float2(1.0,0.0);
+    position=float2( 1.0,-1.0), color0=float3(1.0,0.0,0.0), texcoord0=float2(1.0,1.0);
+    position=float2(-1.0,-1.0), color0=float3(1.0,1.0,0.0), texcoord0=float2(0.0,1.0)
 ]]
 
 let indices = [[int 0; 2; 1; 2; 0; 3]]

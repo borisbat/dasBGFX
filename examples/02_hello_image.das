@@ -4,6 +4,9 @@ require daslib/defer
 require daslib/math_boost
 require daslib/safe_addr
 
+// NOTE
+//  this sample demonstrates overwrites for most attributes
+
 var [[in, semantics=POSITION]]     a_position  : float2
 var [[in, semantics=COLOR0]]       a_color0    : float3
 var [[in, semantics=TEXCOORD0]]    a_texcoord0 : float2
@@ -24,15 +27,15 @@ def fs_main
 
 [bgfx_vertex_buffer]
 struct Vertex
-    [[type=FLOAT, size=2, semantics=POSITION]]   xy : float2
-    [[type=FLOAT, size=3, semantics=COLOR0]]    rgb : float3
-    [[type=FLOAT, size=2, semantics=TEXCOORD0]]  uv : float2
+    [[type=FLOAT, size=2, semantics=POSITION,  normalized=false, as_int=false]] xy : float2
+    [[type=FLOAT, size=3, semantics=COLOR0,    normalized=false, as_int=false]] rgb : float3
+    [[type=FLOAT, size=2, semantics=TEXCOORD0, normalized=false, as_int=false]] uv : float2
 
 let vertices = [[Vertex
-        xy=float2(-0.5, 0.5), rgb=float3(0.0,0.0,0.0), uv=float2(0.0,0.0);
-        xy=float2( 0.5, 0.5), rgb=float3(1.0,1.0,0.0), uv=float2(1.0,0.0);
-        xy=float2( 0.5,-0.5), rgb=float3(1.0,0.0,0.0), uv=float2(1.0,1.0);
-        xy=float2(-0.5,-0.5), rgb=float3(1.0,1.0,0.0), uv=float2(0.0,1.0)
+    xy=float2(-0.5, 0.5), rgb=float3(0.0,0.0,0.0), uv=float2(0.0,0.0);
+    xy=float2( 0.5, 0.5), rgb=float3(1.0,1.0,0.0), uv=float2(1.0,0.0);
+    xy=float2( 0.5,-0.5), rgb=float3(1.0,0.0,0.0), uv=float2(1.0,1.0);
+    xy=float2(-0.5,-0.5), rgb=float3(1.0,1.0,0.0), uv=float2(0.0,1.0)
 ]]
 
 let indices = [[int 0; 2; 1; 2; 0; 3]]

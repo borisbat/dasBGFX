@@ -25,6 +25,7 @@ class GlslBgfxShader : GlslShader
     override output_structure_initializers = true               // produce structure initializers (hi HLSLS)
     override restrict_array_as_result = true                    // returning float[13] and such is prohibited (hi HLSL)
     override allow_unitialized_local_arrays = true              // var a : float[9] can be uninitialized local variable (hi HLSL)
+    override resolve_supported_semantics = true                 // resolve semantic from a_position, v_color0, etc
     def override get_glsl_prefix
         if shaderType==ShaderType compute
             return "\n#include <bgfx_compute.sh>\n\n"

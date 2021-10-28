@@ -8,6 +8,9 @@ require daslib/ast_boost
 require daslib/templates
 require daslib/templates_boost
 require daslib/safe_addr
+require daslib/strings_boost
+
+require glsl/glsl_internal
 
 require bgfx
 
@@ -107,28 +110,36 @@ class BgfxVertexBuffer : AstStructureAnnotation
         let bgfx_attr_enum_t = typeinfo(ast_typedecl type<bgfx_attrib>).enumType
         let bgfx_attr_type_enum_t = typeinfo(ast_typedecl type<bgfx_attrib_type>).enumType
         for fld in st.fields
-            let semantics = find_arg("semantics", fld.annotation)
-            if !(semantics is tString )
+            var semantics = find_arg("semantics", fld.annotation) ?as tString ?? ""
+            if semantics==""
+                let fldname = to_upper(string(fld.name))
+                if glsl_supported_semantics |> key_exists(fldname)
+                    semantics = fldname
+            if semantics==""
                 errors := "field {fld.name} is missing 'semantics'"
                 return false
-            let sizei = find_arg("size", fld.annotation)
-            if !(sizei is tInt)
-                errors := "field {fld.name} is missing 'size'"
+            var dinfo = get_decl_info(fld._type, fld.annotation)
+            if !dinfo.ok
+                errors := "field {fld.name} is missing type information"
                 return false
-            let typet = find_arg("type", fld.annotation)
-            if !(typet is tString)
-                errors := "field {fld.name} is missing 'type'"
+            var ttname = ""
+            if dinfo.info.typet==Type tFloat
+                ttname = "FLOAT"
+            elif dinfo.info.typet==Type tUInt
+                ttname = "UINT8"
+            elif dinfo.info.typet==Type tInt16
+                ttname = "INT16"
+            else
+                errors := "field {fld.name} type {dinfo.info.typet} is not supported"
                 return false
-            let normalized = (find_arg("normalized", fld.annotation) ?as tBool) ?? false
-            let as_int = (find_arg("as_int", fld.annotation) ?as tBool) ?? false
-            // bgfx_vertex_layout_add(safe_addr(pcv_decl), bgfx_attrib BGFX_ATTRIB_POSITION, 3u, bgfx_attrib_type BGFX_ATTRIB_TYPE_FLOAT, false, false)
+            // bgfx_vertex_layout_add(safe_addr(pcv_decl), bgfx_attrib POSITION, 3u, bgfx_attrib_type FLOAT, false, false)
             var cll_vap <- new [[ExprCall() at=fld.at, name:="bgfx_vertex_layout_add"]]
             cll_vap.arguments |> emplace_new() <| clone_expression(saddr)
-            cll_vap.arguments |> emplace_new() <| new [[ExprConstEnumeration() at=st.at, enumType:=bgfx_attr_enum_t, value:=semantics as tString]]
-            cll_vap.arguments |> emplace_new() <| new [[ExprConstUInt() at=st.at, value=uint(sizei as tInt)]]
-            cll_vap.arguments |> emplace_new() <| new [[ExprConstEnumeration() at=st.at, enumType:=bgfx_attr_type_enum_t, value:=typet as tString]]
-            cll_vap.arguments |> emplace_new() <| new [[ExprConstBool() at=st.at, value=normalized]]
-            cll_vap.arguments |> emplace_new() <| new [[ExprConstBool() at=st.at, value=as_int]]
+            cll_vap.arguments |> emplace_new() <| new [[ExprConstEnumeration() at=st.at, enumType:=bgfx_attr_enum_t, value:=semantics]]
+            cll_vap.arguments |> emplace_new() <| new [[ExprConstUInt() at=st.at, value=uint(dinfo.info.sizei)]]
+            cll_vap.arguments |> emplace_new() <| new [[ExprConstEnumeration() at=st.at, enumType:=bgfx_attr_type_enum_t, value:=ttname]]
+            cll_vap.arguments |> emplace_new() <| new [[ExprConstBool() at=st.at, value=dinfo.info.normalized]]
+            cll_vap.arguments |> emplace_new() <| new [[ExprConstBool() at=st.at, value=dinfo.info.as_int]]
             blk.list |> emplace(cll_vap)
         saddr := null
         apply_template(qblk) <| $ ( rules )

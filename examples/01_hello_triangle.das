@@ -4,9 +4,9 @@ require daslib/defer
 require daslib/math_boost
 require daslib/safe_addr
 
-var [[in, semantics=POSITION]]  a_position : float2
-var [[in, semantics=COLOR0]]    a_color0   : float3
-var [[inout, semantics=COLOR0]] v_color0   : float3
+var [[in]] a_position : float2
+var [[in]] a_color0 : float3
+var [[inout]] v_color0 : float3
 var [[uniform]] v_ortho : float4x4
 
 [bgfx_vertex_program(name="VERTEX_SRC")]
@@ -20,13 +20,13 @@ def fs_main
 
 [bgfx_vertex_buffer]
 struct Vertex
-    [[type=FLOAT, size=2, semantics=POSITION]] xy : float2
-    [[type=FLOAT, size=3, semantics=COLOR0]] rgb : float3
+    position : float2
+    color0 : float3
 
 let vertices = [[Vertex
-        xy=float2(-0.5, 0.5), rgb=float3(0.0,0.0,0.0);
-        xy=float2( 0.5,-0.5), rgb=float3(1.0,0.0,0.0);
-        xy=float2( 0.5, 0.5), rgb=float3(1.0,1.0,0.0)
+    position=float2(-0.5, 0.5), color0=float3(0.0,0.0,0.0);
+    position=float2( 0.5,-0.5), color0=float3(1.0,0.0,0.0);
+    position=float2( 0.5, 0.5), color0=float3(1.0,1.0,0.0)
 ]]
 
 let indices = [[int 0;1;2]]

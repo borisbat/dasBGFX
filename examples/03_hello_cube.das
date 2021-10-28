@@ -6,15 +6,12 @@ require dasbgfx/bgfx_boost
 
 require dasbgfx/glsl_bgfx
 
-var [[in, semantics=POSITION]]   a_position : float3
-var [[in, semantics=NORMAL]]       a_normal : float3
-var [[in, semantics=TEXCOORD0]] a_texcoord0 : float2
-
-var [[inout, semantics=NORMAL]]        v_color : float3
-var [[inout, semantics=TEXCOORD0]] v_texcoord0 : float2
-
+var [[in]] a_position  : float3
+var [[in]] a_normal    : float3
+var [[in]] a_texcoord0 : float2
+var [[inout]] v_color0 : float3
+var [[inout]] v_texcoord0 : float2
 var [[uniform, stage=0]] f_tex : sampler2D
-
 var [[uniform]] v_model : float4x4
 var [[uniform]] v_view : float4x4
 var [[uniform]] v_projection : float4x4
@@ -22,7 +19,7 @@ var [[uniform]] v_pvm : float4x4
 
 [bgfx_fragment_program(name="FRAGMENT_SRC")]
 def fs_cube_main
-    gl_FragColor.xyz = texture2D(f_tex,v_texcoord0).xyz * v_color
+    gl_FragColor.xyz = texture2D(f_tex,v_texcoord0).xyz * v_color0
     gl_FragColor.w = 1.
 
 [bgfx_vertex_program(name="VERTEX_SRC")]
@@ -30,48 +27,50 @@ def vs_cube_main
     let light = normalize(float3(1,-1,-1))
     let norm = normalize ( float3x3(v_model) * a_normal )
     gl_Position = v_projection * v_view * v_model * float4(a_position, 1.0)
-    v_color = float3(saturate(-dot(norm,light)))
+    v_color0 = float3(saturate(-dot(norm,light)))
     v_texcoord0 = a_texcoord0
 
 [bgfx_vertex_buffer]
 struct Vertex
-    [[type=FLOAT, size=3, semantics=POSITION]]                    xyz : float3
-    [[type=FLOAT, size=3, semantics=NORMAL, normalized=true]]  normal : float3
-    [[type=FLOAT, size=2, semantics=TEXCOORD0]]                    uv : float2
+    position : float3
+    [[normalized=true]] normal : float3
+    texcoord0 : float2
 
 let vertices = [[Vertex
-        xyz=float3( 1, 1, 1), normal=float3(  0, 0, 1),  uv=float2(0,0);              // v0 (front)
-        xyz=float3(-1, 1, 1), normal=float3(  0, 0, 1),  uv=float2(1,0);              // v1
-        xyz=float3(-1,-1, 1), normal=float3(  0, 0, 1),  uv=float2(1,1);              // v2
-        xyz=float3( 1,-1, 1), normal=float3(  0, 0, 1),  uv=float2(0,1);              // v3
-        xyz=float3( 1, 1, 1), normal=float3(  1, 0, 0),  uv=float2(0,0);              // v0 (right)
-        xyz=float3( 1,-1, 1), normal=float3(  1, 0, 0),  uv=float2(1,0);              // v3
-        xyz=float3( 1,-1,-1), normal=float3(  1, 0, 0),  uv=float2(1,1);              // v4
-        xyz=float3( 1, 1,-1), normal=float3(  1, 0, 0),  uv=float2(0,1);              // v5
-        xyz=float3( 1, 1, 1), normal=float3(  0, 1, 0),  uv=float2(0,0);              // v0 (top)
-        xyz=float3( 1, 1,-1), normal=float3(  0, 1, 0),  uv=float2(1,0);              // v5
-        xyz=float3(-1, 1,-1), normal=float3(  0, 1, 0),  uv=float2(1,1);              // v6
-        xyz=float3(-1, 1, 1), normal=float3(  0, 1, 0),  uv=float2(0,1);              // v1
-        xyz=float3(-1, 1, 1), normal=float3( -1, 0, 0),  uv=float2(0,0);              // v1 (left)
-        xyz=float3(-1, 1,-1), normal=float3( -1, 0, 0),  uv=float2(1,0);              // v6
-        xyz=float3(-1,-1,-1), normal=float3( -1, 0, 0),  uv=float2(1,1);              // v7
-        xyz=float3(-1,-1, 1), normal=float3( -1, 0, 0),  uv=float2(0,1);              // v2
-        xyz=float3(-1,-1,-1), normal=float3(  0,-1, 0),  uv=float2(0,0);              // v7 (bottom)
-        xyz=float3( 1,-1,-1), normal=float3(  0,-1, 0),  uv=float2(1,0);              // v4
-        xyz=float3( 1,-1, 1), normal=float3(  0,-1, 0),  uv=float2(1,1);              // v3
-        xyz=float3(-1,-1, 1), normal=float3(  0,-1, 0),  uv=float2(0,1);              // v2
-        xyz=float3( 1,-1,-1), normal=float3(  0, 0,-1),  uv=float2(0,0);              // v4 (back)
-        xyz=float3(-1,-1,-1), normal=float3(  0, 0,-1),  uv=float2(1,0);              // v7
-        xyz=float3(-1, 1,-1), normal=float3(  0, 0,-1),  uv=float2(1,1);              // v6
-        xyz=float3( 1, 1,-1), normal=float3(  0, 0,-1),  uv=float2(0,1) ]]            // v5
+    position=float3( 1, 1, 1), normal=float3(  0, 0, 1),  texcoord0=float2(0,0); // v0 (front)
+    position=float3(-1, 1, 1), normal=float3(  0, 0, 1),  texcoord0=float2(1,0); // v1
+    position=float3(-1,-1, 1), normal=float3(  0, 0, 1),  texcoord0=float2(1,1); // v2
+    position=float3( 1,-1, 1), normal=float3(  0, 0, 1),  texcoord0=float2(0,1); // v3
+    position=float3( 1, 1, 1), normal=float3(  1, 0, 0),  texcoord0=float2(0,0); // v0 (right)
+    position=float3( 1,-1, 1), normal=float3(  1, 0, 0),  texcoord0=float2(1,0); // v3
+    position=float3( 1,-1,-1), normal=float3(  1, 0, 0),  texcoord0=float2(1,1); // v4
+    position=float3( 1, 1,-1), normal=float3(  1, 0, 0),  texcoord0=float2(0,1); // v5
+    position=float3( 1, 1, 1), normal=float3(  0, 1, 0),  texcoord0=float2(0,0); // v0 (top)
+    position=float3( 1, 1,-1), normal=float3(  0, 1, 0),  texcoord0=float2(1,0); // v5
+    position=float3(-1, 1,-1), normal=float3(  0, 1, 0),  texcoord0=float2(1,1); // v6
+    position=float3(-1, 1, 1), normal=float3(  0, 1, 0),  texcoord0=float2(0,1); // v1
+    position=float3(-1, 1, 1), normal=float3( -1, 0, 0),  texcoord0=float2(0,0); // v1 (left)
+    position=float3(-1, 1,-1), normal=float3( -1, 0, 0),  texcoord0=float2(1,0); // v6
+    position=float3(-1,-1,-1), normal=float3( -1, 0, 0),  texcoord0=float2(1,1); // v7
+    position=float3(-1,-1, 1), normal=float3( -1, 0, 0),  texcoord0=float2(0,1); // v2
+    position=float3(-1,-1,-1), normal=float3(  0,-1, 0),  texcoord0=float2(0,0); // v7 (bottom)
+    position=float3( 1,-1,-1), normal=float3(  0,-1, 0),  texcoord0=float2(1,0); // v4
+    position=float3( 1,-1, 1), normal=float3(  0,-1, 0),  texcoord0=float2(1,1); // v3
+    position=float3(-1,-1, 1), normal=float3(  0,-1, 0),  texcoord0=float2(0,1); // v2
+    position=float3( 1,-1,-1), normal=float3(  0, 0,-1),  texcoord0=float2(0,0); // v4 (back)
+    position=float3(-1,-1,-1), normal=float3(  0, 0,-1),  texcoord0=float2(1,0); // v7
+    position=float3(-1, 1,-1), normal=float3(  0, 0,-1),  texcoord0=float2(1,1); // v6
+    position=float3( 1, 1,-1), normal=float3(  0, 0,-1),  texcoord0=float2(0,1)  // v5
+]]
 
 let indices = [[int
-         0; 1; 2;   2; 3; 0;      // front
-         4; 5; 6;   6; 7; 4;      // right
-         8; 9;10;  10;11; 8;      // top
-        12;13;14;  14;15;12;      // left
-        16;17;18;  18;19;16;      // bottom
-        20;21;22;  22;23;20 ]]    // back
+     0; 1; 2;   2; 3; 0; // front
+     4; 5; 6;   6; 7; 4; // right
+     8; 9;10;  10;11; 8; // top
+    12;13;14;  14;15;12; // left
+    16;17;18;  18;19;16; // bottom
+    20;21;22;  22;23;20  // back
+]]
 
 [export]
 def main
