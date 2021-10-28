@@ -121,10 +121,8 @@ def main
     var pcvl_decl = bgfx_create_vertex_layout(type<Vertex>,render_type)
     var vbh = bgfx_create_vertex_buffer(bgfx_make_ref(vertices), safe_addr(pcvl_decl), BGFX_BUFFER_NONE)
     var ibh = bgfx_create_index_buffer(bgfx_make_ref(indices), BGFX_BUFFER_INDEX32)
-    if render_type==bgfx_renderer_type BGFX_RENDERER_TYPE_OPENGL
-        compute_effect_bind_uniform()
-    var compute_program = bgfx_create_compute_shader_program(COMPUTE_SRC, render_type)
-    var program = bgfx_create_shader_program(VERTEX_SRC, VERTEX_SRC_DECL, FRAGMENT_SRC, FRAGMENT_SRC_DECL, render_type)
+    var compute_program = bgfx_create_compute_shader_program(@@compute_effect)
+    var program = bgfx_create_shader_program(@@vs_main,@@fs_main)
     var texture = bgfx_create_texture_2d(256u, 256u, false, 1u,
         bgfx_texture_format BGFX_TEXTURE_FORMAT_RGBA8, BGFX_TEXTURE_COMPUTE_WRITE, null)
     if texture.idx==uint16(0xffff)

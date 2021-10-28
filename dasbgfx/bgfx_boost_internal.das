@@ -11,6 +11,73 @@ require daslib/safe_addr
 
 require bgfx
 
+[tag_function(compile_shader_tag)]
+def public bgfx_create_shader_program ( vs_main, ps_main : function<void> ) : bgfx_program_handle_s
+    panic("somehow we are in this is temporary stub for the resolved bgfx_create_shader_program")
+    return [[bgfx_program_handle_s idx=uint16(0xffff)]]
+
+[tag_function(compile_compute_shader_tag)]
+def public bgfx_create_compute_shader_program ( cs_main : function<void> ) : bgfx_program_handle_s
+    panic("somehow we are in this is temporary stub for the resolved bgfx_create_compute_shader_program")
+    return [[bgfx_program_handle_s idx=uint16(0xffff)]]
+
+[macro_function]
+def get_shader_const_name ( arg:ExpressionPtr; var errors:das_string )
+    var aAddr = arg ?as ExprAddr
+    if aAddr==null
+        errors := "expecting @@shader_function"
+        return ""
+    if aAddr.func==null
+        errors := "function not found yet"
+        return ""
+    for ann in aAddr.func.annotations
+        if ann.annotation.name=="bgfx_vertex_program" || ann.annotation.name=="bgfx_fragment_program" || ann.annotation.name=="bgfx_compute_program"
+            let cname = find_arg("name",ann.arguments) ?as tString ?? ""
+            if cname==""
+                errors := "annotation {ann.annotation.name} is missing name"
+                return ""
+            else
+                return cname
+    errors := "function needs to be annotated as bgfx_vertex_program, bgfx_fragment_program, or bgfx_compute_program"
+    return ""
+
+[tag_function_macro(tag="compile_shader_tag")]
+class BgfxCompileShaderFunctionAnnotation : AstFunctionAnnotation
+    def override transform ( var call : smart_ptr<ExprCallFunc>; var errors : das_string ) : ExpressionPtr
+        // see if there
+        if call.arguments[0]._type==null || call.arguments[1]._type==null
+            return [[ExpressionPtr]]
+        let vs_name = get_shader_const_name(call.arguments[0],errors)
+        if vs_name==""
+            return [[ExpressionPtr]]
+        let fs_name = get_shader_const_name(call.arguments[1],errors)
+        if fs_name==""
+            return [[ExpressionPtr]]
+        var cll <- new [[ExprCall() at=call.at, name:="bgfx_create_shader_program"]]
+        cll.arguments |> emplace_new <| new [[ExprVar() at=call.at, name:=vs_name]]
+        cll.arguments |> emplace_new <| new [[ExprVar() at=call.at, name:="{vs_name}_DECL"]]
+        cll.arguments |> emplace_new <| new [[ExprVar() at=call.at, name:=fs_name]]
+        cll.arguments |> emplace_new <| new [[ExprVar() at=call.at, name:="{fs_name}_DECL"]]
+        cll.arguments |> emplace_new <| new [[ExprCall() at=call.at, name:="bgfx_get_renderer_type"]]
+        return <- cll
+
+[tag_function_macro(tag="compile_compute_shader_tag")]
+class BgfxCompileComputeShaderFunctionAnnotation : AstFunctionAnnotation
+    def override transform ( var call : smart_ptr<ExprCallFunc>; var errors : das_string ) : ExpressionPtr
+        // see if there
+        if call.arguments[0]._type==null
+            return [[ExpressionPtr]]
+        let cs_name = get_shader_const_name(call.arguments[0],errors)
+        if cs_name==""
+            return [[ExpressionPtr]]
+        let func = (call.arguments[0] as ExprAddr).func
+        let target = func._module.name!="" ? "{func._module.name}::{func.name}" : "{func.name}"
+        var cll <- new [[ExprCall() at=call.at, name:="bgfx_create_compute_shader_program"]]
+        cll.arguments |> emplace_new <| new [[ExprVar() at=call.at, name:=cs_name]]
+        cll.arguments |> emplace_new <| new [[ExprAddr() at=call.at, target:="{target}_bind_uniform"]]
+        cll.arguments |> emplace_new <| new [[ExprCall() at=call.at, name:="bgfx_get_renderer_type"]]
+        return <- cll
+
 [structure_macro(name="bgfx_vertex_buffer")]
 class BgfxVertexBuffer : AstStructureAnnotation
     def override apply ( var st:StructurePtr; var group:ModuleGroup; args:AnnotationArgumentList; var errors : das_string ) : bool

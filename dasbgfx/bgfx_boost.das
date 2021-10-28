@@ -155,6 +155,11 @@ def public bgfx_create_compute_shader_program ( cs : string; render_type : bgfx_
         panic("failed to create compute program")
     return prog
 
+def public bgfx_create_compute_shader_program ( cs : string; func:function<void>; render_type : bgfx_renderer_type )
+    if render_type == bgfx_renderer_type BGFX_RENDERER_TYPE_OPENGL
+        invoke(func)
+    return bgfx_create_compute_shader_program(cs, render_type)
+
 def public bgfx_create_shader_program ( vs, vd, fs, fd : string; render_type : bgfx_renderer_type )
     var vda <- split(vd,"\n")
     var pda <- split(fd,"\n")

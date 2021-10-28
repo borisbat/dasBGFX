@@ -98,7 +98,7 @@ def main
     var pcvl_decl = bgfx_create_vertex_layout(type<Vertex>,render_type)
     var vbh = bgfx_create_vertex_buffer(bgfx_make_ref(vertices), safe_addr(pcvl_decl), BGFX_BUFFER_NONE)
     var ibh = bgfx_create_index_buffer(bgfx_make_ref(indices), BGFX_BUFFER_INDEX32)
-    var program = bgfx_create_shader_program(VERTEX_SRC, VERTEX_SRC_DECL, FRAGMENT_SRC, FRAGMENT_SRC_DECL, render_type)
+    var program = bgfx_create_shader_program(@@vs_cube_main, @@fs_cube_main)
     bgfx_set_view_clear(0u, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, RGBA_TO_BGFX_UCOLOR(0.2,0.2,0.2,1.0), 1.0f, 0u)
     var texture = bgfx_load_image_from_file("{get_das_root()}/modules/dasBgfx/examples/image.png")
     while glfwWindowShouldClose(window)==0

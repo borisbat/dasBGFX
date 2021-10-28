@@ -48,7 +48,7 @@ def public bgfx_create_ttf_objects
     set_api_adapter <| new BGFXTTFApiAdapter()
     let render_type = bgfx_get_renderer_type()
     font_vertex_decl = bgfx_create_vertex_layout(type<TTF_FontVertex>,render_type)
-    program = bgfx_create_shader_program(TTF_VERTEX_SRC,TTF_VERTEX_SRC_DECL,TTF_FRAGMENT_SRC,TTF_FRAGMENT_SRC_DECL,render_type)
+    program = bgfx_create_shader_program(@@TTF_vs_main,@@TTF_fs_main)
     return program
 
 def public bgfx_draw_quads_2d ( font:Font; stream:uint; quads : array<FontVertex>; w,h,x,y:int; tint:float3 = float3(1.) )
