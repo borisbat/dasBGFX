@@ -142,13 +142,7 @@ def private get_temp_dir
     return temp_dir
 
 def public bgfx_create_compute_shader_program ( cs : string; render_type : bgfx_renderer_type )
-    let temp_dir = get_temp_dir()
-    let cs_name = "{temp_dir}/compute.sh"
-    fopen(cs_name,"wb") <| $ ( fvtx )
-        fwrite ( fvtx, cs )
-    let cs_bin_name = "{temp_dir}/compute.bin"
-    if !bgfx_compile_shader_file ( cs_name, cs_bin_name, "c", render_type )
-        panic("can't compile {cs_name}")
+    let cs_bin_name = bgfx_cache_shader_file(cs, "", "c", render_type)
     var csh = bgfx_load_shader_from_bin(cs_bin_name)
     let prog = bgfx_create_compute_program(csh,true)
     if prog.idx==uint16(0xffff)
@@ -167,30 +161,38 @@ def public bgfx_create_shader_program ( vs, vd, fs, fd : string; render_type : b
     sort_unique(vpda)
     delete vda
     delete pda
-    let temp_dir = get_temp_dir()
-    fopen("{temp_dir}/varying.def.sc","wb") <| $ ( fdef )
+    let decl = build_string <| $ ( writer )
         for t in vpda
             if length(t)>0
-                fwrite(fdef, "{t}\n")
+                writer |> write("{t}\n")
     delete vpda
-    let vs_name = "{temp_dir}/vertex.sh"
-    fopen(vs_name,"wb") <| $ ( fvtx )
-        fwrite ( fvtx, vs )
-    let fs_name = "{temp_dir}/fragment.sh"
-    fopen(fs_name,"wb") <| $ ( ffrag )
-        fwrite ( ffrag, fs )
-    let vs_bin_name = "{temp_dir}/vertex.bin"
-    if !bgfx_compile_shader_file ( vs_name, vs_bin_name, "v", render_type )
-        panic("can't compile {vs_name}")
-    let fs_bin_name = "{temp_dir}/fragment.bin"
-    if !bgfx_compile_shader_file ( fs_name, fs_bin_name, "f", render_type )
-        panic("can't compile {fs_name}")
+    let vs_bin_name = bgfx_cache_shader_file(vs,decl,"v",render_type)
+    let fs_bin_name = bgfx_cache_shader_file(fs,decl,"f",render_type)
     var vsh = bgfx_load_shader_from_bin(vs_bin_name)
     var fsh = bgfx_load_shader_from_bin(fs_bin_name)
     let prog = bgfx_create_program(vsh, fsh, true)
     if prog.idx==uint16(0xffff)
         panic("failed to create program")
     return prog
+
+def public bgfx_cache_shader_file ( shader_const, shader_decl, shader_type : string; render_type : bgfx_renderer_type )
+    let shader_const_hash = hash(shader_const)  // TODO: get better hash function
+    let shader_decl_hash  = hash(shader_decl)   // TODO: get better hash function
+    let temp_dir = get_temp_dir()
+    let shader_file_name = "{shader_type}_{int(render_type)}_{shader_const_hash}_{shader_decl_hash}"
+    var sh_name = "{temp_dir}/{shader_file_name}.sc"
+    let sh_bin_name = "{temp_dir}/{shader_file_name}.bin"
+    var fs : FStat
+    if !stat(sh_bin_name,fs)
+        fopen(sh_name,"wb") <| $ ( fsh )
+            fwrite ( fsh, shader_const )
+        if shader_type!="c"
+            fopen("{temp_dir}/varying.def.sc","wb") <| $ ( fsh )
+                fwrite ( fsh, shader_decl )
+        if !bgfx_compile_shader_file ( sh_name, sh_bin_name, shader_type, render_type )
+            panic("can't compile {sh_name}")
+        verify(stat(sh_bin_name,fs),"missing output")
+    return sh_bin_name
 
 def public bgfx_compile_shader_file ( fin, fout, ftype:string; rt : bgfx_renderer_type )
     var platform = ""
