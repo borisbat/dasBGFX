@@ -101,7 +101,7 @@ def main
 		panic("can't init glfw")
     defer <|
         glfwTerminate()
-    var window = glfwCreateWindow(WNDW_WIDTH, WNDW_HEIGHT, "Hello image", null, null)
+    var window = glfwCreateWindow(WNDW_WIDTH, WNDW_HEIGHT, "BGFX - Hello compute", null, null)
     if window==null
 		panic("can't create window")
     defer <|
@@ -110,9 +110,10 @@ def main
     pd.nwh = glfwGetWin32Window(window)
     bgfx_set_platform_data(safe_addr(pd))
     // bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type BGFX_RENDERER_TYPE_DIRECT3D11,true)
-    // bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type BGFX_RENDERER_TYPE_DIRECT3D12)
-    bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type BGFX_RENDERER_TYPE_OPENGL)
+    bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type BGFX_RENDERER_TYPE_DIRECT3D12)
+    // bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type BGFX_RENDERER_TYPE_OPENGL)
     let render_type = bgfx_get_renderer_type()
+    glfwSetWindowTitle(window, "BGFX - Hello compute - {render_type}")
     print("render_type {render_type}\n")
     var can_read_back = false
     if (bgfx_get_caps().supported & BGFX_CAPS_TEXTURE_READ_BACK) != 0ul
@@ -120,7 +121,8 @@ def main
     var pcvl_decl = bgfx_create_vertex_layout(type<Vertex>,render_type)
     var vbh = bgfx_create_vertex_buffer(bgfx_make_ref(vertices), safe_addr(pcvl_decl), BGFX_BUFFER_NONE)
     var ibh = bgfx_create_index_buffer(bgfx_make_ref(indices), BGFX_BUFFER_INDEX32)
-    compute_effect_bind_uniform()
+    if render_type==bgfx_renderer_type BGFX_RENDERER_TYPE_OPENGL
+        compute_effect_bind_uniform()
     var compute_program = bgfx_create_compute_shader_program(COMPUTE_SRC, render_type)
     var program = bgfx_create_shader_program(VERTEX_SRC, VERTEX_SRC_DECL, FRAGMENT_SRC, FRAGMENT_SRC_DECL, render_type)
     var texture = bgfx_create_texture_2d(256u, 256u, false, 1u,

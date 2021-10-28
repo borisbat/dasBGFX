@@ -13,7 +13,7 @@ def main
 		panic("can't init glfw")
     defer <|
         glfwTerminate()
-    var window = glfwCreateWindow(WNDW_WIDTH, WNDW_HEIGHT, "Hello bgfx_ttf", null, null)
+    var window = glfwCreateWindow(WNDW_WIDTH, WNDW_HEIGHT, "BGFX - Hello ttf", null, null)
     if window==null
 		panic("can't create window")
     defer <|
@@ -23,6 +23,7 @@ def main
     bgfx_set_platform_data(safe_addr(pd))
     bgfx_init(WNDW_WIDTH,WNDW_HEIGHT) //,bgfx_renderer_type BGFX_RENDERER_TYPE_OPENGL)
     let render_type = bgfx_get_renderer_type()
+    glfwSetWindowTitle(window, "BGFX - Hello ttf - {render_type}")
     print("render_type {render_type}\n")
     bgfx_create_ttf_objects()
     let font <- load_ttf("c:/windows/fonts/times.ttf")

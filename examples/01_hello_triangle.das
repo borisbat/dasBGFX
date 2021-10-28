@@ -39,7 +39,7 @@ def main
 		panic("can't init glfw")
     defer <|
         glfwTerminate()
-    var window = glfwCreateWindow(WNDW_WIDTH, WNDW_HEIGHT, "Hello triangle", null, null)
+    var window = glfwCreateWindow(WNDW_WIDTH, WNDW_HEIGHT, "BGFX - Hello triangle", null, null)
     if window==null
 		panic("can't create window")
     defer <|
@@ -49,6 +49,7 @@ def main
     bgfx_set_platform_data(safe_addr(pd))
     bgfx_init(WNDW_WIDTH,WNDW_HEIGHT)
     let render_type = bgfx_get_renderer_type()
+    glfwSetWindowTitle(window, "BGFX - Hello triangle - {render_type}")
     print("render_type {render_type}\n")
     var pcvl_decl = bgfx_create_vertex_layout(type<Vertex>,render_type)
     var vbh = bgfx_create_vertex_buffer(bgfx_make_ref(vertices), safe_addr(pcvl_decl), BGFX_BUFFER_NONE)

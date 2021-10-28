@@ -20,10 +20,11 @@ class GlslBgfxShader : GlslShader
     override restrict_uniform_types = true                      // only vec4, mat3x3 and mat4x4
     override restrict_vertex_attribute_names = true             // only a_position, a_color0, etc
     override output_unfirom_macro_declarations = true           // SAMPLER2D(...) instead of unifor sampler2D ...;
-    override output_compatibility_constructors = true           // hlsl-compatible numeric constructors
+    override output_compatibility_constructors = true           // hlsl-compatible numeric constructors (hi HLSL)
     override output_hlsl_style_compute_layout = true            // NUM_THREADS(16,16,1) right before main
-    override output_structure_initializers = true               // produce structure initializers
+    override output_structure_initializers = true               // produce structure initializers (hi HLSLS)
     override restrict_array_as_result = true                    // returning float[13] and such is prohibited (hi HLSL)
+    override allow_unitialized_local_arrays = true              // var a : float[9] can be uninitialized local variable (hi HLSL)
     def override get_glsl_prefix
         if shaderType==ShaderType compute
             return "\n#include <bgfx_compute.sh>\n\n"

@@ -81,7 +81,7 @@ def main
 		panic("can't init glfw")
     defer <|
         glfwTerminate()
-    var window = glfwCreateWindow(WNDW_WIDTH, WNDW_HEIGHT, "Hello cube", null, null)
+    var window = glfwCreateWindow(WNDW_WIDTH, WNDW_HEIGHT, "BGFX - Hello cube", null, null)
     if window==null
 		panic("can't create window")
     defer <|
@@ -93,6 +93,7 @@ def main
     // bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type BGFX_RENDERER_TYPE_DIRECT3D12)
     // bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type BGFX_RENDERER_TYPE_OPENGL)
     let render_type = bgfx_get_renderer_type()
+    glfwSetWindowTitle(window, "BGFX - Hello cube - {render_type}")
     print("render_type {render_type}\n")
     var pcvl_decl = bgfx_create_vertex_layout(type<Vertex>,render_type)
     var vbh = bgfx_create_vertex_buffer(bgfx_make_ref(vertices), safe_addr(pcvl_decl), BGFX_BUFFER_NONE)
