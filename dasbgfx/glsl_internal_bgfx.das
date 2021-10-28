@@ -80,12 +80,12 @@ def private generate_bgfx_bind_uniform(fnMain:FunctionPtr; var fn:FunctionPtr)
                             cll_uni.arguments |> emplace_new() <| new [[ExprConstUInt() at=vv.at, value=sampler_flags]]
                         if sname|>find("image")!=-1
                             let stage = (find_arg("binding",vv.annotation) ?as tInt) ?? 0
-                            var access = "BGFX_ACCESS_READWRITE"
+                            var access = "READWRITE"
                             for arg in vv.annotation
                                 if arg.name=="writeonly" && arg.basicType==Type tBool
-                                    access = "BGFX_ACCESS_WRITE"
+                                    access = "WRITE"
                                 elif arg.name=="readonly" && arg.basicType==Type tBool
-                                    access = "BGFX_ACCESS_READ"
+                                    access = "READ"
                             cll_uni.arguments |> emplace_new() <| new [[ExprConstUInt() at=vv.at, value=uint(stage)]]
                             let access_enum_t = typeinfo(ast_typedecl type<bgfx_access>).enumType
                             cll_uni.arguments |> emplace_new() <| new [[ExprConstEnumeration() at=vv.at, enumType:=access_enum_t, value:=access]]

@@ -90,36 +90,36 @@ def public bgfx_reset_uniform_cache
 
 def public bgfx_any_uniform ( name:string; stage:uint; access:bgfx_access; value:image2D )
     bgfx_set_image(stage, [[bgfx_texture_handle_s idx=uint16(value.texture2D)]], 0u,
-        access, bgfx_texture_format BGFX_TEXTURE_FORMAT_COUNT)
+        access, bgfx_texture_format COUNT)
 
 def public bgfx_any_uniform ( name:string; stage:uint; sampler_flags:uint; value:sampler2D )
-    var handle = bgfx_cache_uniform(name, bgfx_uniform_type BGFX_UNIFORM_TYPE_SAMPLER, 1u)
+    var handle = bgfx_cache_uniform(name, bgfx_uniform_type SAMPLER, 1u)
     bgfx_set_texture(stage, handle, [[bgfx_texture_handle_s idx=uint16(value.texture2D)]], sampler_flags)
 
 def public bgfx_any_uniform ( name:string; _value:uint )
     var value = [[bgfx_texture_handle_s idx=uint16(_value)]]
-    var handle = bgfx_cache_uniform(name, bgfx_uniform_type BGFX_UNIFORM_TYPE_SAMPLER, 1u)
+    var handle = bgfx_cache_uniform(name, bgfx_uniform_type SAMPLER, 1u)
     bgfx_set_uniform(handle, safe_addr(value), 0xffff)
 
 def public bgfx_any_uniform ( name:string; value:float4 )
-    var handle = bgfx_cache_uniform(name, bgfx_uniform_type BGFX_UNIFORM_TYPE_VEC4, 1u)
+    var handle = bgfx_cache_uniform(name, bgfx_uniform_type VEC4, 1u)
     bgfx_set_uniform(handle, safe_addr(value), 0xffff)
 
 [generic]
 def public bgfx_any_uniform ( name:string; value:float4[] )
-    var handle = bgfx_cache_uniform(name, bgfx_uniform_type BGFX_UNIFORM_TYPE_VEC4, uint(length(value)))
+    var handle = bgfx_cache_uniform(name, bgfx_uniform_type VEC4, uint(length(value)))
     bgfx_set_uniform(handle, safe_addr(value), 0xffff)
 
 def public bgfx_any_uniform ( name:string; value:float3x3 )
-    var handle = bgfx_cache_uniform(name, bgfx_uniform_type BGFX_UNIFORM_TYPE_MAT3, 1u)
+    var handle = bgfx_cache_uniform(name, bgfx_uniform_type MAT3, 1u)
     bgfx_set_uniform(handle, safe_addr(value), 0xffff)
 
 def public bgfx_any_uniform ( name:string; value:float3x3[] )
-    var handle = bgfx_cache_uniform(name, bgfx_uniform_type BGFX_UNIFORM_TYPE_MAT3, uint(length(value)))
+    var handle = bgfx_cache_uniform(name, bgfx_uniform_type MAT3, uint(length(value)))
     bgfx_set_uniform(handle, safe_addr(value), 0xffff)
 
 def public bgfx_any_uniform ( name:string; _value:float4x4 )
-    var handle = bgfx_cache_uniform(name, bgfx_uniform_type BGFX_UNIFORM_TYPE_MAT4, 1u)
+    var handle = bgfx_cache_uniform(name, bgfx_uniform_type MAT4, 1u)
     if transpose_uniform_mat
         var value = transpose(_value)
         bgfx_set_uniform(handle, safe_addr(value), 0xffff)
@@ -127,7 +127,7 @@ def public bgfx_any_uniform ( name:string; _value:float4x4 )
         bgfx_set_uniform(handle, safe_addr(_value), 0xffff)
 
 def public bgfx_any_uniform ( name:string; _value:float4x4[] )
-    var handle = bgfx_cache_uniform(name, bgfx_uniform_type BGFX_UNIFORM_TYPE_MAT4, uint(length(value)))
+    var handle = bgfx_cache_uniform(name, bgfx_uniform_type MAT4, uint(length(value)))
     if transpose_uniform_mat
         var value : float4x4[length(_value)]
         for v,_v in value,_value
@@ -135,6 +135,12 @@ def public bgfx_any_uniform ( name:string; _value:float4x4[] )
         bgfx_set_uniform(handle, safe_addr(value), 0xffff)
     else
         bgfx_set_uniform(handle, safe_addr(_value), 0xffff)
+
+def public clone ( var image:image2D; tex:bgfx_texture_handle_s )
+    image.texture2D = uint(tex.idx)
+
+def public clone ( var sampler:sampler2D; tex:bgfx_texture_handle_s )
+    sampler.texture2D = uint(tex.idx)
 
 def private get_temp_dir
     let temp_dir = "{get_das_root()}/temp"
@@ -150,7 +156,7 @@ def public bgfx_create_compute_shader_program ( cs : string; render_type : bgfx_
     return prog
 
 def public bgfx_create_compute_shader_program ( cs : string; func:function<void>; render_type : bgfx_renderer_type )
-    if render_type == bgfx_renderer_type BGFX_RENDERER_TYPE_OPENGL
+    if render_type == bgfx_renderer_type OPENGL
         invoke(func)
     return bgfx_create_compute_shader_program(cs, render_type)
 
@@ -197,12 +203,12 @@ def public bgfx_cache_shader_file ( shader_const, shader_decl, shader_type : str
 def public bgfx_compile_shader_file ( fin, fout, ftype:string; rt : bgfx_renderer_type )
     var platform = ""
     var profile = ""
-    if rt==bgfx_renderer_type BGFX_RENDERER_TYPE_NOOP
+    if rt==bgfx_renderer_type NOOP
         pass
-    elif rt==bgfx_renderer_type BGFX_RENDERER_TYPE_AGC || rt==bgfx_renderer_type BGFX_RENDERER_TYPE_GNM
+    elif rt==bgfx_renderer_type AGC || rt==bgfx_renderer_type GNM
         platform = "orbis"
         profile = "pssl"
-    elif rt==bgfx_renderer_type BGFX_RENDERER_TYPE_DIRECT3D9
+    elif rt==bgfx_renderer_type DIRECT3D9
         platform = "windows"
         if ftype=="v"
             profile = "vs_3_0"
@@ -210,7 +216,7 @@ def public bgfx_compile_shader_file ( fin, fout, ftype:string; rt : bgfx_rendere
             profile = "ps_3_0"
         elif ftype=="c"
             profile = "cs_3_0"
-    elif rt==bgfx_renderer_type BGFX_RENDERER_TYPE_DIRECT3D11 || rt==bgfx_renderer_type BGFX_RENDERER_TYPE_DIRECT3D12
+    elif rt==bgfx_renderer_type DIRECT3D11 || rt==bgfx_renderer_type DIRECT3D12
         platform = "windows"
         if ftype=="v"
             profile = "vs_5_0"
@@ -218,17 +224,17 @@ def public bgfx_compile_shader_file ( fin, fout, ftype:string; rt : bgfx_rendere
             profile = "ps_5_0"
         elif ftype=="c"
             profile = "cs_5_0"
-    elif rt==bgfx_renderer_type BGFX_RENDERER_TYPE_METAL
+    elif rt==bgfx_renderer_type METAL
         platform = "osx"
         profile = "metal"
-    elif rt==bgfx_renderer_type BGFX_RENDERER_TYPE_NVN
+    elif rt==bgfx_renderer_type NVN
         panic("unsupported?")
-    elif rt==bgfx_renderer_type BGFX_RENDERER_TYPE_OPENGLES
+    elif rt==bgfx_renderer_type OPENGLES
         platform = "android"
-    elif rt==bgfx_renderer_type BGFX_RENDERER_TYPE_OPENGL
+    elif rt==bgfx_renderer_type OPENGL
         platform = "linux"
         profile = ftype=="c" ? "430" : "120"
-    elif rt==bgfx_renderer_type BGFX_RENDERER_TYPE_VULKAN || rt==bgfx_renderer_type BGFX_RENDERER_TYPE_WEBGPU
+    elif rt==bgfx_renderer_type VULKAN || rt==bgfx_renderer_type WEBGPU
         platform = "linux"
         profile = "spirv"
     let shaderc = "{get_das_root()}/modules/dasBGFX/bin/shaderc.exe"
@@ -278,7 +284,7 @@ def bgfx_load_image_from_bytes ( width,height:int; data:void? )
     var mem = bgfx_copy(data, uint(width*height*4))
     let sampler_flags = BGFX_SAMPLER_U_CLAMP | BGFX_SAMPLER_V_CLAMP
     let handle = bgfx_create_texture_2d(uint(width), uint(height), false, 1u,
-        bgfx_texture_format BGFX_TEXTURE_FORMAT_RGBA8, BGFX_TEXTURE_NONE | uint64(sampler_flags), mem)
+        bgfx_texture_format RGBA8, BGFX_TEXTURE_NONE | uint64(sampler_flags), mem)
     return handle
 
 def bgfx_load_image_from_file ( fname:string implicit; canfail:bool=false )
@@ -296,7 +302,7 @@ def bgfx_load_image_from_file ( fname:string implicit; canfail:bool=false )
 
 var private transpose_uniform_mat = false
 
-def public bgfx_init ( winw,winh:int; rt:bgfx_renderer_type = bgfx_renderer_type BGFX_RENDERER_TYPE_COUNT; dbgfx:bool = false )
+def public bgfx_init ( winw,winh:int; rt:bgfx_renderer_type = bgfx_renderer_type COUNT; dbgfx:bool = false )
     var init : bgfx_init_s
     bgfx_init_ctor(safe_addr(init))
     init._type = rt
@@ -307,9 +313,9 @@ def public bgfx_init ( winw,winh:int; rt:bgfx_renderer_type = bgfx_renderer_type
         bgfx_init_debug(init)
     bgfx_init(safe_addr(init))
     let render_type = bgfx_get_renderer_type()
-    if render_type==bgfx_renderer_type BGFX_RENDERER_TYPE_DIRECT3D11
+    if render_type==bgfx_renderer_type DIRECT3D11
         transpose_uniform_mat = true
-    elif render_type==bgfx_renderer_type BGFX_RENDERER_TYPE_DIRECT3D12
+    elif render_type==bgfx_renderer_type DIRECT3D12
         transpose_uniform_mat = true
     else
         transpose_uniform_mat = false

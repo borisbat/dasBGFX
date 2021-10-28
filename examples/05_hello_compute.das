@@ -109,9 +109,9 @@ def main
     var pd: bgfx_platform_data_s
     pd.nwh = glfwGetWin32Window(window)
     bgfx_set_platform_data(safe_addr(pd))
-    // bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type BGFX_RENDERER_TYPE_DIRECT3D11,true)
-    bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type BGFX_RENDERER_TYPE_DIRECT3D12)
-    // bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type BGFX_RENDERER_TYPE_OPENGL)
+    // bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type DIRECT3D11,true)
+    bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type DIRECT3D12)
+    // bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type OPENGL)
     let render_type = bgfx_get_renderer_type()
     glfwSetWindowTitle(window, "BGFX - Hello compute - {render_type}")
     print("render_type {render_type}\n")
@@ -123,12 +123,10 @@ def main
     var ibh = bgfx_create_index_buffer(bgfx_make_ref(indices), BGFX_BUFFER_INDEX32)
     var compute_program = bgfx_create_compute_shader_program(@@compute_effect)
     var program = bgfx_create_shader_program(@@vs_main,@@fs_main)
-    var texture = bgfx_create_texture_2d(256u, 256u, false, 1u,
-        bgfx_texture_format BGFX_TEXTURE_FORMAT_RGBA8, BGFX_TEXTURE_COMPUTE_WRITE, null)
+    var texture = bgfx_create_texture_2d(256u, 256u, false, 1u, bgfx_texture_format RGBA8, BGFX_TEXTURE_COMPUTE_WRITE, null)
     if texture.idx==uint16(0xffff)
         panic("can't create texture")
-    var mat_texture = bgfx_create_texture_2d(4u, 6u, false, 1u,
-        bgfx_texture_format BGFX_TEXTURE_FORMAT_RGBA32F,
+    var mat_texture = bgfx_create_texture_2d(4u, 6u, false, 1u, bgfx_texture_format RGBA32F,
         BGFX_TEXTURE_COMPUTE_WRITE  | BGFX_TEXTURE_READ_BACK, null)
     if mat_texture.idx==uint16(0xffff)
         panic("can't create texture")
@@ -153,14 +151,14 @@ def main
         c_mat_z[2] = float4(9,10,11,12)
         c_mat_z[3] = float4(13,14,15,16)
         c_offset.x = float(ioffset++)
-        c_destTex.texture2D = uint(texture.idx)
-        c_matTex.texture2D = uint(mat_texture.idx)
+        c_destTex := texture
+        c_matTex := mat_texture
         compute_effect_bind_uniform()
         bgfx_dispatch(0u, compute_program, 256u/16u, 256u/16u, 1u, 0u)
         bgfx_set_view_rect(0u, 0u, 0u, uint(display_w), uint(display_h))
         bgfx_set_vertex_buffer(0u, vbh, 0u, uint(length(vertices)))
         bgfx_set_index_buffer(ibh, 0u, uint(length(indices)))
-        f_tex.texture2D = uint(texture.idx)
+        f_tex := texture
         vs_main_bind_uniform()
         fs_main_bind_uniform()
         bgfx_set_state(BGFX_STATE_DEFAULT, 0u)

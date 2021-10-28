@@ -90,8 +90,8 @@ def main
     pd.nwh = glfwGetWin32Window(window)
     bgfx_set_platform_data(safe_addr(pd))
     bgfx_init(WNDW_WIDTH,WNDW_HEIGHT)
-    // bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type BGFX_RENDERER_TYPE_DIRECT3D12)
-    // bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type BGFX_RENDERER_TYPE_OPENGL)
+    // bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type DIRECT3D12)
+    // bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type OPENGL)
     let render_type = bgfx_get_renderer_type()
     glfwSetWindowTitle(window, "BGFX - Hello cube - {render_type}")
     print("render_type {render_type}\n")
@@ -116,7 +116,7 @@ def main
         v_pvm = v_projection * v_view * v_model
         bgfx_set_vertex_buffer(0u, vbh, 0u, uint(length(vertices)))
         bgfx_set_index_buffer(ibh, 0u, uint(length(indices)))
-        f_tex.texture2D = uint(texture.idx)
+        f_tex := texture
         vs_cube_main_bind_uniform()
         fs_cube_main_bind_uniform()
         bgfx_set_state(BGFX_STATE_DEFAULT,0u)

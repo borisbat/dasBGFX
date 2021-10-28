@@ -124,9 +124,9 @@ class BgfxVertexBuffer : AstStructureAnnotation
             // bgfx_vertex_layout_add(safe_addr(pcv_decl), bgfx_attrib BGFX_ATTRIB_POSITION, 3u, bgfx_attrib_type BGFX_ATTRIB_TYPE_FLOAT, false, false)
             var cll_vap <- new [[ExprCall() at=fld.at, name:="bgfx_vertex_layout_add"]]
             cll_vap.arguments |> emplace_new() <| clone_expression(saddr)
-            cll_vap.arguments |> emplace_new() <| new [[ExprConstEnumeration() at=st.at, enumType:=bgfx_attr_enum_t, value:="BGFX_ATTRIB_{semantics as tString}"]]
+            cll_vap.arguments |> emplace_new() <| new [[ExprConstEnumeration() at=st.at, enumType:=bgfx_attr_enum_t, value:=semantics as tString]]
             cll_vap.arguments |> emplace_new() <| new [[ExprConstUInt() at=st.at, value=uint(sizei as tInt)]]
-            cll_vap.arguments |> emplace_new() <| new [[ExprConstEnumeration() at=st.at, enumType:=bgfx_attr_type_enum_t, value:="BGFX_ATTRIB_TYPE_{typet as tString}"]]
+            cll_vap.arguments |> emplace_new() <| new [[ExprConstEnumeration() at=st.at, enumType:=bgfx_attr_type_enum_t, value:=typet as tString]]
             cll_vap.arguments |> emplace_new() <| new [[ExprConstBool() at=st.at, value=normalized]]
             cll_vap.arguments |> emplace_new() <| new [[ExprConstBool() at=st.at, value=as_int]]
             blk.list |> emplace(cll_vap)

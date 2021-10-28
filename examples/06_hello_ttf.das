@@ -21,7 +21,7 @@ def main
     var pd: bgfx_platform_data_s
     pd.nwh = glfwGetWin32Window(window)
     bgfx_set_platform_data(safe_addr(pd))
-    bgfx_init(WNDW_WIDTH,WNDW_HEIGHT) //,bgfx_renderer_type BGFX_RENDERER_TYPE_OPENGL)
+    bgfx_init(WNDW_WIDTH,WNDW_HEIGHT) //,bgfx_renderer_type OPENGL)
     let render_type = bgfx_get_renderer_type()
     glfwSetWindowTitle(window, "BGFX - Hello ttf - {render_type}")
     print("render_type {render_type}\n")

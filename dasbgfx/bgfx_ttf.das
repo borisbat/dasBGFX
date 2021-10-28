@@ -35,7 +35,7 @@ class BGFXTTFApiAdapter : TTFApiAdapter
     def override create_font_texture ( dim:int2; data:array<uint8> ) : uint64
         unsafe
             var mem = bgfx_copy(addr(data[0]),uint(length(data)))
-            var tex = bgfx_create_texture_2d(uint(dim.x), uint(dim.y), false, 1u, bgfx_texture_format BGFX_TEXTURE_FORMAT_A8, 0ul, mem)
+            var tex = bgfx_create_texture_2d(uint(dim.x), uint(dim.y), false, 1u, bgfx_texture_format A8, 0ul, mem)
             return uint64(tex.idx)
     def override destroy_font_texture ( tex:uint64 ) : void
         var th = [[bgfx_texture_handle_s idx=uint16(tex)]]

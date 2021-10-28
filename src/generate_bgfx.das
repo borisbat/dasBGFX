@@ -28,6 +28,28 @@ def main
     }]
 */
 
+    ex_enums <- {{
+    // flags
+        // "ImGuiWindowFlags_" => [[ExEnum() name="ImGuiWindowFlags", isFlags=true]];
+    // not flags
+        "bgfx_renderer_type" => [[ExEnum() name = "bgfx_renderer_type"]];
+        "bgfx_access" => [[ExEnum() name = "bgfx_access"]];
+        "bgfx_attrib" => [[ExEnum() name = "bgfx_attrib"]];
+        "bgfx_attrib_type" => [[ExEnum() name = "bgfx_attrib_type"]];
+        "bgfx_texture_format" => [[ExEnum() name = "bgfx_texture_format"]];
+        "bgfx_uniform_type" => [[ExEnum() name = "bgfx_uniform_type"]];
+        "bgfx_backbuffer_ratio" => [[ExEnum() name = "bgfx_backbuffer_ratio"]];
+        "bgfx_occlusion_query_result" => [[ExEnum() name = "bgfx_occlusion_query_result"]];
+        "bgfx_topology" => [[ExEnum() name = "bgfx_topology"]];
+        "bgfx_topology_convert" => [[ExEnum() name = "bgfx_topology_convert"]];
+        "bgfx_topology_sort" => [[ExEnum() name = "bgfx_topology_sort"]];
+        "bgfx_view_mode" => [[ExEnum() name = "bgfx_view_mode"]];
+        "bgfx_render_frame" => [[ExEnum() name = "bgfx_render_frame"]];
+        "bgfx_function_id" => [[ExEnum() name = "bgfx_function_id"]];
+        "bgfx_fatal" => [[ExEnum() name = "bgfx_fatal"]]
+
+    }}
+
     enum_suffix = "_t"
 
     is_struct_blocked <- @ <| ( st:string ) : bool
