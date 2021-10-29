@@ -111,8 +111,8 @@ def main
         v_model = compose(float4(0,0,0,0), rot, float4(1.0))
         v_projection = bgfx_mat_projection(45., float(display_w), float(display_h), 0.1, 50., bgfx_get_caps().homogeneousDepth,false)
         v_pvm = v_projection * v_view * v_model
-        bgfx_set_vertex_buffer(0u, vbh, 0u, uint(length(vertices)))
-        bgfx_set_index_buffer(ibh, 0u, uint(length(indices)))
+        bgfx_set_vertex_buffer(0u, vbh)
+        bgfx_set_index_buffer(ibh)
         f_tex := texture
         vs_cube_main_bind_uniform()
         fs_cube_main_bind_uniform()

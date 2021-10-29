@@ -105,16 +105,20 @@ Module_BGFX::Module_BGFX() : Module("bgfx") {
 
     addExtern<DAS_BIND_FUN(Das_bgfx_dbg_text_printf)>(*this, lib, "bgfx_dbg_text_printf",SideEffects::worstDefault, "Das_bgfx_dbg_text_printf")
         ->args({"_x","_y","_attr","text"});
-
     addExtern<DAS_BIND_FUN(Das_bgfx_projection), SimNode_ExtFuncCallAndCopyOrMove>(*this, lib, "bgfx_mat_projection",SideEffects::worstDefault, "Das_bgfx_projection")
         ->args({"angleD","w","h","zn","zf","homogeneousNdc","leftHanded"});
-
     addExtern<DAS_BIND_FUN(Das_bgfx_ortho), SimNode_ExtFuncCallAndCopyOrMove>(*this, lib, "bgfx_mat_ortho",SideEffects::worstDefault, "Das_bgfx_ortho")
         ->args({"left","right","top","bottom","znear","zfar","offset","homogeneousNdc","leftHanded"});
-
     addExtern<DAS_BIND_FUN(Das_bgfx_init_debug)>(*this, lib, "bgfx_init_debug",SideEffects::worstDefault, "Das_bgfx_init_debug")
         ->arg("init");
-
+    // set_vertex_buffer(...,...,0u,0xffffffff)
+    auto svb = this->findUniqueFunction("bgfx_set_vertex_buffer");
+    svb->arguments[2]->init = make_smart<ExprConstUInt>(0);
+    svb->arguments[3]->init = make_smart<ExprConstUInt>(0xffffffff);
+    // set_idnex_buffer(...,0u,0xffffffff)
+    auto sib = this->findUniqueFunction("bgfx_set_index_buffer");
+    sib->arguments[1]->init = make_smart<ExprConstUInt>(0);
+    sib->arguments[2]->init = make_smart<ExprConstUInt>(0xffffffff);
     // we are fixing raw 'storage type' arguments
     for ( auto fn : this->functions ) {
         const auto&  pfn = fn.second;
