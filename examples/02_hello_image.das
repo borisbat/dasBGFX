@@ -53,6 +53,7 @@ def main
 		panic("can't create window")
     defer <|
         glfwDestroyWindow(window)
+    glfwMakeContextCurrent(window)
     var pd: bgfx_platform_data_s
     pd.nwh = glfwGetWin32Window(window)
     bgfx_set_platform_data(safe_addr(pd))
@@ -67,9 +68,7 @@ def main
     v_ortho = bgfx_mat_ortho(-1.,1.,-1.,1.,-100.,100.,0.,bgfx_get_caps().homogeneousDepth,false)
     while glfwWindowShouldClose(window)==0
         glfwPollEvents()
-        var display_w, display_h : int
-        glfwGetFramebufferSize(window, display_w, display_h)
-        bgfx_set_view_rect(0u, 0u, 0u, uint(display_w), uint(display_h))
+        bgfx_set_view_rect(0u, 0u, 0u, uint(WNDW_WIDTH), uint(WNDW_HEIGHT))
         bgfx_set_vertex_buffer(0u, vbh)
         bgfx_set_index_buffer(ibh)
         f_tex := texture

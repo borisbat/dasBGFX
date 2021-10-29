@@ -106,6 +106,7 @@ def main
 		panic("can't create window")
     defer <|
         glfwDestroyWindow(window)
+    glfwMakeContextCurrent(window)
     var pd: bgfx_platform_data_s
     pd.nwh = glfwGetWin32Window(window)
     bgfx_set_platform_data(safe_addr(pd))
@@ -135,8 +136,6 @@ def main
     var c_res_frame = 0u
     while glfwWindowShouldClose(window)==0
         glfwPollEvents()
-        var display_w, display_h : int
-        glfwGetFramebufferSize(window, display_w, display_h)
         var c_mat : CMat
         let rot = un_quat_from_unit_vec_ang(normalize(float3(1.,0.,0.)), PI*0.25)
         c_mat.a = compose(float4(0.), rot, float4(1.))
@@ -153,7 +152,7 @@ def main
         c_matTex := mat_texture
         compute_effect_bind_uniform()
         bgfx_dispatch(0u, compute_program, 256u/16u, 256u/16u, 1u, 0u)
-        bgfx_set_view_rect(0u, 0u, 0u, uint(display_w), uint(display_h))
+        bgfx_set_view_rect(0u, 0u, 0u, uint(WNDW_WIDTH), uint(WNDW_HEIGHT))
         bgfx_set_vertex_buffer(0u, vbh)
         bgfx_set_index_buffer(ibh)
         f_tex := texture

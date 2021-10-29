@@ -18,6 +18,7 @@ def main
 		panic("can't create window")
     defer <|
         glfwDestroyWindow(window)
+    glfwMakeContextCurrent(window)
     var pd: bgfx_platform_data_s
     pd.nwh = glfwGetWin32Window(window)
     bgfx_set_platform_data(safe_addr(pd))
@@ -31,14 +32,12 @@ def main
     let model = quads_view(hw_text, float2(3./(dim.vmax.x-dim.vmin.x)))
     while glfwWindowShouldClose(window)==0
         glfwPollEvents()
-        var display_w, display_h : int
-        glfwGetFramebufferSize(window, display_w, display_h)
-        bgfx_set_view_rect(0u, 0u, 0u, uint(display_w), uint(display_h))
+        bgfx_set_view_rect(0u, 0u, 0u, uint(WNDW_WIDTH), uint(WNDW_HEIGHT))
         // model-view-projection setup
         let view = translation(float3(0.0f, 0.0f, -4.0f))
-        let projection = bgfx_mat_projection(45., float(display_w), float(display_h), 0.1, 50., bgfx_get_caps().homogeneousDepth,false)
+        let projection = bgfx_mat_projection(45., float(WNDW_WIDTH), float(WNDW_HEIGHT), 0.1, 50., bgfx_get_caps().homogeneousDepth,false)
         let mvp = projection * view * model
         font |> bgfx_draw_quads(0u, hw_text, mvp)
-        font |> bgfx_draw_quads_2d(0u, hw_text, display_w, display_h, 100, 100)
+        font |> bgfx_draw_quads_2d(0u, hw_text, WNDW_WIDTH, WNDW_HEIGHT, 100, 100)
         bgfx_frame(false)
     bgfx_shutdown()

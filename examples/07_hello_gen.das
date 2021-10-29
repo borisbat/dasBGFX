@@ -54,11 +54,11 @@ def main
 		panic("can't create window")
     defer <|
         glfwDestroyWindow(window)
+    glfwMakeContextCurrent(window)
     var pd: bgfx_platform_data_s
     pd.nwh = glfwGetWin32Window(window)
     bgfx_set_platform_data(safe_addr(pd))
-    // bgfx_init(WNDW_WIDTH,WNDW_HEIGHT)
-    bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type OPENGL)
+    bgfx_init(WNDW_WIDTH,WNDW_HEIGHT)
     glfwSetWindowTitle(window, "BGFX - Hello generated geometry - {bgfx_get_renderer_type()}")
     var program = bgfx_create_shader_program(@@vs_preview,@@fs_preview)
     var sphere <- gen_sphere(32,16,false) |> bgfx_create_geometry_fragment
@@ -68,16 +68,14 @@ def main
     bgfx_set_view_clear(0u, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, RGBA_TO_BGFX_UCOLOR(0.2,0.2,0.2,1.0), 1.0f, 0u)
     while glfwWindowShouldClose(window)==0
         glfwPollEvents()
-        var display_w, display_h : int
-        glfwGetFramebufferSize(window, display_w, display_h)
-        bgfx_set_view_rect(0u, 0u, 0u, uint(display_w), uint(display_h))
+        bgfx_set_view_rect(0u, 0u, 0u, uint(WNDW_WIDTH), uint(WNDW_HEIGHT))
         let t = glfwGetTime()
         if t > 10lf
             glfwSetTime(t - 10lf)
         f_camera_position = float3(0,0,8)
         v_view = look_at_rh(f_camera_position,float3(0,0,0),float3(0,1,0))
         let rot = un_quat_from_unit_vec_ang(normalize(float3(1.,1.,0.)), float(t)*PI*2.*0.1)
-        v_projection = bgfx_mat_projection(45., float(display_w), float(display_h), 0.1, 50., bgfx_get_caps().homogeneousDepth,false)
+        v_projection = bgfx_mat_projection(45., float(WNDW_WIDTH), float(WNDW_HEIGHT), 0.1, 50., bgfx_get_caps().homogeneousDepth,false)
         f_tex := checkerboard_texture
         // cube
         v_model = compose(float4(-3,0,0,0), rot, float4(1.0))
