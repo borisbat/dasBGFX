@@ -95,7 +95,8 @@ class BgfxVertexBuffer : AstStructureAnnotation
         ]]
         fn.arguments |> emplace_new() <| new [[Variable() at=st.at,
             name := "render_type",
-            _type <- clone_type() <| typeinfo(ast_typedecl type<bgfx_renderer_type>)
+            _type <- clone_type() <| typeinfo(ast_typedecl type<bgfx_renderer_type>),
+            init <- new [[ExprCall() at=st.at, name:="bgfx_get_renderer_type"]]
         ]]
         var qblk <- quote() <|
             var pcv_decl : bgfx_vertex_layout_s

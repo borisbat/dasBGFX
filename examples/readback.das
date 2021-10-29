@@ -121,13 +121,11 @@ def main
     bgfx_init(WNDW_WIDTH,WNDW_HEIGHT)
     // bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type DIRECT3D12)
     // bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type OPENGL)
-    let render_type = bgfx_get_renderer_type()
-    glfwSetWindowTitle(window, "BGFX - Readback - {render_type}")
-    print("render_type {render_type}\n")
+    glfwSetWindowTitle(window, "BGFX - Readback - {bgfx_get_renderer_type()}")
     var can_read_back = false
     if (bgfx_get_caps().supported & BGFX_CAPS_TEXTURE_READ_BACK) != 0ul
         can_read_back = true
-    var pcvl_decl = bgfx_create_vertex_layout(type<Vertex>,render_type)
+    var pcvl_decl = bgfx_create_vertex_layout(type<Vertex>)
     var vbh = bgfx_create_vertex_buffer(bgfx_make_ref(vertices), safe_addr(pcvl_decl), BGFX_BUFFER_NONE)
     var ibh = bgfx_create_index_buffer(bgfx_make_ref(indices), BGFX_BUFFER_INDEX32)
     var compute_program = bgfx_create_compute_shader_program(@@compute_effect)

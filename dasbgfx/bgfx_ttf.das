@@ -46,8 +46,7 @@ var private font_vertex_decl : bgfx_vertex_layout_s
 
 def public bgfx_create_ttf_objects
     set_api_adapter <| new BGFXTTFApiAdapter()
-    let render_type = bgfx_get_renderer_type()
-    font_vertex_decl = bgfx_create_vertex_layout(type<TTF_FontVertex>,render_type)
+    font_vertex_decl = bgfx_create_vertex_layout(type<TTF_FontVertex>)
     program = bgfx_create_shader_program(@@TTF_vs_main,@@TTF_fs_main)
     return program
 
