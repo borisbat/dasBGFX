@@ -17,12 +17,12 @@ var [[uniform]] v_view : float4x4
 var [[uniform]] v_projection : float4x4
 var [[uniform]] v_pvm : float4x4
 
-[bgfx_fragment_program(name="FRAGMENT_SRC")]
+[bgfx_fragment_program]
 def fs_cube_main
     gl_FragColor.xyz = texture2D(f_tex,v_texcoord0).xyz * v_color0
     gl_FragColor.w = 1.
 
-[bgfx_vertex_program(name="VERTEX_SRC")]
+[bgfx_vertex_program]
 def vs_cube_main
     let light = normalize(float3(1,-1,-1))
     let norm = normalize ( float3x3(v_model) * a_normal )

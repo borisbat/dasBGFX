@@ -16,17 +16,17 @@ var [[uniform]] c_offset : float4
 var [[uniform]] c_mat_z : float4x4
 var [[uniform]] v_ortho : float4x4
 
-[bgfx_vertex_program(name="VERTEX_SRC")]
+[bgfx_vertex_program]
 def vs_main
     v_color0 = a_color0
     v_texcoord0 = a_texcoord0
     gl_Position = v_ortho * float4(a_position, 0.0, 1.0)
 
-[bgfx_fragment_program(name="FRAGMENT_SRC")]
+[bgfx_fragment_program]
 def fs_main
     gl_FragColor = texture2D(f_tex,v_texcoord0) * float4(v_color0, 1.0)
 
-[bgfx_compute_program(name="COMPUTE_SRC",local_size_x=16,local_size_y=16)]
+[bgfx_compute_program(local_size_x=16,local_size_y=16)]
 def compute_effect
     let storePos = int2(gl_GlobalInvocationID.xy)
     let bitPos = storePos + int2(int(c_offset.x)*3,int(c_offset.x)*3)

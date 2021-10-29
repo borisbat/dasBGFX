@@ -15,13 +15,13 @@ var [[inout, semantics=TEXCOORD0]] v_texcoord0 : float2
 var [[uniform, stage=0]] f_tex : sampler2D
 var [[uniform]] v_ortho : float4x4
 
-[bgfx_vertex_program(name="VERTEX_SRC")]
+[bgfx_vertex_program]
 def vs_main
     v_color0 = a_color0
     v_texcoord0 = a_texcoord0
     gl_Position = v_ortho * float4(a_position, 0.0, 1.0)
 
-[bgfx_fragment_program(name="FRAGMENT_SRC")]
+[bgfx_fragment_program]
 def fs_main
     gl_FragColor = texture2D(f_tex,v_texcoord0) * float4(v_color0, 1.0)
 

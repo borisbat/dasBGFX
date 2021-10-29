@@ -16,12 +16,12 @@ var [[uniform, stage=0]] f_tex : sampler2D
 var [[uniform]] v_mvp : float4x4
 var [[uniform]] f_tint : float4
 
-[bgfx_vertex_program(name="TTF_VERTEX_SRC")]
+[bgfx_vertex_program]
 def TTF_vs_main
     v_texcoord0 = a_texcoord0
     gl_Position = v_mvp * float4(a_position, 0.0, 1.0)
 
-[bgfx_fragment_program(name="TTF_FRAGMENT_SRC")]
+[bgfx_fragment_program]
 def TTF_fs_main
     let tex = texture2D(f_tex,v_texcoord0)
     gl_FragColor = float4(f_tint.xyz,tex.w)

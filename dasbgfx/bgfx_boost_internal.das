@@ -37,8 +37,7 @@ def get_shader_const_name ( arg:ExpressionPtr; var errors:das_string )
         if ann.annotation.name=="bgfx_vertex_program" || ann.annotation.name=="bgfx_fragment_program" || ann.annotation.name=="bgfx_compute_program"
             let cname = find_arg("name",ann.arguments) ?as tString ?? ""
             if cname==""
-                errors := "annotation {ann.annotation.name} is missing name"
-                return ""
+                return "{aAddr.func.name}`shader_text"
             else
                 return cname
     errors := "function needs to be annotated as bgfx_vertex_program, bgfx_fragment_program, or bgfx_compute_program"

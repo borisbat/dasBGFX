@@ -13,13 +13,13 @@ var [[uniform]] f_tex : sampler2D
 var [[uniform]] f_offset : float4
 var [[uniform]] v_ortho : float4x4
 
-[bgfx_vertex_program(name="VERTEX_SRC")]
+[bgfx_vertex_program]
 def vs_main
     v_color0 = a_color0
     v_texcoord0 = a_texcoord0
     gl_Position = v_ortho * float4(a_position, 0.0, 1.0)
 
-[bgfx_fragment_program(name="FRAGMENT_SRC")]
+[bgfx_fragment_program]
 def fs_main
     gl_FragColor = texture2D(f_tex,v_texcoord0+f_offset.xy) * float4(v_color0, 1.0)
 
@@ -30,12 +30,12 @@ def checker(uv:float2; checkSize:float=8.0)
 def greyscale(color:float3)
     return dot(color,float3(0.2126,0.7152,0.0722))
 
-[bgfx_vertex_program(name="DISPLAY_VERTEX_SRC")]
+[bgfx_vertex_program]
 def vs_display_main
     v_texcoord0 = a_texcoord0
     gl_Position = v_ortho * float4(a_position, 0.0, 1.0)
 
-[bgfx_fragment_program(name="DISPLAY_FRAGMENT_SRC")]
+[bgfx_fragment_program]
 def fs_display_main
     let f = checker(v_texcoord0.xy)
     let trgb = texture2D(f_tex,float2(v_texcoord0.x,v_texcoord0.y * f_offset.w)).xyz

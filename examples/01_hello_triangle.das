@@ -9,12 +9,12 @@ var [[in]] a_color0 : float3
 var [[inout]] v_color0 : float3
 var [[uniform]] v_ortho : float4x4
 
-[bgfx_vertex_program(name="VERTEX_SRC")]
+[bgfx_vertex_program]
 def vs_main
     v_color0 = a_color0
     gl_Position = v_ortho * float4(a_position, 0.0, 1.0)
 
-[bgfx_fragment_program(name="FRAGMENT_SRC")]
+[bgfx_fragment_program]
 def fs_main
     gl_FragColor = float4(v_color0, 1.0)
 
