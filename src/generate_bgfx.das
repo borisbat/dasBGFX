@@ -18,6 +18,7 @@ def main
         "dbg_text_vprintf";
         "operator delete";
         "operator new";
+        "bgfx_dbg_text_vprintf";
         "__security_init_cookie";
         "__security_check_cookie"
     }]
