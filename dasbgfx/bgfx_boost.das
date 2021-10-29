@@ -275,10 +275,18 @@ def public bgfx_load_shader_from_bin ( fileName:string )
     return sha
 
 def public bgfx_make_ref ( arr:array<auto(TT)> )
-    return bgfx_make_ref(safe_addr(arr[0]), uint(length(arr)*typeinfo(sizeof type<TT>)))
+    unsafe
+        return bgfx_make_ref(addr(arr[0]), uint(length(arr)*typeinfo(sizeof type<TT>)))
 
 def public bgfx_make_ref ( arr:auto(TT)[] )
     return bgfx_make_ref(safe_addr(arr[0]), uint(length(arr)*typeinfo(sizeof type<TT>)))
+
+def public bgfx_copy ( arr:array<auto(TT)> )
+    unsafe
+        return bgfx_copy(addr(arr[0]), uint(length(arr)*typeinfo(sizeof type<TT>)))
+
+def public bgfx_copy ( arr:auto(TT)[] )
+    return bgfx_copy(safe_addr(arr[0]), uint(length(arr)*typeinfo(sizeof type<TT>)))
 
 def bgfx_load_image_from_bytes ( width,height:int; data:void? )
     var mem = bgfx_copy(data, uint(width*height*4))

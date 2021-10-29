@@ -15,7 +15,6 @@ var [[uniform, stage=0]] f_tex : sampler2D
 var [[uniform]] v_model : float4x4
 var [[uniform]] v_view : float4x4
 var [[uniform]] v_projection : float4x4
-var [[uniform]] v_pvm : float4x4
 
 [bgfx_fragment_program]
 def fs_cube_main
@@ -96,8 +95,8 @@ def main
     var vbh = bgfx_create_vertex_buffer(bgfx_make_ref(vertices), safe_addr(pcvl_decl), BGFX_BUFFER_NONE)
     var ibh = bgfx_create_index_buffer(bgfx_make_ref(indices), BGFX_BUFFER_INDEX32)
     var program = bgfx_create_shader_program(@@vs_cube_main, @@fs_cube_main)
-    bgfx_set_view_clear(0u, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, RGBA_TO_BGFX_UCOLOR(0.2,0.2,0.2,1.0), 1.0f, 0u)
     var texture = bgfx_load_image_from_file("{get_das_root()}/modules/dasBgfx/examples/image.png")
+    bgfx_set_view_clear(0u, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, RGBA_TO_BGFX_UCOLOR(0.2,0.2,0.2,1.0), 1.0f, 0u)
     while glfwWindowShouldClose(window)==0
         glfwPollEvents()
         var display_w, display_h : int
@@ -110,7 +109,6 @@ def main
         v_view = look_at_rh(float3(0,0,10),float3(0,0,0),float3(0,1,0))
         v_model = compose(float4(0,0,0,0), rot, float4(1.0))
         v_projection = bgfx_mat_projection(45., float(display_w), float(display_h), 0.1, 50., bgfx_get_caps().homogeneousDepth,false)
-        v_pvm = v_projection * v_view * v_model
         bgfx_set_vertex_buffer(0u, vbh)
         bgfx_set_index_buffer(ibh)
         f_tex := texture

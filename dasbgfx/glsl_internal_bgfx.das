@@ -77,6 +77,14 @@ def private generate_bgfx_bind_uniform(fnMain:FunctionPtr; var fn:FunctionPtr)
                                         sampler_flags |= BGFX_SAMPLER_W_CLAMP
                                     elif arg.sValue=="W_MIRROR"
                                         sampler_flags |= BGFX_SAMPLER_W_MIRROR
+                                    elif arg.sValue=="MIN_POINT"
+                                        sampler_flags |= BGFX_SAMPLER_MIN_POINT
+                                    elif arg.sValue=="MAG_POINT"
+                                        sampler_flags |= BGFX_SAMPLER_MAG_POINT
+                                    elif arg.sValue=="MIN_ANISOTROPIC"
+                                        sampler_flags |= BGFX_SAMPLER_MIN_ANISOTROPIC
+                                    elif arg.sValue=="MAG_ANISOTROPIC"
+                                        sampler_flags |= BGFX_SAMPLER_MAG_ANISOTROPIC
                             cll_uni.arguments |> emplace_new() <| new [[ExprConstUInt() at=vv.at, value=uint(stage)]]
                             cll_uni.arguments |> emplace_new() <| new [[ExprConstUInt() at=vv.at, value=sampler_flags]]
                         if sname|>find("image")!=-1
