@@ -6,7 +6,13 @@ IF (NOT DAS_BGFX_INCLUDED)
 	SET(DAS_BGFX_DIR ${CMAKE_SOURCE_DIR}/modules/dasBGFX)
 	SET(DAS_BGFX_KHRONOS_DIR ${CMAKE_SOURCE_DIR}/modules/dasBGFX/bgfx/bgfx/3rdparty/khronos)
 	SET(DAS_BGFX_DX12_DIR ${CMAKE_SOURCE_DIR}/modules/dasBGFX/bgfx/bgfx/3rdparty/dxsdk/include)
-	SET(DAS_BGFX_COMPAT_DIR ${CMAKE_SOURCE_DIR}/modules/dasBGFX/bgfx/bx/include/compat/msvc)
+
+    IF(APPLE)
+        SET(DAS_BGFX_COMPAT_DIR ${CMAKE_SOURCE_DIR}/modules/dasBGFX/bgfx/bx/include/compat/osx)
+    ELSEIF(WIN32)
+	    SET(DAS_BGFX_COMPAT_DIR ${CMAKE_SOURCE_DIR}/modules/dasBGFX/bgfx/bx/include/compat/msvc)
+    ENDIF()
+    
 	SET(DAS_BGFX_ASTC_CODEC_DIR ${CMAKE_SOURCE_DIR}/modules/dasBGFX/bgfx/bimg/3rdparty/astc-codec/include)
 
 	SET(DAS_BX_INCLUDE_DIR   ${CMAKE_SOURCE_DIR}/modules/dasBGFX/bgfx/bx/include)
@@ -20,13 +26,23 @@ IF (NOT DAS_BGFX_INCLUDED)
 
     LIST(APPEND CMAKE_MODULE_PATH ${DAS_BGFX_DIR})
 
-	# libBGFX
-	SET(LIB_BGFX_SRC
-		${DAS_BGFX_DIR}/bgfx/bgfx/src/amalgamated.cpp
-		${DAS_BGFX_DIR}/bgfx/bx/src/amalgamated.cpp
-		${DAS_BGFX_DIR}/bgfx/bimg/src/image.cpp
-		${DAS_BGFX_DIR}/bgfx/bimg/src/image_gnf.cpp
-	)
+    IF(APPLE)
+    	# libBGFX
+    	SET(LIB_BGFX_SRC
+    		${DAS_BGFX_DIR}/bgfx/bgfx/src/amalgamated.mm
+    		${DAS_BGFX_DIR}/bgfx/bx/src/amalgamated.cpp
+    		${DAS_BGFX_DIR}/bgfx/bimg/src/image.cpp
+    		${DAS_BGFX_DIR}/bgfx/bimg/src/image_gnf.cpp
+    	)
+    ELSE()
+    	# libBGFX
+    	SET(LIB_BGFX_SRC
+    		${DAS_BGFX_DIR}/bgfx/bgfx/src/amalgamated.cpp
+    		${DAS_BGFX_DIR}/bgfx/bx/src/amalgamated.cpp
+    		${DAS_BGFX_DIR}/bgfx/bimg/src/image.cpp
+    		${DAS_BGFX_DIR}/bgfx/bimg/src/image_gnf.cpp
+    	)
+    ENDIF()
 
 	# libDasModuleBGFX
 	SET(DAS_BGFX_MODULE_SRC

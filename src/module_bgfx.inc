@@ -63,11 +63,6 @@ addExtern<DAS_BIND_FUN(bgfx_set_view_clear_mrt)>(*this, lib, "bgfx_set_view_clea
 ;
 #endif
 #ifdef GLOBAL_NAMESPACE
-addExtern<DAS_BIND_FUN(bgfx_dbg_text_vprintf)>(*this, lib, "bgfx_dbg_text_vprintf",SideEffects::worstDefault, "bgfx_dbg_text_vprintf")
-	->args({"_x","_y","_attr","_format","_argList"})
-;
-#endif
-#ifdef GLOBAL_NAMESPACE
 addExtern<DAS_BIND_FUN(bgfx_create_dynamic_vertex_buffer), SimNode_ExtFuncCallAndCopyOrMove>(*this, lib, "bgfx_create_dynamic_vertex_buffer",SideEffects::worstDefault, "bgfx_create_dynamic_vertex_buffer")
 	->args({"_num","_layout","_flags"})
 ;
