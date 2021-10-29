@@ -10,8 +10,8 @@ var [[in]] a_texcoord0 : float2
 var [[inout]] v_color0 : float3
 var [[inout]] v_texcoord0 : float2
 var [[uniform, stage=0]] f_tex : sampler2D
-var [[uniform, format=rgba8, binding=0, writeonly]] c_destTex : image2D
-var [[uniform, format=rgba32f, binding=1, readwrite]] c_matTex : image2D
+var [[uniform, format=rgba8, stage=0, writeonly]] c_destTex : image2D
+var [[uniform, format=rgba32f, stage=1, readwrite]] c_matTex : image2D
 var [[uniform]] c_offset : float4
 var [[uniform]] c_mat_z : float4x4
 var [[uniform]] v_ortho : float4x4

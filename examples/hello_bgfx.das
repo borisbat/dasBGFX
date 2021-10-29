@@ -27,7 +27,7 @@ def main
     var init: bgfx_init_s
     bgfx_init_ctor(safe_addr(init))
 
-    init._type = bgfx_renderer_type BGFX_RENDERER_TYPE_COUNT
+    init._type = bgfx_renderer_type COUNT
     init.resolution.width = uint(WNDW_WIDTH)
     init.resolution.height = uint(WNDW_HEIGHT)
     init.resolution.reset = BGFX_RESET_VSYNC
