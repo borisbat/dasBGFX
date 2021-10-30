@@ -42,13 +42,11 @@ let indices = [[int 0; 2; 1; 2; 0; 3]]
 
 [export]
 def main
-    let WNDW_WIDTH = 1280
-    let WNDW_HEIGHT = 720
     if glfwInit()==0
 		panic("can't init glfw")
     defer <|
         glfwTerminate()
-    var window = glfwCreateWindow(WNDW_WIDTH, WNDW_HEIGHT, "BGFX - Hello image", null, null)
+    var window = glfwCreateWindow(1280, 720, "BGFX - Hello image", null, null)
     if window==null
 		panic("can't create window")
     defer <|
@@ -57,7 +55,7 @@ def main
     var pd: bgfx_platform_data_s
     pd.nwh = glfwGetWin32Window(window)
     bgfx_set_platform_data(safe_addr(pd))
-    bgfx_init(WNDW_WIDTH,WNDW_HEIGHT)
+    bgfx_init(1280,720)
     glfwSetWindowTitle(window, "BGFX - Hello image - {bgfx_get_renderer_type()}")
     var pcvl_decl = bgfx_create_vertex_layout(type<Vertex>)
     var vbh = bgfx_create_vertex_buffer(bgfx_make_ref(vertices), safe_addr(pcvl_decl), BGFX_BUFFER_NONE)
@@ -68,7 +66,10 @@ def main
     v_ortho = bgfx_mat_ortho(-1.,1.,-1.,1.,-100.,100.,0.,bgfx_get_caps().homogeneousDepth,false)
     while glfwWindowShouldClose(window)==0
         glfwPollEvents()
-        bgfx_set_view_rect(0u, 0u, 0u, uint(WNDW_WIDTH), uint(WNDW_HEIGHT))
+        var display_w, display_h : int
+        glfwGetWindowSize(window, safe_addr(display_w), safe_addr(display_h))
+        bgfx_reset(uint(display_w), uint(display_h), BGFX_RESET_VSYNC, bgfx_texture_format COUNT)
+        bgfx_set_view_rect(0u, 0u, 0u, uint(display_w), uint(display_h))
         bgfx_set_vertex_buffer(0u, vbh)
         bgfx_set_index_buffer(ibh)
         f_tex := texture

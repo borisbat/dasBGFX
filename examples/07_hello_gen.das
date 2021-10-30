@@ -43,13 +43,11 @@ def fs_preview
 
 [export]
 def main
-    let WNDW_WIDTH = 1280
-    let WNDW_HEIGHT = 720
     if glfwInit()==0
 		panic("can't init glfw")
     defer <|
         glfwTerminate()
-    var window = glfwCreateWindow(WNDW_WIDTH, WNDW_HEIGHT, "BGFX - Hello generated geometry", null, null)
+    var window = glfwCreateWindow(1280, 720, "BGFX - Hello generated geometry", null, null)
     if window==null
 		panic("can't create window")
     defer <|
@@ -58,7 +56,7 @@ def main
     var pd: bgfx_platform_data_s
     pd.nwh = glfwGetWin32Window(window)
     bgfx_set_platform_data(safe_addr(pd))
-    bgfx_init(WNDW_WIDTH,WNDW_HEIGHT)
+    bgfx_init(1280,720)
     glfwSetWindowTitle(window, "BGFX - Hello generated geometry - {bgfx_get_renderer_type()}")
     var program = bgfx_create_shader_program(@@vs_preview,@@fs_preview)
     var sphere <- gen_sphere(32,16,false) |> bgfx_create_geometry_fragment
@@ -68,14 +66,17 @@ def main
     bgfx_set_view_clear(0u, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, RGBA_TO_BGFX_UCOLOR(0.2,0.2,0.2,1.0), 1.0f, 0u)
     while glfwWindowShouldClose(window)==0
         glfwPollEvents()
-        bgfx_set_view_rect(0u, 0u, 0u, uint(WNDW_WIDTH), uint(WNDW_HEIGHT))
+        var display_w, display_h : int
+        glfwGetWindowSize(window, safe_addr(display_w), safe_addr(display_h))
+        bgfx_reset(uint(display_w), uint(display_h), BGFX_RESET_VSYNC, bgfx_texture_format COUNT)
+        bgfx_set_view_rect(0u, 0u, 0u, uint(display_w), uint(display_h))
         let t = glfwGetTime()
         if t > 10lf
             glfwSetTime(t - 10lf)
         f_camera_position = float3(0,0,8)
         v_view = look_at_rh(f_camera_position,float3(0,0,0),float3(0,1,0))
         let rot = un_quat_from_unit_vec_ang(normalize(float3(1.,1.,0.)), float(t)*PI*2.*0.1)
-        v_projection = bgfx_mat_projection(45., float(WNDW_WIDTH), float(WNDW_HEIGHT), 0.1, 50., bgfx_get_caps().homogeneousDepth,false)
+        v_projection = bgfx_mat_projection(45., float(display_w), float(display_h), 0.1, 50., bgfx_get_caps().homogeneousDepth,false)
         f_tex := checkerboard_texture
         // cube
         v_model = compose(float4(-3,0,0,0), rot, float4(1.0))

@@ -3,7 +3,7 @@
 #include "daScript/daScript.h"
 #include "daScript/ast/ast_typefactory_bind.h"
 
-#include "imgui/imgui_bgfx.h"
+#include "dasBGFXImgui.h"
 
 using namespace das;
 
@@ -17,12 +17,17 @@ void bgfx_imgui_destroy () {
     imguiDestroy();
 }
 
-void bgfx_imgui_begin_frame(int32_t viewId) {
-    imguiBeginFrame(viewId);
+void bgfx_imgui_begin_frame(uint32_t viewId) {
+    imguiBeginFrame((bgfx::ViewId) viewId);
 }
 
 void bgfx_imgui_end_frame() {
     imguiEndFrame();
+}
+
+void bgfx_imgui_push_font(uint32_t fidx, Context * context, LineInfoArg * at ) {
+    if ( fidx>=BgfxImguiFont::Enum::Count) context->throw_error_at(*at, "invalid font index");
+    imguiPushFont((BgfxImguiFont::Enum)fidx);
 }
 
 class Module_BGFXImgui : public Module {
@@ -47,17 +52,26 @@ bool Module_BGFXImgui::initDependencies() {
     lib.addModule(this);
     lib.addBuiltInModule();
     lib.addModule(mod_imgui);
-    addExtern<DAS_BIND_FUN(bgfx_imgui_create)>(*this, lib, "bgfx_imgui_create",SideEffects::worstDefault, "bgfx_imgui_create")
-        ->arg("fontSize");
-    addExtern<DAS_BIND_FUN(bgfx_imgui_destroy)>(*this, lib, "bgfx_imgui_destroy",SideEffects::worstDefault, "bgfx_imgui_destroy");
-    addExtern<DAS_BIND_FUN(bgfx_imgui_begin_frame)>(*this, lib, "bgfx_imgui_begin_frame",SideEffects::worstDefault, "bgfx_imgui_begin_frame")
-        ->arg("viewId");
-    addExtern<DAS_BIND_FUN(bgfx_imgui_end_frame)>(*this, lib, "bgfx_imgui_end_frame",SideEffects::worstDefault, "bgfx_imgui_end_frame");
+    addConstant<uint32_t>(*this, "BGFX_IMGUI_FONT_REGULAR", 0);
+    addConstant<uint32_t>(*this, "BGFX_IMGUI_FONT_MONO",    1);
+    addExtern<DAS_BIND_FUN(bgfx_imgui_create)>(*this, lib, "bgfx_imgui_create",
+        SideEffects::worstDefault, "bgfx_imgui_create")
+            ->arg("fontSize");
+    addExtern<DAS_BIND_FUN(bgfx_imgui_destroy)>(*this, lib, "bgfx_imgui_destroy",
+        SideEffects::worstDefault, "bgfx_imgui_destroy");
+    addExtern<DAS_BIND_FUN(bgfx_imgui_begin_frame)>(*this, lib, "bgfx_imgui_begin_frame",
+        SideEffects::worstDefault, "bgfx_imgui_begin_frame")
+            ->arg("viewId");
+    addExtern<DAS_BIND_FUN(bgfx_imgui_end_frame)>(*this, lib, "bgfx_imgui_end_frame",
+        SideEffects::worstDefault, "bgfx_imgui_end_frame");
+    addExtern<DAS_BIND_FUN(bgfx_imgui_push_font)>(*this, lib, "bgfx_imgui_push_font",
+        SideEffects::worstDefault, "bgfx_imgui_push_font")
+            ->args({"fontIndex","context","line"});
     return true;
 }
 
 ModuleAotType Module_BGFXImgui::aotRequire ( TextWriter & tw ) const {
-    // tw << "#include \"../modules/dasBGFX/src/dasBGFX.h\"\n";
+    tw << "#include \"../modules/dasBGFX/src/dasBGFXImgui.h\"\n";
     return ModuleAotType::cpp;
 }
 

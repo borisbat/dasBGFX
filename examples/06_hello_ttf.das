@@ -7,13 +7,11 @@ require daslib/safe_addr
 
 [export]
 def main
-    let WNDW_WIDTH = 1280
-    let WNDW_HEIGHT = 720
     if glfwInit()==0
 		panic("can't init glfw")
     defer <|
         glfwTerminate()
-    var window = glfwCreateWindow(WNDW_WIDTH, WNDW_HEIGHT, "BGFX - Hello ttf", null, null)
+    var window = glfwCreateWindow(1280, 720, "BGFX - Hello ttf", null, null)
     if window==null
 		panic("can't create window")
     defer <|
@@ -22,7 +20,7 @@ def main
     var pd: bgfx_platform_data_s
     pd.nwh = glfwGetWin32Window(window)
     bgfx_set_platform_data(safe_addr(pd))
-    bgfx_init(WNDW_WIDTH,WNDW_HEIGHT) //,bgfx_renderer_type OPENGL)
+    bgfx_init(1280,720) //,bgfx_renderer_type OPENGL)
     glfwSetWindowTitle(window, "BGFX - Hello ttf - {bgfx_get_renderer_type()}")
     bgfx_create_ttf_objects()
     let font <- load_ttf("c:/windows/fonts/times.ttf")
@@ -32,12 +30,15 @@ def main
     let model = quads_view(hw_text, float2(3./(dim.vmax.x-dim.vmin.x)))
     while glfwWindowShouldClose(window)==0
         glfwPollEvents()
-        bgfx_set_view_rect(0u, 0u, 0u, uint(WNDW_WIDTH), uint(WNDW_HEIGHT))
+        var display_w, display_h : int
+        glfwGetWindowSize(window, safe_addr(display_w), safe_addr(display_h))
+        bgfx_reset(uint(display_w), uint(display_h), BGFX_RESET_VSYNC, bgfx_texture_format COUNT)
+        bgfx_set_view_rect(0u, 0u, 0u, uint(display_w), uint(display_h))
         // model-view-projection setup
         let view = translation(float3(0.0f, 0.0f, -4.0f))
-        let projection = bgfx_mat_projection(45., float(WNDW_WIDTH), float(WNDW_HEIGHT), 0.1, 50., bgfx_get_caps().homogeneousDepth,false)
+        let projection = bgfx_mat_projection(45., float(display_w), float(display_h), 0.1, 50., bgfx_get_caps().homogeneousDepth,false)
         let mvp = projection * view * model
         font |> bgfx_draw_quads(0u, hw_text, mvp)
-        font |> bgfx_draw_quads_2d(0u, hw_text, WNDW_WIDTH, WNDW_HEIGHT, 100, 100)
+        font |> bgfx_draw_quads_2d(0u, hw_text, display_w, display_h, 100, 100)
         bgfx_frame(false)
     bgfx_shutdown()

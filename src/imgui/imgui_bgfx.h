@@ -15,6 +15,19 @@
 #define IMGUI_MBUT_RIGHT  0x02
 #define IMGUI_MBUT_MIDDLE 0x04
 
+struct BgfxImguiFont
+{
+	enum Enum
+	{
+		Regular,
+		Mono,
+
+		Count
+	};
+};
+
+void imguiPushFont(BgfxImguiFont::Enum _font);
+
 inline uint32_t imguiRGBA(uint8_t _r, uint8_t _g, uint8_t _b, uint8_t _a = 255)
 {
 	return 0

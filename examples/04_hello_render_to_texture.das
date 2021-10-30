@@ -63,13 +63,11 @@ let VIEW_FB = 1u
 
 [export]
 def main
-    let WNDW_WIDTH = 1280
-    let WNDW_HEIGHT = 720
     if glfwInit()==0
 		panic("can't init glfw")
     defer <|
         glfwTerminate()
-    var window = glfwCreateWindow(WNDW_WIDTH, WNDW_HEIGHT, "BGFX - Hello render to texture", null, null)
+    var window = glfwCreateWindow(1280, 720, "BGFX - Hello render to texture", null, null)
     if window==null
 		panic("can't create window")
     defer <|
@@ -78,9 +76,9 @@ def main
     var pd: bgfx_platform_data_s
     pd.nwh = glfwGetWin32Window(window)
     bgfx_set_platform_data(safe_addr(pd))
-    bgfx_init(WNDW_WIDTH,WNDW_HEIGHT)
-    // bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type DIRECT3D12)
-    // bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type OPENGL)
+    // bgfx_init(1280,720)
+    // bgfx_init(1280,720,bgfx_renderer_type DIRECT3D12)
+    bgfx_init(1280,720,bgfx_renderer_type OPENGL)
     glfwSetWindowTitle(window, "BGFX - Hello render to texture - {bgfx_get_renderer_type()}")
     var pcvl_decl = bgfx_create_vertex_layout(type<Vertex>)
     var vbh = bgfx_create_vertex_buffer(bgfx_make_ref(vertices), safe_addr(pcvl_decl), BGFX_BUFFER_NONE)
@@ -88,30 +86,35 @@ def main
     var program = bgfx_create_shader_program(@@vs_main,@@fs_main)
     var display_program = bgfx_create_shader_program(@@vs_display_main,@@fs_display_main)
     var texture = bgfx_load_image_from_file("{get_das_root()}/modules/dasBgfx/examples/image.png")
-    var frame_buffer = bgfx_create_frame_buffer(uint(WNDW_WIDTH), uint(WNDW_HEIGHT),
-        bgfx_texture_format RGBA8, BGFX_TEXTURE_NONE)
+    var frame_buffer = bgfx_create_frame_buffer(256u, 256u, bgfx_texture_format RGBA8, BGFX_TEXTURE_NONE)
     bgfx_set_view_name(VIEW_MAIN, "main")
     bgfx_set_view_clear(VIEW_MAIN, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, RGBA_TO_BGFX_UCOLOR(0.2,0.2,0.2,1.0), 1.0f, 0u)
     bgfx_set_view_frame_buffer(VIEW_MAIN, [[bgfx_frame_buffer_handle_s idx=BGFX_INVALID_HANDLE]])
     bgfx_set_view_name(VIEW_FB, "fb")
     bgfx_set_view_clear(VIEW_FB, BGFX_CLEAR_COLOR, 0u, 1.0f, 0u)
-    bgfx_set_view_frame_buffer(VIEW_FB,frame_buffer)
     v_ortho = bgfx_mat_ortho(-1.,1.,-1.,1.,-100.,100.,0.,bgfx_get_caps().homogeneousDepth,false)
     while glfwWindowShouldClose(window)==0
         glfwPollEvents()
+        var display_w, display_h : int
+        glfwGetWindowSize(window, safe_addr(display_w), safe_addr(display_h))
+        bgfx_reset(uint(display_w), uint(display_h), BGFX_RESET_VSYNC, bgfx_texture_format COUNT)
+        // fb
+        bgfx_set_view_frame_buffer(VIEW_FB,frame_buffer)
+        bgfx_set_view_rect(VIEW_FB, 0u, 0u, 256u, 256u)
         let t = glfwGetTime()
         if t > 1lf
             glfwSetTime(t - 1lf)
         let ft = float(t)
         f_offset = float4(ft,sin(ft*PI*2.)*0.25,0.,bgfx_get_caps().originBottomLeft ? -1. : 1.)
-        bgfx_set_view_rect(VIEW_FB, 0u, 0u, uint(WNDW_WIDTH), uint(WNDW_HEIGHT))
         bgfx_set_vertex_buffer(0u, vbh)
         bgfx_set_index_buffer(ibh)
         f_tex := texture
         vs_main_bind_uniform()
         fs_main_bind_uniform()
+        bgfx_set_state(BGFX_STATE_WRITE_RGB, 0u)
         bgfx_submit(VIEW_FB, program, 1u, BGFX_DISCARD_NONE)
-        bgfx_set_view_rect(VIEW_MAIN, 0u, 0u, uint(WNDW_WIDTH), uint(WNDW_HEIGHT))
+        // now to main window
+        bgfx_set_view_rect(VIEW_MAIN, 0u, 0u, uint(display_w), uint(display_h))
         bgfx_set_vertex_buffer(0u, vbh)
         bgfx_set_index_buffer(ibh)
         f_tex := bgfx_get_texture(frame_buffer,0u)
