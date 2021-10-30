@@ -32,7 +32,7 @@ def main
         glfwPollEvents()
         var display_w, display_h : int
         glfwGetWindowSize(window, safe_addr(display_w), safe_addr(display_h))
-        bgfx_reset(uint(display_w), uint(display_h), BGFX_RESET_NONE, bgfx_texture_format COUNT)
+        bgfx_reset(uint(display_w), uint(display_h), BGFX_RESET_VSYNC, bgfx_texture_format COUNT)
         bgfx_imgui_begin_frame(0u)
         ImGui_ImplGlfw_NewFrame()
         // now  go on with the framer
