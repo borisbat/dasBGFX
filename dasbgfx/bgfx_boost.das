@@ -71,7 +71,7 @@ var private g_bgfxUniform : table<string; BgfxUniform>
 
 def public bgfx_cache_uniform ( name:string; utype:bgfx_uniform_type; ucount:uint )
     assert(ucount!=0u)
-    var unf & = g_bgfxUniform[name]
+    var unf & = unsafe(g_bgfxUniform[name])
     if unf.ucount==0u
         unf.handle = bgfx_create_uniform(name, utype, ucount)
         if unf.handle.idx==uint16(0xffff)
