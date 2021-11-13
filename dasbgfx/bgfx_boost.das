@@ -99,32 +99,32 @@ def public bgfx_any_uniform ( name:string; stage:uint; sampler_flags:uint; value
 def public bgfx_any_uniform ( name:string; _value:uint )
     var value = [[bgfx_texture_handle_s idx=uint16(_value)]]
     var handle = bgfx_cache_uniform(name, bgfx_uniform_type SAMPLER, 1u)
-    bgfx_set_uniform(handle, safe_addr(value), 0xffff)
+    bgfx_set_uniform(handle, unsafe(addr(value)), 0xffff)
 
 def public bgfx_any_uniform ( name:string; value:float4 )
     var handle = bgfx_cache_uniform(name, bgfx_uniform_type VEC4, 1u)
-    bgfx_set_uniform(handle, safe_addr(value), 0xffff)
+    bgfx_set_uniform(handle, unsafe(addr(value)), 0xffff)
 
 [generic]
 def public bgfx_any_uniform ( name:string; value:float4[] )
     var handle = bgfx_cache_uniform(name, bgfx_uniform_type VEC4, uint(length(value)))
-    bgfx_set_uniform(handle, safe_addr(value), 0xffff)
+    bgfx_set_uniform(handle, unsafe(addr(value)), 0xffff)
 
 def public bgfx_any_uniform ( name:string; value:float3x3 )
     var handle = bgfx_cache_uniform(name, bgfx_uniform_type MAT3, 1u)
-    bgfx_set_uniform(handle, safe_addr(value), 0xffff)
+    bgfx_set_uniform(handle, unsafe(addr(value)), 0xffff)
 
 def public bgfx_any_uniform ( name:string; value:float3x3[] )
     var handle = bgfx_cache_uniform(name, bgfx_uniform_type MAT3, uint(length(value)))
-    bgfx_set_uniform(handle, safe_addr(value), 0xffff)
+    bgfx_set_uniform(handle, unsafe(addr(value)), 0xffff)
 
 def public bgfx_any_uniform ( name:string; _value:float4x4 )
     var handle = bgfx_cache_uniform(name, bgfx_uniform_type MAT4, 1u)
     if transpose_uniform_mat
         var value = transpose(_value)
-        bgfx_set_uniform(handle, safe_addr(value), 0xffff)
+        bgfx_set_uniform(handle, unsafe(addr(value)), 0xffff)
     else
-        bgfx_set_uniform(handle, safe_addr(_value), 0xffff)
+        bgfx_set_uniform(handle, unsafe(addr(_value)), 0xffff)
 
 def public bgfx_any_uniform ( name:string; _value:float4x4[] )
     var handle = bgfx_cache_uniform(name, bgfx_uniform_type MAT4, uint(length(value)))
@@ -134,7 +134,7 @@ def public bgfx_any_uniform ( name:string; _value:float4x4[] )
             v = transpose(_v)
         bgfx_set_uniform(handle, safe_addr(value), 0xffff)
     else
-        bgfx_set_uniform(handle, safe_addr(_value), 0xffff)
+        bgfx_set_uniform(handle, unsafe(addr(_value)), 0xffff)
 
 def public clone ( var image:image2D; tex:bgfx_texture_handle_s )
     image.texture2D = uint(tex.idx)
@@ -279,14 +279,14 @@ def public bgfx_make_ref ( arr:array<auto(TT)> )
         return bgfx_make_ref(addr(arr[0]), uint(length(arr)*typeinfo(sizeof type<TT>)))
 
 def public bgfx_make_ref ( arr:auto(TT)[] )
-    return bgfx_make_ref(safe_addr(arr[0]), uint(length(arr)*typeinfo(sizeof type<TT>)))
+    return bgfx_make_ref(unsafe(addr(arr[0])), uint(length(arr)*typeinfo(sizeof type<TT>)))
 
 def public bgfx_copy ( arr:array<auto(TT)> )
     unsafe
         return bgfx_copy(addr(arr[0]), uint(length(arr)*typeinfo(sizeof type<TT>)))
 
 def public bgfx_copy ( arr:auto(TT)[] )
-    return bgfx_copy(safe_addr(arr[0]), uint(length(arr)*typeinfo(sizeof type<TT>)))
+    return bgfx_copy(unsafe(addr(arr[0])), uint(length(arr)*typeinfo(sizeof type<TT>)))
 
 def bgfx_load_image_from_bytes ( width,height:int; data:void? )
     var mem = bgfx_copy(data, uint(width*height*4))

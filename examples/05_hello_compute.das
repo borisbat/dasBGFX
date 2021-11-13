@@ -87,11 +87,11 @@ struct CMat
     a, b, c, d, e, z : float4x4
 
 def set_cmat ( var tex:bgfx_texture_handle_s; m : CMat )
-    var mem = bgfx_copy(safe_addr(m), uint(typeinfo(sizeof m)))
+    var mem = bgfx_copy(unsafe(addr(m)), uint(typeinfo(sizeof m)))
     bgfx_update_texture_2d(tex, 0u, 0u, 0u, 0u, 4u, 6u, mem, uint(4*4*typeinfo(sizeof type<float>)))
 
 def get_cmat ( var tex:bgfx_texture_handle_s; var m : CMat )
-    return bgfx_read_texture(tex, safe_addr(m), 0u)
+    return bgfx_read_texture(tex, unsafe(addr(m)), 0u)
 
 [export]
 def main
