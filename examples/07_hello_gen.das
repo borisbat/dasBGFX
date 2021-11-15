@@ -54,7 +54,7 @@ def main
         glfwDestroyWindow(window)
     glfwMakeContextCurrent(window)
     var pd: bgfx_platform_data_s
-    pd.nwh = glfwGetWin32Window(window)
+    pd.nwh = glfwGetNativeWindow(window)
     bgfx_set_platform_data(safe_addr(pd))
     bgfx_init(1280,720)
     glfwSetWindowTitle(window, "BGFX - Hello generated geometry - {bgfx_get_renderer_type()}")

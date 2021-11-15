@@ -116,7 +116,7 @@ def main
     defer <|
         glfwDestroyWindow(window)
     var pd: bgfx_platform_data_s
-    pd.nwh = glfwGetWin32Window(window)
+    pd.nwh = glfwGetNativeWindow(window)
     bgfx_set_platform_data(safe_addr(pd))
     bgfx_init(WNDW_WIDTH,WNDW_HEIGHT)
     // bgfx_init(WNDW_WIDTH,WNDW_HEIGHT,bgfx_renderer_type DIRECT3D12)

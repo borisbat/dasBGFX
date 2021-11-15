@@ -21,7 +21,7 @@ def main
         glfwDestroyWindow(window)
 
     var pd: bgfx_platform_data_s
-    pd.nwh = glfwGetWin32Window(window)
+    pd.nwh = glfwGetNativeWindow(window)
     bgfx_set_platform_data(safe_addr(pd))
 
     var init: bgfx_init_s
