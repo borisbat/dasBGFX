@@ -12,7 +12,7 @@ IF (NOT DAS_BGFX_INCLUDED)
     ELSEIF(WIN32)
 	    SET(DAS_BGFX_COMPAT_DIR ${CMAKE_SOURCE_DIR}/modules/dasBGFX/bgfx/bx/include/compat/msvc)
     ENDIF()
-    
+
 	SET(DAS_BGFX_ASTC_CODEC_DIR ${CMAKE_SOURCE_DIR}/modules/dasBGFX/bgfx/bimg/3rdparty/astc-codec/include)
 
 	SET(DAS_BX_INCLUDE_DIR   ${CMAKE_SOURCE_DIR}/modules/dasBGFX/bgfx/bx/include)
@@ -57,6 +57,10 @@ IF (NOT DAS_BGFX_INCLUDED)
 		${DAS_BGFX_DIR}/src/module_bgfx.inc
 		${DAS_BGFX_DIR}/src/module_bgfx.method.inc
 	)
+
+	IF(APPLE)
+		ADD_DEFINITIONS(-DBGFX_CONFIG_MULTITHREADED=0)
+	ENDIF()
 
 	ADD_MODULE_LIB(libDasModuleBGFX)
 	ADD_MODULE_CPP(BGFX)

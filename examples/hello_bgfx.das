@@ -21,12 +21,6 @@ def main
         glfwDestroyWindow(window)
     glfwMakeContextCurrent(window)
 
-    for t in range(10)
-        glfwPollEvents()
-        // swap buffers
-        glfwMakeContextCurrent(window)
-        glfwSwapBuffers(window)
-
     var pd: bgfx_platform_data_s
     pd.nwh = glfwGetNativeWindow(window)
     bgfx_set_platform_data(safe_addr(pd))
