@@ -19,6 +19,13 @@ def main
 		panic("can't create window")
     defer <|
         glfwDestroyWindow(window)
+    glfwMakeContextCurrent(window)
+
+    for t in range(10)
+        glfwPollEvents()
+        // swap buffers
+        glfwMakeContextCurrent(window)
+        glfwSwapBuffers(window)
 
     var pd: bgfx_platform_data_s
     pd.nwh = glfwGetNativeWindow(window)
