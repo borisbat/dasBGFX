@@ -37,12 +37,12 @@ def main
 		panic("can't init glfw")
     defer <|
         glfwTerminate()
+    glfwWindowHint(int(GLFW_CLIENT_API), GLFW_NO_API)
     var window = glfwCreateWindow(1270, 720, "BGFX - Hello triangle", null, null)
     if window==null
 		panic("can't create window")
     defer <|
         glfwDestroyWindow(window)
-    glfwMakeContextCurrent(window)
     var pd: bgfx_platform_data_s
     pd.nwh = glfwGetNativeWindow(window)
     bgfx_set_platform_data(safe_addr(pd))
@@ -68,3 +68,4 @@ def main
         bgfx_submit(0u, program, 1u, BGFX_DISCARD_NONE)
         bgfx_frame(true)
     bgfx_shutdown()
+

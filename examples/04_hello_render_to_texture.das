@@ -67,12 +67,12 @@ def main
 		panic("can't init glfw")
     defer <|
         glfwTerminate()
+    glfwWindowHint(int(GLFW_CLIENT_API), GLFW_NO_API)
     var window = glfwCreateWindow(1280, 720, "BGFX - Hello render to texture", null, null)
     if window==null
 		panic("can't create window")
     defer <|
         glfwDestroyWindow(window)
-    glfwMakeContextCurrent(window)
     var pd: bgfx_platform_data_s
     pd.nwh = glfwGetNativeWindow(window)
     bgfx_set_platform_data(safe_addr(pd))

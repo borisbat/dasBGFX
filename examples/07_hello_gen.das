@@ -47,6 +47,7 @@ def main
 		panic("can't init glfw")
     defer <|
         glfwTerminate()
+    glfwWindowHint(int(GLFW_CLIENT_API), GLFW_NO_API)
     var window = glfwCreateWindow(1280, 720, "BGFX - Hello generated geometry", null, null)
     if window==null
 		panic("can't create window")

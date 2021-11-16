@@ -99,12 +99,12 @@ def main
 		panic("can't init glfw")
     defer <|
         glfwTerminate()
+    glfwWindowHint(int(GLFW_CLIENT_API), GLFW_NO_API)
     var window = glfwCreateWindow(1280, 720, "BGFX - Hello compute", null, null)
     if window==null
 		panic("can't create window")
     defer <|
         glfwDestroyWindow(window)
-    glfwMakeContextCurrent(window)
     var pd: bgfx_platform_data_s
     pd.nwh = glfwGetNativeWindow(window)
     bgfx_set_platform_data(safe_addr(pd))
@@ -171,18 +171,17 @@ def main
             e_mat.e[0] = e_mat.a * float4(1,2,3,4)
             e_mat.e[1] = e_mat.b * float4(1,2,3,4)
             e_mat.z = c_mat_z
-            /*
             if can_read_back
                 if c_mat_res.c[0].x!=0.
-                    assert(c_mat_res.c==e_mat.c)
-                    assert(c_mat_res.d==e_mat.d)
-                    assert(c_mat_res.e[0]==e_mat.e[0])
-                    assert(c_mat_res.e[1]==e_mat.e[1])
-                    assert(c_mat_res.z==c_mat_z)
-                else
-                    print("c_res_frame vs n_frame = {c_res_frame} vs {n_frame}\n")
-                    print("c_mat_res = {c_mat_res}\n")
-                    print("e_mat     = {e_mat}\n")
-            */
+                    if c_mat_res.c != e_mat.c
+                        print("{c_mat_res.c} vs {e_mat.c}\n")
+                    if c_mat_res.d != e_mat.d
+                        print("{c_mat_res.d} vs {e_mat.d}\n")
+                    if c_mat_res.e[0] != e_mat.e[0]
+                        print("{c_mat_res.e[0]} vs {e_mat.e[0]}\n")
+                    if c_mat_res.e[1]!=e_mat.e[1]
+                        print("{c_mat_res.e[1]} vs {e_mat.e[1]}\n")
+                    if c_mat_res.z!=c_mat_z
+                        print("{c_mat_res.z} vs {c_mat_z}\n")
             c_res_frame = 0u
     bgfx_shutdown()

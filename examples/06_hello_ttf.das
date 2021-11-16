@@ -11,19 +11,19 @@ def main
 		panic("can't init glfw")
     defer <|
         glfwTerminate()
+    glfwWindowHint(int(GLFW_CLIENT_API), GLFW_NO_API)
     var window = glfwCreateWindow(1280, 720, "BGFX - Hello ttf", null, null)
     if window==null
 		panic("can't create window")
     defer <|
         glfwDestroyWindow(window)
-    glfwMakeContextCurrent(window)
     var pd: bgfx_platform_data_s
     pd.nwh = glfwGetNativeWindow(window)
     bgfx_set_platform_data(safe_addr(pd))
     bgfx_init(1280,720) //,bgfx_renderer_type OPENGL)
     glfwSetWindowTitle(window, "BGFX - Hello ttf - {bgfx_get_renderer_type()}")
     bgfx_create_ttf_objects()
-    let font <- load_ttf("c:/windows/fonts/times.ttf")
+    let font <- load_ttf("{get_das_root()}/modules/dasBGFX/bgfx/bgfx/examples/runtime/font/droidsansmono.ttf")
     var hw_text <- font |> create_quads("Hello, world")
     bgfx_set_view_clear(0u, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, RGBA_TO_BGFX_UCOLOR(0.2,0.2,0.2,1.0), 1.0f, 0u)
     let dim = quads_dim(hw_text)
