@@ -325,6 +325,8 @@ def public bgfx_init ( winw,winh:int; rt:bgfx_renderer_type = bgfx_renderer_type
         transpose_uniform_mat = true
     elif render_type==bgfx_renderer_type DIRECT3D12
         transpose_uniform_mat = true
+    elif render_type==bgfx_renderer_type METAL
+        transpose_uniform_mat = true
     else
         transpose_uniform_mat = false
 

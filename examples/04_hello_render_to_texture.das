@@ -76,9 +76,9 @@ def main
     var pd: bgfx_platform_data_s
     pd.nwh = glfwGetNativeWindow(window)
     bgfx_set_platform_data(safe_addr(pd))
-    // bgfx_init(1280,720)
+    bgfx_init(1280,720)
     // bgfx_init(1280,720,bgfx_renderer_type DIRECT3D12)
-    bgfx_init(1280,720,bgfx_renderer_type OPENGL)
+    // bgfx_init(1280,720,bgfx_renderer_type OPENGL)
     glfwSetWindowTitle(window, "BGFX - Hello render to texture - {bgfx_get_renderer_type()}")
     var pcvl_decl = bgfx_create_vertex_layout(type<Vertex>)
     var vbh = bgfx_create_vertex_buffer(bgfx_make_ref(vertices), safe_addr(pcvl_decl), BGFX_BUFFER_NONE)
