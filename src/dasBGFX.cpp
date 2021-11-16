@@ -103,6 +103,14 @@ Module_BGFX::Module_BGFX() : Module("bgfx") {
     #include "module_bgfx.inc"
     #include "module_bgfx.const_inc"
 
+#ifdef _MSC_VER
+    addConstant(*this,"BGFX_SHADERC_NAME","shaderc.exe");
+#elif defined(__APPLE__)
+     addConstant(*this,"BGFX_SHADERC_NAME","shaderc-osx");
+#else
+     addConstant(*this,"BGFX_SHADERC_NAME","shaderc.exe");
+#endif
+
     addExtern<DAS_BIND_FUN(Das_bgfx_dbg_text_printf)>(*this, lib, "bgfx_dbg_text_printf",SideEffects::worstDefault, "Das_bgfx_dbg_text_printf")
         ->args({"_x","_y","_attr","text"});
     addExtern<DAS_BIND_FUN(Das_bgfx_projection), SimNode_ExtFuncCallAndCopyOrMove>(*this, lib, "bgfx_mat_projection",SideEffects::worstDefault, "Das_bgfx_projection")
