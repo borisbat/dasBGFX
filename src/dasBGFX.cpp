@@ -128,8 +128,7 @@ Module_BGFX::Module_BGFX() : Module("bgfx") {
     sib->arguments[1]->init = make_smart<ExprConstUInt>(0);
     sib->arguments[2]->init = make_smart<ExprConstUInt>(0xffffffff);
     // we are fixing raw 'storage type' arguments
-    for ( auto fn : this->functions ) {
-        const auto&  pfn = fn.second;
+    for ( auto & pfn : this->functions.each() ) {
         for ( auto & arg : pfn->arguments ) {
             if ( arg->type->isSimpleType(Type::tUInt8) || arg->type->isSimpleType(Type::tUInt16) ) {
                 arg->type->baseType = Type::tUInt;
