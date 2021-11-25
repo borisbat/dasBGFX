@@ -80,6 +80,11 @@ IF ((NOT DAS_BGFX_INCLUDED) AND ((NOT ${DAS_BGFX_DISABLED}) OR (NOT DEFINED DAS_
 	)
 	SETUP_CPP11(libDasModuleBGFX)
 
+	IF(APPLE)
+		target_compile_options(libDasModuleBGFX PUBLIC -Wno-tautological-constant-compare)
+		target_compile_options(libDasModuleBGFX PUBLIC -Wno-gnu-zero-variadic-macro-arguments)
+	ENDIF()
+
 	ADD_MODULE_DAS(dasbgfx dasbgfx bgfx_boost)
 	ADD_MODULE_DAS(dasbgfx dasbgfx bgfx_boost_internal)
 	ADD_MODULE_DAS(dasbgfx dasbgfx bgfx_ttf)
