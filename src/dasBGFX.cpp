@@ -23,6 +23,7 @@ MAKE_EXTERNAL_TYPE_FACTORY(bgfx_encoder_s,bgfx_encoder_s);
 
 IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_encoder_s,bgfx_encoder_s);
 
+namespace das {
 BGFX_CAST_HANDLE_TYPE(bgfx_dynamic_vertex_buffer_handle_t);
 BGFX_CAST_HANDLE_TYPE(bgfx_occlusion_query_handle_t);
 BGFX_CAST_HANDLE_TYPE(bgfx_frame_buffer_handle_t);
@@ -34,6 +35,7 @@ BGFX_CAST_HANDLE_TYPE(bgfx_uniform_handle_t);
 BGFX_CAST_HANDLE_TYPE(bgfx_vertex_layout_handle_t);
 BGFX_CAST_HANDLE_TYPE(bgfx_index_buffer_handle_t);
 BGFX_CAST_HANDLE_TYPE(bgfx_shader_handle_t);
+}
 
 #define GLOBAL_NAMESPACE
 #include "module_bgfx.h"
