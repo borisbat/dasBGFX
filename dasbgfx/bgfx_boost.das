@@ -251,7 +251,7 @@ def public bgfx_compile_shader_file ( fin, fout, ftype:string; rt : bgfx_rendere
                     let st = fgets(f)
                     text |> push(st)
             else
-                print("das: can't open\n")
+                print("das: can't popen shaderc: {shaderc}\n")
         if ex_code!=0 || VERBOSE_COMPILER
             for t in text
                 print(t)
