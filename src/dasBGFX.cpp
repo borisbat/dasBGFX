@@ -108,7 +108,7 @@ Module_BGFX::Module_BGFX() : Module("bgfx") {
 #ifdef _MSC_VER
     addConstant(*this,"BGFX_SHADERC_NAME","shaderc.exe");
 #elif defined(__APPLE__)
-     addConstant(*this,"BGFX_SHADERC_NAME","shaderc-osx");
+    addConstant(*this,"BGFX_SHADERC_NAME","shaderc-osx");
 #elif defined(__linux__)
     addConstant(*this,"BGFX_SHADERC_NAME","shaderc-ubuntu");
 #else
