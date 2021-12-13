@@ -37,8 +37,55 @@ IF ((NOT DAS_BGFX_INCLUDED) AND ((NOT ${DAS_BGFX_DISABLED}) OR (NOT DEFINED DAS_
     ELSE()
     	# libBGFX
     	SET(LIB_BGFX_SRC
-    		${DAS_BGFX_DIR}/bgfx/bgfx/src/amalgamated.cpp
-    		${DAS_BGFX_DIR}/bgfx/bx/src/amalgamated.cpp
+    		#${DAS_BGFX_DIR}/bgfx/bgfx/src/amalgamated.cpp
+			${DAS_BGFX_DIR}/bgfx/bgfx/src/bgfx.cpp
+			${DAS_BGFX_DIR}/bgfx/bgfx/src/debug_renderdoc.cpp
+			${DAS_BGFX_DIR}/bgfx/bgfx/src/dxgi.cpp
+			${DAS_BGFX_DIR}/bgfx/bgfx/src/glcontext_egl.cpp
+			${DAS_BGFX_DIR}/bgfx/bgfx/src/glcontext_glx.cpp
+			${DAS_BGFX_DIR}/bgfx/bgfx/src/glcontext_wgl.cpp
+			${DAS_BGFX_DIR}/bgfx/bgfx/src/glcontext_html5.cpp
+			${DAS_BGFX_DIR}/bgfx/bgfx/src/nvapi.cpp
+			${DAS_BGFX_DIR}/bgfx/bgfx/src/renderer_agc.cpp
+			${DAS_BGFX_DIR}/bgfx/bgfx/src/renderer_d3d11.cpp
+			${DAS_BGFX_DIR}/bgfx/bgfx/src/renderer_d3d12.cpp
+			${DAS_BGFX_DIR}/bgfx/bgfx/src/renderer_d3d9.cpp
+			${DAS_BGFX_DIR}/bgfx/bgfx/src/renderer_gl.cpp
+			${DAS_BGFX_DIR}/bgfx/bgfx/src/renderer_gnm.cpp
+			${DAS_BGFX_DIR}/bgfx/bgfx/src/renderer_noop.cpp
+			${DAS_BGFX_DIR}/bgfx/bgfx/src/renderer_nvn.cpp
+			${DAS_BGFX_DIR}/bgfx/bgfx/src/renderer_vk.cpp
+			${DAS_BGFX_DIR}/bgfx/bgfx/src/renderer_webgpu.cpp
+			${DAS_BGFX_DIR}/bgfx/bgfx/src/shader.cpp
+			${DAS_BGFX_DIR}/bgfx/bgfx/src/shader_dx9bc.cpp
+			${DAS_BGFX_DIR}/bgfx/bgfx/src/shader_dxbc.cpp
+			${DAS_BGFX_DIR}/bgfx/bgfx/src/shader_spirv.cpp
+			${DAS_BGFX_DIR}/bgfx/bgfx/src/topology.cpp
+			${DAS_BGFX_DIR}/bgfx/bgfx/src/vertexlayout.cpp
+			#${DAS_BGFX_DIR}/bgfx/bx/src/amalgamated.cpp
+			${DAS_BGFX_DIR}/bgfx/bx/src/allocator.cpp
+			${DAS_BGFX_DIR}/bgfx/bx/src/bounds.cpp
+			${DAS_BGFX_DIR}/bgfx/bx/src/bx.cpp
+			${DAS_BGFX_DIR}/bgfx/bx/src/commandline.cpp
+			${DAS_BGFX_DIR}/bgfx/bx/src/crtnone.cpp
+			${DAS_BGFX_DIR}/bgfx/bx/src/debug.cpp
+			${DAS_BGFX_DIR}/bgfx/bx/src/dtoa.cpp
+			${DAS_BGFX_DIR}/bgfx/bx/src/easing.cpp
+			${DAS_BGFX_DIR}/bgfx/bx/src/file.cpp
+			${DAS_BGFX_DIR}/bgfx/bx/src/filepath.cpp
+			${DAS_BGFX_DIR}/bgfx/bx/src/hash.cpp
+			${DAS_BGFX_DIR}/bgfx/bx/src/math.cpp
+			${DAS_BGFX_DIR}/bgfx/bx/src/mutex.cpp
+			${DAS_BGFX_DIR}/bgfx/bx/src/os.cpp
+			${DAS_BGFX_DIR}/bgfx/bx/src/process.cpp
+			${DAS_BGFX_DIR}/bgfx/bx/src/semaphore.cpp
+			${DAS_BGFX_DIR}/bgfx/bx/src/settings.cpp
+			${DAS_BGFX_DIR}/bgfx/bx/src/sort.cpp
+			${DAS_BGFX_DIR}/bgfx/bx/src/string.cpp
+			${DAS_BGFX_DIR}/bgfx/bx/src/thread.cpp
+			${DAS_BGFX_DIR}/bgfx/bx/src/timer.cpp
+			${DAS_BGFX_DIR}/bgfx/bx/src/url.cpp
+			#
     		${DAS_BGFX_DIR}/bgfx/bimg/src/image.cpp
     		${DAS_BGFX_DIR}/bgfx/bimg/src/image_gnf.cpp
     	)
