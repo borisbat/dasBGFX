@@ -3,70 +3,55 @@
 // ------------
 
 #ifdef GLOBAL_NAMESPACE
+	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_occlusion_query_handle_s,bgfx_occlusion_query_handle_s)
+#endif
+#ifdef GLOBAL_NAMESPACE
+	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_instance_data_buffer_s,bgfx_instance_data_buffer_s)
+#endif
+#ifdef GLOBAL_NAMESPACE
+	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_memory_s,bgfx_memory_s)
+#endif
+#ifdef GLOBAL_NAMESPACE
+	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_internal_data_s,bgfx_internal_data_s)
+#endif
+#ifdef GLOBAL_NAMESPACE
+	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_attachment_s,bgfx_attachment_s)
+#endif
+#ifdef GLOBAL_NAMESPACE
+	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_indirect_buffer_handle_s,bgfx_indirect_buffer_handle_s)
+#endif
+#ifdef GLOBAL_NAMESPACE
+	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_frame_buffer_handle_s,bgfx_frame_buffer_handle_s)
+#endif
+#ifdef GLOBAL_NAMESPACE
+	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_stats_s,bgfx_stats_s)
+#endif
+#ifdef GLOBAL_NAMESPACE
+	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_shader_handle_s,bgfx_shader_handle_s)
+#endif
+#ifdef GLOBAL_NAMESPACE
+	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_transient_vertex_buffer_s,bgfx_transient_vertex_buffer_s)
+#endif
+#ifdef GLOBAL_NAMESPACE
+	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_index_buffer_handle_s,bgfx_index_buffer_handle_s)
+#endif
+#ifdef GLOBAL_NAMESPACE
+	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_vertex_layout_handle_s,bgfx_vertex_layout_handle_s)
+#endif
+#ifdef GLOBAL_NAMESPACE
+	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_dynamic_index_buffer_handle_s,bgfx_dynamic_index_buffer_handle_s)
+#endif
+#ifdef GLOBAL_NAMESPACE
 	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_texture_handle_s,bgfx_texture_handle_s)
 #endif
 #ifdef GLOBAL_NAMESPACE
 	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_resolution_s,bgfx_resolution_s)
 #endif
 #ifdef GLOBAL_NAMESPACE
-	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_memory_s,bgfx_memory_s)
+	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_allocator_interface_s,bgfx_allocator_interface_s)
 #endif
 #ifdef GLOBAL_NAMESPACE
-	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_uniform_handle_s,bgfx_uniform_handle_s)
-#endif
-#ifdef GLOBAL_NAMESPACE
-	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_caps_limits_s,bgfx_caps_limits_s)
-#endif
-#ifdef GLOBAL_NAMESPACE
-	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_shader_handle_s,bgfx_shader_handle_s)
-#endif
-#ifdef GLOBAL_NAMESPACE
-	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_uniform_info_s,bgfx_uniform_info_s)
-#endif
-#ifdef GLOBAL_NAMESPACE
-	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_transient_vertex_buffer_s,bgfx_transient_vertex_buffer_s)
-#endif
-#ifdef GLOBAL_NAMESPACE
-	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_attachment_s,bgfx_attachment_s)
-#endif
-#ifdef GLOBAL_NAMESPACE
-	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_vertex_buffer_handle_s,bgfx_vertex_buffer_handle_s)
-#endif
-#ifdef GLOBAL_NAMESPACE
-	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_view_stats_s,bgfx_view_stats_s)
-#endif
-#ifdef GLOBAL_NAMESPACE
-	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_index_buffer_handle_s,bgfx_index_buffer_handle_s)
-#endif
-#ifdef GLOBAL_NAMESPACE
-	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_indirect_buffer_handle_s,bgfx_indirect_buffer_handle_s)
-#endif
-#ifdef GLOBAL_NAMESPACE
-	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_vertex_layout_handle_s,bgfx_vertex_layout_handle_s)
-#endif
-#ifdef GLOBAL_NAMESPACE
-	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_allocator_vtbl_s,bgfx_allocator_vtbl_s)
-#endif
-#ifdef GLOBAL_NAMESPACE
-	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_internal_data_s,bgfx_internal_data_s)
-#endif
-#ifdef GLOBAL_NAMESPACE
-	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_transient_index_buffer_s,bgfx_transient_index_buffer_s)
-#endif
-#ifdef GLOBAL_NAMESPACE
-	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_instance_data_buffer_s,bgfx_instance_data_buffer_s)
-#endif
-#ifdef GLOBAL_NAMESPACE
-	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_encoder_stats_s,bgfx_encoder_stats_s)
-#endif
-#ifdef GLOBAL_NAMESPACE
-	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_init_limits_s,bgfx_init_limits_s)
-#endif
-#ifdef GLOBAL_NAMESPACE
-	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_stats_s,bgfx_stats_s)
-#endif
-#ifdef GLOBAL_NAMESPACE
-	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_vertex_layout_s,bgfx_vertex_layout_s)
+	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_caps_s,bgfx_caps_s)
 #endif
 #ifdef GLOBAL_NAMESPACE
 	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_init_s,bgfx_init_s)
@@ -75,237 +60,57 @@
 	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_program_handle_s,bgfx_program_handle_s)
 #endif
 #ifdef GLOBAL_NAMESPACE
-	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_transform_s,bgfx_transform_s)
+	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_view_stats_s,bgfx_view_stats_s)
 #endif
 #ifdef GLOBAL_NAMESPACE
-	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_allocator_interface_s,bgfx_allocator_interface_s)
+	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_vertex_buffer_handle_s,bgfx_vertex_buffer_handle_s)
 #endif
 #ifdef GLOBAL_NAMESPACE
 	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_dynamic_vertex_buffer_handle_s,bgfx_dynamic_vertex_buffer_handle_s)
 #endif
 #ifdef GLOBAL_NAMESPACE
+	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_init_limits_s,bgfx_init_limits_s)
+#endif
+#ifdef GLOBAL_NAMESPACE
+	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_uniform_info_s,bgfx_uniform_info_s)
+#endif
+#ifdef GLOBAL_NAMESPACE
+	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_transform_s,bgfx_transform_s)
+#endif
+#ifdef GLOBAL_NAMESPACE
 	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_platform_data_s,bgfx_platform_data_s)
 #endif
 #ifdef GLOBAL_NAMESPACE
-	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_caps_gpu_s,bgfx_caps_gpu_s)
+	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_vertex_layout_s,bgfx_vertex_layout_s)
 #endif
 #ifdef GLOBAL_NAMESPACE
-	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_frame_buffer_handle_s,bgfx_frame_buffer_handle_s)
-#endif
-#ifdef GLOBAL_NAMESPACE
-	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_dynamic_index_buffer_handle_s,bgfx_dynamic_index_buffer_handle_s)
-#endif
-#ifdef GLOBAL_NAMESPACE
-	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_occlusion_query_handle_s,bgfx_occlusion_query_handle_s)
+	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_uniform_handle_s,bgfx_uniform_handle_s)
 #endif
 #ifdef GLOBAL_NAMESPACE
 	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_texture_info_s,bgfx_texture_info_s)
 #endif
 #ifdef GLOBAL_NAMESPACE
-	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_caps_s,bgfx_caps_s)
+	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_encoder_stats_s,bgfx_encoder_stats_s)
+#endif
+#ifdef GLOBAL_NAMESPACE
+	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_caps_limits_s,bgfx_caps_limits_s)
+#endif
+#ifdef GLOBAL_NAMESPACE
+	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_transient_index_buffer_s,bgfx_transient_index_buffer_s)
+#endif
+#ifdef GLOBAL_NAMESPACE
+	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_allocator_vtbl_s,bgfx_allocator_vtbl_s)
+#endif
+#ifdef GLOBAL_NAMESPACE
+	IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_caps_gpu_s,bgfx_caps_gpu_s)
 #endif
 
 #ifdef GLOBAL_NAMESPACE
-struct bgfx_texture_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_texture_handle_s> {
-	bgfx_texture_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_texture_handle_s", ml) {
+struct bgfx_occlusion_query_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_occlusion_query_handle_s> {
+	bgfx_occlusion_query_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_occlusion_query_handle_s", ml) {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(idx)>("idx","idx");
-	}
-};
-#endif
-#ifdef GLOBAL_NAMESPACE
-struct bgfx_resolution_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_resolution_s> {
-	bgfx_resolution_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_resolution_s", ml) {
-	}
-	void init () {
-		addField<DAS_BIND_MANAGED_FIELD(format)>("format","format");
-		addField<DAS_BIND_MANAGED_FIELD(width)>("width","width");
-		addField<DAS_BIND_MANAGED_FIELD(height)>("height","height");
-		addField<DAS_BIND_MANAGED_FIELD(reset)>("reset","reset");
-		addField<DAS_BIND_MANAGED_FIELD(numBackBuffers)>("numBackBuffers","numBackBuffers");
-		addField<DAS_BIND_MANAGED_FIELD(maxFrameLatency)>("maxFrameLatency","maxFrameLatency");
-	}
-};
-#endif
-#ifdef GLOBAL_NAMESPACE
-struct bgfx_memory_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_memory_s> {
-	bgfx_memory_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_memory_s", ml) {
-	}
-	void init () {
-		addField<DAS_BIND_MANAGED_FIELD(data)>("data","data");
-		addField<DAS_BIND_MANAGED_FIELD(size)>("size","size");
-	}
-};
-#endif
-#ifdef GLOBAL_NAMESPACE
-struct bgfx_uniform_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_uniform_handle_s> {
-	bgfx_uniform_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_uniform_handle_s", ml) {
-	}
-	void init () {
-		addField<DAS_BIND_MANAGED_FIELD(idx)>("idx","idx");
-	}
-};
-#endif
-#ifdef GLOBAL_NAMESPACE
-struct bgfx_caps_limits_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_caps_limits_s> {
-	bgfx_caps_limits_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_caps_limits_s", ml) {
-	}
-	void init () {
-		addField<DAS_BIND_MANAGED_FIELD(maxDrawCalls)>("maxDrawCalls","maxDrawCalls");
-		addField<DAS_BIND_MANAGED_FIELD(maxBlits)>("maxBlits","maxBlits");
-		addField<DAS_BIND_MANAGED_FIELD(maxTextureSize)>("maxTextureSize","maxTextureSize");
-		addField<DAS_BIND_MANAGED_FIELD(maxTextureLayers)>("maxTextureLayers","maxTextureLayers");
-		addField<DAS_BIND_MANAGED_FIELD(maxViews)>("maxViews","maxViews");
-		addField<DAS_BIND_MANAGED_FIELD(maxFrameBuffers)>("maxFrameBuffers","maxFrameBuffers");
-		addField<DAS_BIND_MANAGED_FIELD(maxFBAttachments)>("maxFBAttachments","maxFBAttachments");
-		addField<DAS_BIND_MANAGED_FIELD(maxPrograms)>("maxPrograms","maxPrograms");
-		addField<DAS_BIND_MANAGED_FIELD(maxShaders)>("maxShaders","maxShaders");
-		addField<DAS_BIND_MANAGED_FIELD(maxTextures)>("maxTextures","maxTextures");
-		addField<DAS_BIND_MANAGED_FIELD(maxTextureSamplers)>("maxTextureSamplers","maxTextureSamplers");
-		addField<DAS_BIND_MANAGED_FIELD(maxComputeBindings)>("maxComputeBindings","maxComputeBindings");
-		addField<DAS_BIND_MANAGED_FIELD(maxVertexLayouts)>("maxVertexLayouts","maxVertexLayouts");
-		addField<DAS_BIND_MANAGED_FIELD(maxVertexStreams)>("maxVertexStreams","maxVertexStreams");
-		addField<DAS_BIND_MANAGED_FIELD(maxIndexBuffers)>("maxIndexBuffers","maxIndexBuffers");
-		addField<DAS_BIND_MANAGED_FIELD(maxVertexBuffers)>("maxVertexBuffers","maxVertexBuffers");
-		addField<DAS_BIND_MANAGED_FIELD(maxDynamicIndexBuffers)>("maxDynamicIndexBuffers","maxDynamicIndexBuffers");
-		addField<DAS_BIND_MANAGED_FIELD(maxDynamicVertexBuffers)>("maxDynamicVertexBuffers","maxDynamicVertexBuffers");
-		addField<DAS_BIND_MANAGED_FIELD(maxUniforms)>("maxUniforms","maxUniforms");
-		addField<DAS_BIND_MANAGED_FIELD(maxOcclusionQueries)>("maxOcclusionQueries","maxOcclusionQueries");
-		addField<DAS_BIND_MANAGED_FIELD(maxEncoders)>("maxEncoders","maxEncoders");
-		addField<DAS_BIND_MANAGED_FIELD(minResourceCbSize)>("minResourceCbSize","minResourceCbSize");
-		addField<DAS_BIND_MANAGED_FIELD(transientVbSize)>("transientVbSize","transientVbSize");
-		addField<DAS_BIND_MANAGED_FIELD(transientIbSize)>("transientIbSize","transientIbSize");
-	}
-};
-#endif
-#ifdef GLOBAL_NAMESPACE
-struct bgfx_shader_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_shader_handle_s> {
-	bgfx_shader_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_shader_handle_s", ml) {
-	}
-	void init () {
-		addField<DAS_BIND_MANAGED_FIELD(idx)>("idx","idx");
-	}
-};
-#endif
-#ifdef GLOBAL_NAMESPACE
-struct bgfx_uniform_info_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_uniform_info_s> {
-	bgfx_uniform_info_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_uniform_info_s", ml) {
-	}
-	void init () {
-		addField<DAS_BIND_MANAGED_FIELD(name)>("name","name");
-		addField<DAS_BIND_MANAGED_FIELD(type)>("_type","type");
-		addField<DAS_BIND_MANAGED_FIELD(num)>("num","num");
-	}
-};
-#endif
-#ifdef GLOBAL_NAMESPACE
-struct bgfx_transient_vertex_buffer_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_transient_vertex_buffer_s> {
-	bgfx_transient_vertex_buffer_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_transient_vertex_buffer_s", ml) {
-	}
-	void init () {
-		addField<DAS_BIND_MANAGED_FIELD(data)>("data","data");
-		addField<DAS_BIND_MANAGED_FIELD(size)>("size","size");
-		addField<DAS_BIND_MANAGED_FIELD(startVertex)>("startVertex","startVertex");
-		addField<DAS_BIND_MANAGED_FIELD(stride)>("stride","stride");
-		addField<DAS_BIND_MANAGED_FIELD(handle)>("handle","handle");
-		addField<DAS_BIND_MANAGED_FIELD(layoutHandle)>("layoutHandle","layoutHandle");
-	}
-};
-#endif
-#ifdef GLOBAL_NAMESPACE
-struct bgfx_attachment_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_attachment_s> {
-	bgfx_attachment_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_attachment_s", ml) {
-	}
-	void init () {
-		addField<DAS_BIND_MANAGED_FIELD(access)>("access","access");
-		addField<DAS_BIND_MANAGED_FIELD(handle)>("handle","handle");
-		addField<DAS_BIND_MANAGED_FIELD(mip)>("mip","mip");
-		addField<DAS_BIND_MANAGED_FIELD(layer)>("layer","layer");
-		addField<DAS_BIND_MANAGED_FIELD(numLayers)>("numLayers","numLayers");
-		addField<DAS_BIND_MANAGED_FIELD(resolve)>("resolve","resolve");
-	}
-};
-#endif
-#ifdef GLOBAL_NAMESPACE
-struct bgfx_vertex_buffer_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_vertex_buffer_handle_s> {
-	bgfx_vertex_buffer_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_vertex_buffer_handle_s", ml) {
-	}
-	void init () {
-		addField<DAS_BIND_MANAGED_FIELD(idx)>("idx","idx");
-	}
-};
-#endif
-#ifdef GLOBAL_NAMESPACE
-struct bgfx_view_stats_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_view_stats_s> {
-	bgfx_view_stats_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_view_stats_s", ml) {
-	}
-	void init () {
-		addField<DAS_BIND_MANAGED_FIELD(name)>("name","name");
-		addField<DAS_BIND_MANAGED_FIELD(view)>("view","view");
-		addField<DAS_BIND_MANAGED_FIELD(cpuTimeBegin)>("cpuTimeBegin","cpuTimeBegin");
-		addField<DAS_BIND_MANAGED_FIELD(cpuTimeEnd)>("cpuTimeEnd","cpuTimeEnd");
-		addField<DAS_BIND_MANAGED_FIELD(gpuTimeBegin)>("gpuTimeBegin","gpuTimeBegin");
-		addField<DAS_BIND_MANAGED_FIELD(gpuTimeEnd)>("gpuTimeEnd","gpuTimeEnd");
-	}
-};
-#endif
-#ifdef GLOBAL_NAMESPACE
-struct bgfx_index_buffer_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_index_buffer_handle_s> {
-	bgfx_index_buffer_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_index_buffer_handle_s", ml) {
-	}
-	void init () {
-		addField<DAS_BIND_MANAGED_FIELD(idx)>("idx","idx");
-	}
-};
-#endif
-#ifdef GLOBAL_NAMESPACE
-struct bgfx_indirect_buffer_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_indirect_buffer_handle_s> {
-	bgfx_indirect_buffer_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_indirect_buffer_handle_s", ml) {
-	}
-	void init () {
-		addField<DAS_BIND_MANAGED_FIELD(idx)>("idx","idx");
-	}
-};
-#endif
-#ifdef GLOBAL_NAMESPACE
-struct bgfx_vertex_layout_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_vertex_layout_handle_s> {
-	bgfx_vertex_layout_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_vertex_layout_handle_s", ml) {
-	}
-	void init () {
-		addField<DAS_BIND_MANAGED_FIELD(idx)>("idx","idx");
-	}
-};
-#endif
-#ifdef GLOBAL_NAMESPACE
-struct bgfx_allocator_vtbl_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_allocator_vtbl_s> {
-	bgfx_allocator_vtbl_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_allocator_vtbl_s", ml) {
-	}
-	void init () {
-		addField<DAS_BIND_MANAGED_FIELD(realloc)>("realloc","realloc");
-	}
-};
-#endif
-#ifdef GLOBAL_NAMESPACE
-struct bgfx_internal_data_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_internal_data_s> {
-	bgfx_internal_data_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_internal_data_s", ml) {
-	}
-	void init () {
-		addField<DAS_BIND_MANAGED_FIELD(caps)>("caps","caps");
-		addField<DAS_BIND_MANAGED_FIELD(context)>("context","context");
-	}
-};
-#endif
-#ifdef GLOBAL_NAMESPACE
-struct bgfx_transient_index_buffer_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_transient_index_buffer_s> {
-	bgfx_transient_index_buffer_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_transient_index_buffer_s", ml) {
-	}
-	void init () {
-		addField<DAS_BIND_MANAGED_FIELD(data)>("data","data");
-		addField<DAS_BIND_MANAGED_FIELD(size)>("size","size");
-		addField<DAS_BIND_MANAGED_FIELD(startIndex)>("startIndex","startIndex");
-		addField<DAS_BIND_MANAGED_FIELD(handle)>("handle","handle");
-		addField<DAS_BIND_MANAGED_FIELD(isIndex16)>("isIndex16","isIndex16");
 	}
 };
 #endif
@@ -324,24 +129,54 @@ struct bgfx_instance_data_buffer_s_GeneratedAnnotation : ManagedStructureAnnotat
 };
 #endif
 #ifdef GLOBAL_NAMESPACE
-struct bgfx_encoder_stats_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_encoder_stats_s> {
-	bgfx_encoder_stats_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_encoder_stats_s", ml) {
+struct bgfx_memory_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_memory_s> {
+	bgfx_memory_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_memory_s", ml) {
 	}
 	void init () {
-		addField<DAS_BIND_MANAGED_FIELD(cpuTimeBegin)>("cpuTimeBegin","cpuTimeBegin");
-		addField<DAS_BIND_MANAGED_FIELD(cpuTimeEnd)>("cpuTimeEnd","cpuTimeEnd");
+		addField<DAS_BIND_MANAGED_FIELD(data)>("data","data");
+		addField<DAS_BIND_MANAGED_FIELD(size)>("size","size");
 	}
 };
 #endif
 #ifdef GLOBAL_NAMESPACE
-struct bgfx_init_limits_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_init_limits_s> {
-	bgfx_init_limits_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_init_limits_s", ml) {
+struct bgfx_internal_data_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_internal_data_s> {
+	bgfx_internal_data_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_internal_data_s", ml) {
 	}
 	void init () {
-		addField<DAS_BIND_MANAGED_FIELD(maxEncoders)>("maxEncoders","maxEncoders");
-		addField<DAS_BIND_MANAGED_FIELD(minResourceCbSize)>("minResourceCbSize","minResourceCbSize");
-		addField<DAS_BIND_MANAGED_FIELD(transientVbSize)>("transientVbSize","transientVbSize");
-		addField<DAS_BIND_MANAGED_FIELD(transientIbSize)>("transientIbSize","transientIbSize");
+		addField<DAS_BIND_MANAGED_FIELD(caps)>("caps","caps");
+		addField<DAS_BIND_MANAGED_FIELD(context)>("context","context");
+	}
+};
+#endif
+#ifdef GLOBAL_NAMESPACE
+struct bgfx_attachment_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_attachment_s> {
+	bgfx_attachment_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_attachment_s", ml) {
+	}
+	void init () {
+		addField<DAS_BIND_MANAGED_FIELD(access)>("access","access");
+		addField<DAS_BIND_MANAGED_FIELD(handle)>("handle","handle");
+		addField<DAS_BIND_MANAGED_FIELD(mip)>("mip","mip");
+		addField<DAS_BIND_MANAGED_FIELD(layer)>("layer","layer");
+		addField<DAS_BIND_MANAGED_FIELD(numLayers)>("numLayers","numLayers");
+		addField<DAS_BIND_MANAGED_FIELD(resolve)>("resolve","resolve");
+	}
+};
+#endif
+#ifdef GLOBAL_NAMESPACE
+struct bgfx_indirect_buffer_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_indirect_buffer_handle_s> {
+	bgfx_indirect_buffer_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_indirect_buffer_handle_s", ml) {
+	}
+	void init () {
+		addField<DAS_BIND_MANAGED_FIELD(idx)>("idx","idx");
+	}
+};
+#endif
+#ifdef GLOBAL_NAMESPACE
+struct bgfx_frame_buffer_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_frame_buffer_handle_s> {
+	bgfx_frame_buffer_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_frame_buffer_handle_s", ml) {
+	}
+	void init () {
+		addField<DAS_BIND_MANAGED_FIELD(idx)>("idx","idx");
 	}
 };
 #endif
@@ -393,14 +228,102 @@ struct bgfx_stats_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_stats_
 };
 #endif
 #ifdef GLOBAL_NAMESPACE
-struct bgfx_vertex_layout_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_vertex_layout_s> {
-	bgfx_vertex_layout_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_vertex_layout_s", ml) {
+struct bgfx_shader_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_shader_handle_s> {
+	bgfx_shader_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_shader_handle_s", ml) {
 	}
 	void init () {
-		addField<DAS_BIND_MANAGED_FIELD(hash)>("hash","hash");
+		addField<DAS_BIND_MANAGED_FIELD(idx)>("idx","idx");
+	}
+};
+#endif
+#ifdef GLOBAL_NAMESPACE
+struct bgfx_transient_vertex_buffer_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_transient_vertex_buffer_s> {
+	bgfx_transient_vertex_buffer_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_transient_vertex_buffer_s", ml) {
+	}
+	void init () {
+		addField<DAS_BIND_MANAGED_FIELD(data)>("data","data");
+		addField<DAS_BIND_MANAGED_FIELD(size)>("size","size");
+		addField<DAS_BIND_MANAGED_FIELD(startVertex)>("startVertex","startVertex");
 		addField<DAS_BIND_MANAGED_FIELD(stride)>("stride","stride");
-		addField<DAS_BIND_MANAGED_FIELD(offset)>("offset","offset");
-		addField<DAS_BIND_MANAGED_FIELD(attributes)>("attributes","attributes");
+		addField<DAS_BIND_MANAGED_FIELD(handle)>("handle","handle");
+		addField<DAS_BIND_MANAGED_FIELD(layoutHandle)>("layoutHandle","layoutHandle");
+	}
+};
+#endif
+#ifdef GLOBAL_NAMESPACE
+struct bgfx_index_buffer_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_index_buffer_handle_s> {
+	bgfx_index_buffer_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_index_buffer_handle_s", ml) {
+	}
+	void init () {
+		addField<DAS_BIND_MANAGED_FIELD(idx)>("idx","idx");
+	}
+};
+#endif
+#ifdef GLOBAL_NAMESPACE
+struct bgfx_vertex_layout_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_vertex_layout_handle_s> {
+	bgfx_vertex_layout_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_vertex_layout_handle_s", ml) {
+	}
+	void init () {
+		addField<DAS_BIND_MANAGED_FIELD(idx)>("idx","idx");
+	}
+};
+#endif
+#ifdef GLOBAL_NAMESPACE
+struct bgfx_dynamic_index_buffer_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_dynamic_index_buffer_handle_s> {
+	bgfx_dynamic_index_buffer_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_dynamic_index_buffer_handle_s", ml) {
+	}
+	void init () {
+		addField<DAS_BIND_MANAGED_FIELD(idx)>("idx","idx");
+	}
+};
+#endif
+#ifdef GLOBAL_NAMESPACE
+struct bgfx_texture_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_texture_handle_s> {
+	bgfx_texture_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_texture_handle_s", ml) {
+	}
+	void init () {
+		addField<DAS_BIND_MANAGED_FIELD(idx)>("idx","idx");
+	}
+};
+#endif
+#ifdef GLOBAL_NAMESPACE
+struct bgfx_resolution_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_resolution_s> {
+	bgfx_resolution_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_resolution_s", ml) {
+	}
+	void init () {
+		addField<DAS_BIND_MANAGED_FIELD(format)>("format","format");
+		addField<DAS_BIND_MANAGED_FIELD(width)>("width","width");
+		addField<DAS_BIND_MANAGED_FIELD(height)>("height","height");
+		addField<DAS_BIND_MANAGED_FIELD(reset)>("reset","reset");
+		addField<DAS_BIND_MANAGED_FIELD(numBackBuffers)>("numBackBuffers","numBackBuffers");
+		addField<DAS_BIND_MANAGED_FIELD(maxFrameLatency)>("maxFrameLatency","maxFrameLatency");
+	}
+};
+#endif
+#ifdef GLOBAL_NAMESPACE
+struct bgfx_allocator_interface_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_allocator_interface_s> {
+	bgfx_allocator_interface_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_allocator_interface_s", ml) {
+	}
+	void init () {
+		addField<DAS_BIND_MANAGED_FIELD(vtbl)>("vtbl","vtbl");
+	}
+};
+#endif
+#ifdef GLOBAL_NAMESPACE
+struct bgfx_caps_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_caps_s> {
+	bgfx_caps_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_caps_s", ml) {
+	}
+	void init () {
+		addField<DAS_BIND_MANAGED_FIELD(rendererType)>("rendererType","rendererType");
+		addField<DAS_BIND_MANAGED_FIELD(supported)>("supported","supported");
+		addField<DAS_BIND_MANAGED_FIELD(vendorId)>("vendorId","vendorId");
+		addField<DAS_BIND_MANAGED_FIELD(deviceId)>("deviceId","deviceId");
+		addField<DAS_BIND_MANAGED_FIELD(homogeneousDepth)>("homogeneousDepth","homogeneousDepth");
+		addField<DAS_BIND_MANAGED_FIELD(originBottomLeft)>("originBottomLeft","originBottomLeft");
+		addField<DAS_BIND_MANAGED_FIELD(numGPUs)>("numGPUs","numGPUs");
+		addField<DAS_BIND_MANAGED_FIELD(gpu)>("gpu","gpu");
+		addField<DAS_BIND_MANAGED_FIELD(limits)>("limits","limits");
+		addField<DAS_BIND_MANAGED_FIELD(formats)>("formats","formats");
 	}
 };
 #endif
@@ -432,21 +355,25 @@ struct bgfx_program_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bg
 };
 #endif
 #ifdef GLOBAL_NAMESPACE
-struct bgfx_transform_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_transform_s> {
-	bgfx_transform_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_transform_s", ml) {
+struct bgfx_view_stats_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_view_stats_s> {
+	bgfx_view_stats_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_view_stats_s", ml) {
 	}
 	void init () {
-		addField<DAS_BIND_MANAGED_FIELD(data)>("data","data");
-		addField<DAS_BIND_MANAGED_FIELD(num)>("num","num");
+		addField<DAS_BIND_MANAGED_FIELD(name)>("name","name");
+		addField<DAS_BIND_MANAGED_FIELD(view)>("view","view");
+		addField<DAS_BIND_MANAGED_FIELD(cpuTimeBegin)>("cpuTimeBegin","cpuTimeBegin");
+		addField<DAS_BIND_MANAGED_FIELD(cpuTimeEnd)>("cpuTimeEnd","cpuTimeEnd");
+		addField<DAS_BIND_MANAGED_FIELD(gpuTimeBegin)>("gpuTimeBegin","gpuTimeBegin");
+		addField<DAS_BIND_MANAGED_FIELD(gpuTimeEnd)>("gpuTimeEnd","gpuTimeEnd");
 	}
 };
 #endif
 #ifdef GLOBAL_NAMESPACE
-struct bgfx_allocator_interface_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_allocator_interface_s> {
-	bgfx_allocator_interface_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_allocator_interface_s", ml) {
+struct bgfx_vertex_buffer_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_vertex_buffer_handle_s> {
+	bgfx_vertex_buffer_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_vertex_buffer_handle_s", ml) {
 	}
 	void init () {
-		addField<DAS_BIND_MANAGED_FIELD(vtbl)>("vtbl","vtbl");
+		addField<DAS_BIND_MANAGED_FIELD(idx)>("idx","idx");
 	}
 };
 #endif
@@ -456,6 +383,39 @@ struct bgfx_dynamic_vertex_buffer_handle_s_GeneratedAnnotation : ManagedStructur
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(idx)>("idx","idx");
+	}
+};
+#endif
+#ifdef GLOBAL_NAMESPACE
+struct bgfx_init_limits_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_init_limits_s> {
+	bgfx_init_limits_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_init_limits_s", ml) {
+	}
+	void init () {
+		addField<DAS_BIND_MANAGED_FIELD(maxEncoders)>("maxEncoders","maxEncoders");
+		addField<DAS_BIND_MANAGED_FIELD(minResourceCbSize)>("minResourceCbSize","minResourceCbSize");
+		addField<DAS_BIND_MANAGED_FIELD(transientVbSize)>("transientVbSize","transientVbSize");
+		addField<DAS_BIND_MANAGED_FIELD(transientIbSize)>("transientIbSize","transientIbSize");
+	}
+};
+#endif
+#ifdef GLOBAL_NAMESPACE
+struct bgfx_uniform_info_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_uniform_info_s> {
+	bgfx_uniform_info_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_uniform_info_s", ml) {
+	}
+	void init () {
+		addField<DAS_BIND_MANAGED_FIELD(name)>("name","name");
+		addField<DAS_BIND_MANAGED_FIELD(type)>("_type","type");
+		addField<DAS_BIND_MANAGED_FIELD(num)>("num","num");
+	}
+};
+#endif
+#ifdef GLOBAL_NAMESPACE
+struct bgfx_transform_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_transform_s> {
+	bgfx_transform_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_transform_s", ml) {
+	}
+	void init () {
+		addField<DAS_BIND_MANAGED_FIELD(data)>("data","data");
+		addField<DAS_BIND_MANAGED_FIELD(num)>("num","num");
 	}
 };
 #endif
@@ -473,36 +433,20 @@ struct bgfx_platform_data_s_GeneratedAnnotation : ManagedStructureAnnotation<bgf
 };
 #endif
 #ifdef GLOBAL_NAMESPACE
-struct bgfx_caps_gpu_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_caps_gpu_s> {
-	bgfx_caps_gpu_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_caps_gpu_s", ml) {
+struct bgfx_vertex_layout_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_vertex_layout_s> {
+	bgfx_vertex_layout_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_vertex_layout_s", ml) {
 	}
 	void init () {
-		addField<DAS_BIND_MANAGED_FIELD(vendorId)>("vendorId","vendorId");
-		addField<DAS_BIND_MANAGED_FIELD(deviceId)>("deviceId","deviceId");
+		addField<DAS_BIND_MANAGED_FIELD(hash)>("hash","hash");
+		addField<DAS_BIND_MANAGED_FIELD(stride)>("stride","stride");
+		addField<DAS_BIND_MANAGED_FIELD(offset)>("offset","offset");
+		addField<DAS_BIND_MANAGED_FIELD(attributes)>("attributes","attributes");
 	}
 };
 #endif
 #ifdef GLOBAL_NAMESPACE
-struct bgfx_frame_buffer_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_frame_buffer_handle_s> {
-	bgfx_frame_buffer_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_frame_buffer_handle_s", ml) {
-	}
-	void init () {
-		addField<DAS_BIND_MANAGED_FIELD(idx)>("idx","idx");
-	}
-};
-#endif
-#ifdef GLOBAL_NAMESPACE
-struct bgfx_dynamic_index_buffer_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_dynamic_index_buffer_handle_s> {
-	bgfx_dynamic_index_buffer_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_dynamic_index_buffer_handle_s", ml) {
-	}
-	void init () {
-		addField<DAS_BIND_MANAGED_FIELD(idx)>("idx","idx");
-	}
-};
-#endif
-#ifdef GLOBAL_NAMESPACE
-struct bgfx_occlusion_query_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_occlusion_query_handle_s> {
-	bgfx_occlusion_query_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_occlusion_query_handle_s", ml) {
+struct bgfx_uniform_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_uniform_handle_s> {
+	bgfx_uniform_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_uniform_handle_s", ml) {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(idx)>("idx","idx");
@@ -527,20 +471,76 @@ struct bgfx_texture_info_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx
 };
 #endif
 #ifdef GLOBAL_NAMESPACE
-struct bgfx_caps_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_caps_s> {
-	bgfx_caps_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_caps_s", ml) {
+struct bgfx_encoder_stats_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_encoder_stats_s> {
+	bgfx_encoder_stats_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_encoder_stats_s", ml) {
 	}
 	void init () {
-		addField<DAS_BIND_MANAGED_FIELD(rendererType)>("rendererType","rendererType");
-		addField<DAS_BIND_MANAGED_FIELD(supported)>("supported","supported");
+		addField<DAS_BIND_MANAGED_FIELD(cpuTimeBegin)>("cpuTimeBegin","cpuTimeBegin");
+		addField<DAS_BIND_MANAGED_FIELD(cpuTimeEnd)>("cpuTimeEnd","cpuTimeEnd");
+	}
+};
+#endif
+#ifdef GLOBAL_NAMESPACE
+struct bgfx_caps_limits_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_caps_limits_s> {
+	bgfx_caps_limits_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_caps_limits_s", ml) {
+	}
+	void init () {
+		addField<DAS_BIND_MANAGED_FIELD(maxDrawCalls)>("maxDrawCalls","maxDrawCalls");
+		addField<DAS_BIND_MANAGED_FIELD(maxBlits)>("maxBlits","maxBlits");
+		addField<DAS_BIND_MANAGED_FIELD(maxTextureSize)>("maxTextureSize","maxTextureSize");
+		addField<DAS_BIND_MANAGED_FIELD(maxTextureLayers)>("maxTextureLayers","maxTextureLayers");
+		addField<DAS_BIND_MANAGED_FIELD(maxViews)>("maxViews","maxViews");
+		addField<DAS_BIND_MANAGED_FIELD(maxFrameBuffers)>("maxFrameBuffers","maxFrameBuffers");
+		addField<DAS_BIND_MANAGED_FIELD(maxFBAttachments)>("maxFBAttachments","maxFBAttachments");
+		addField<DAS_BIND_MANAGED_FIELD(maxPrograms)>("maxPrograms","maxPrograms");
+		addField<DAS_BIND_MANAGED_FIELD(maxShaders)>("maxShaders","maxShaders");
+		addField<DAS_BIND_MANAGED_FIELD(maxTextures)>("maxTextures","maxTextures");
+		addField<DAS_BIND_MANAGED_FIELD(maxTextureSamplers)>("maxTextureSamplers","maxTextureSamplers");
+		addField<DAS_BIND_MANAGED_FIELD(maxComputeBindings)>("maxComputeBindings","maxComputeBindings");
+		addField<DAS_BIND_MANAGED_FIELD(maxVertexLayouts)>("maxVertexLayouts","maxVertexLayouts");
+		addField<DAS_BIND_MANAGED_FIELD(maxVertexStreams)>("maxVertexStreams","maxVertexStreams");
+		addField<DAS_BIND_MANAGED_FIELD(maxIndexBuffers)>("maxIndexBuffers","maxIndexBuffers");
+		addField<DAS_BIND_MANAGED_FIELD(maxVertexBuffers)>("maxVertexBuffers","maxVertexBuffers");
+		addField<DAS_BIND_MANAGED_FIELD(maxDynamicIndexBuffers)>("maxDynamicIndexBuffers","maxDynamicIndexBuffers");
+		addField<DAS_BIND_MANAGED_FIELD(maxDynamicVertexBuffers)>("maxDynamicVertexBuffers","maxDynamicVertexBuffers");
+		addField<DAS_BIND_MANAGED_FIELD(maxUniforms)>("maxUniforms","maxUniforms");
+		addField<DAS_BIND_MANAGED_FIELD(maxOcclusionQueries)>("maxOcclusionQueries","maxOcclusionQueries");
+		addField<DAS_BIND_MANAGED_FIELD(maxEncoders)>("maxEncoders","maxEncoders");
+		addField<DAS_BIND_MANAGED_FIELD(minResourceCbSize)>("minResourceCbSize","minResourceCbSize");
+		addField<DAS_BIND_MANAGED_FIELD(transientVbSize)>("transientVbSize","transientVbSize");
+		addField<DAS_BIND_MANAGED_FIELD(transientIbSize)>("transientIbSize","transientIbSize");
+	}
+};
+#endif
+#ifdef GLOBAL_NAMESPACE
+struct bgfx_transient_index_buffer_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_transient_index_buffer_s> {
+	bgfx_transient_index_buffer_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_transient_index_buffer_s", ml) {
+	}
+	void init () {
+		addField<DAS_BIND_MANAGED_FIELD(data)>("data","data");
+		addField<DAS_BIND_MANAGED_FIELD(size)>("size","size");
+		addField<DAS_BIND_MANAGED_FIELD(startIndex)>("startIndex","startIndex");
+		addField<DAS_BIND_MANAGED_FIELD(handle)>("handle","handle");
+		addField<DAS_BIND_MANAGED_FIELD(isIndex16)>("isIndex16","isIndex16");
+	}
+};
+#endif
+#ifdef GLOBAL_NAMESPACE
+struct bgfx_allocator_vtbl_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_allocator_vtbl_s> {
+	bgfx_allocator_vtbl_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_allocator_vtbl_s", ml) {
+	}
+	void init () {
+		addField<DAS_BIND_MANAGED_FIELD(realloc)>("realloc","realloc");
+	}
+};
+#endif
+#ifdef GLOBAL_NAMESPACE
+struct bgfx_caps_gpu_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_caps_gpu_s> {
+	bgfx_caps_gpu_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_caps_gpu_s", ml) {
+	}
+	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(vendorId)>("vendorId","vendorId");
 		addField<DAS_BIND_MANAGED_FIELD(deviceId)>("deviceId","deviceId");
-		addField<DAS_BIND_MANAGED_FIELD(homogeneousDepth)>("homogeneousDepth","homogeneousDepth");
-		addField<DAS_BIND_MANAGED_FIELD(originBottomLeft)>("originBottomLeft","originBottomLeft");
-		addField<DAS_BIND_MANAGED_FIELD(numGPUs)>("numGPUs","numGPUs");
-		addField<DAS_BIND_MANAGED_FIELD(gpu)>("gpu","gpu");
-		addField<DAS_BIND_MANAGED_FIELD(limits)>("limits","limits");
-		addField<DAS_BIND_MANAGED_FIELD(formats)>("formats","formats");
 	}
 };
 #endif

@@ -74,6 +74,24 @@ def main
     // generate
     allow_extern_c = true
     var args <- get_command_line_arguments()
+    generate_split_functions = true
+    g_split_factor = 30
+    split_prefix = "{args[4]}_split"
+    split_cpp_prefix="
+#include \"daScript\/misc\/platform.h\"
+#include \"daScript\/daScript.h\"
+#include \"daScript\/ast\/ast_typefactory_bind.h\"
+#include \"need_bgfx.h\"
+#define GLOBAL_NAMESPACE
+using namespace das;
+namespace das \{
+void Module_BGFX::initFunctions_$$$() \{
+"
+
+    split_cpp_suffix="
+}
+}
+"
     bindHeaders(args[3], args[4])
 
     /*

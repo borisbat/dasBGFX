@@ -95,6 +95,7 @@ IF ((NOT DAS_BGFX_INCLUDED) AND ((NOT ${DAS_BGFX_DISABLED}) OR (NOT DEFINED DAS_
 	SET(DAS_BGFX_MODULE_SRC
 		${DAS_BGFX_DIR}/src/dasBGFX.h
 		${DAS_BGFX_DIR}/src/dasBGFX.cpp
+		${DAS_BGFX_DIR}/src/dasBGFX.func.cpp
 		${DAS_BGFX_DIR}/src/need_bgfx.h
 		${DAS_BGFX_DIR}/src/module_bgfx.ann.cpp_inc
 		${DAS_BGFX_DIR}/src/module_bgfx.ann.inc
@@ -103,6 +104,14 @@ IF ((NOT DAS_BGFX_INCLUDED) AND ((NOT ${DAS_BGFX_DISABLED}) OR (NOT DEFINED DAS_
 		${DAS_BGFX_DIR}/src/module_bgfx.h
 		${DAS_BGFX_DIR}/src/module_bgfx.inc
 		${DAS_BGFX_DIR}/src/module_bgfx.method.inc
+		#split
+		${DAS_BGFX_DIR}/src/module_bgfx_split_0.cpp
+		${DAS_BGFX_DIR}/src/module_bgfx_split_1.cpp
+		${DAS_BGFX_DIR}/src/module_bgfx_split_2.cpp
+		${DAS_BGFX_DIR}/src/module_bgfx_split_3.cpp
+		${DAS_BGFX_DIR}/src/module_bgfx_split_4.cpp
+		${DAS_BGFX_DIR}/src/module_bgfx_split_5.cpp
+		${DAS_BGFX_DIR}/src/module_bgfx_split_6.cpp
 	)
 
 	IF(APPLE)

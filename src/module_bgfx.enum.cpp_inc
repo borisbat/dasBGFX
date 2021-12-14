@@ -4,33 +4,49 @@
 
 #ifdef GLOBAL_NAMESPACE
 
-class Enumerationbgfx_view_mode : public das::Enumeration {
+class Enumerationbgfx_topology_sort : public das::Enumeration {
 public:
-    Enumerationbgfx_view_mode() : das::Enumeration("bgfx_view_mode") {
+    Enumerationbgfx_topology_sort() : das::Enumeration("bgfx_topology_sort") {
         external = true;
-        cppName = "bgfx_view_mode_t";
-        baseType = (das::Type) das::ToBasicType< das::underlying_type< bgfx_view_mode_t >::type >::type;
-		addIEx("DEFAULT", "BGFX_VIEW_MODE_DEFAULT", int64_t(bgfx_view_mode_t::BGFX_VIEW_MODE_DEFAULT), das::LineInfo());
-		addIEx("SEQUENTIAL", "BGFX_VIEW_MODE_SEQUENTIAL", int64_t(bgfx_view_mode_t::BGFX_VIEW_MODE_SEQUENTIAL), das::LineInfo());
-		addIEx("DEPTH_ASCENDING", "BGFX_VIEW_MODE_DEPTH_ASCENDING", int64_t(bgfx_view_mode_t::BGFX_VIEW_MODE_DEPTH_ASCENDING), das::LineInfo());
-		addIEx("DEPTH_DESCENDING", "BGFX_VIEW_MODE_DEPTH_DESCENDING", int64_t(bgfx_view_mode_t::BGFX_VIEW_MODE_DEPTH_DESCENDING), das::LineInfo());
-		addIEx("COUNT", "BGFX_VIEW_MODE_COUNT", int64_t(bgfx_view_mode_t::BGFX_VIEW_MODE_COUNT), das::LineInfo());
+        cppName = "bgfx_topology_sort_t";
+        baseType = (das::Type) das::ToBasicType< das::underlying_type< bgfx_topology_sort_t >::type >::type;
+		addIEx("DIRECTION_FRONT_TO_BACK_MIN", "BGFX_TOPOLOGY_SORT_DIRECTION_FRONT_TO_BACK_MIN", int64_t(bgfx_topology_sort_t::BGFX_TOPOLOGY_SORT_DIRECTION_FRONT_TO_BACK_MIN), das::LineInfo());
+		addIEx("DIRECTION_FRONT_TO_BACK_AVG", "BGFX_TOPOLOGY_SORT_DIRECTION_FRONT_TO_BACK_AVG", int64_t(bgfx_topology_sort_t::BGFX_TOPOLOGY_SORT_DIRECTION_FRONT_TO_BACK_AVG), das::LineInfo());
+		addIEx("DIRECTION_FRONT_TO_BACK_MAX", "BGFX_TOPOLOGY_SORT_DIRECTION_FRONT_TO_BACK_MAX", int64_t(bgfx_topology_sort_t::BGFX_TOPOLOGY_SORT_DIRECTION_FRONT_TO_BACK_MAX), das::LineInfo());
+		addIEx("DIRECTION_BACK_TO_FRONT_MIN", "BGFX_TOPOLOGY_SORT_DIRECTION_BACK_TO_FRONT_MIN", int64_t(bgfx_topology_sort_t::BGFX_TOPOLOGY_SORT_DIRECTION_BACK_TO_FRONT_MIN), das::LineInfo());
+		addIEx("DIRECTION_BACK_TO_FRONT_AVG", "BGFX_TOPOLOGY_SORT_DIRECTION_BACK_TO_FRONT_AVG", int64_t(bgfx_topology_sort_t::BGFX_TOPOLOGY_SORT_DIRECTION_BACK_TO_FRONT_AVG), das::LineInfo());
+		addIEx("DIRECTION_BACK_TO_FRONT_MAX", "BGFX_TOPOLOGY_SORT_DIRECTION_BACK_TO_FRONT_MAX", int64_t(bgfx_topology_sort_t::BGFX_TOPOLOGY_SORT_DIRECTION_BACK_TO_FRONT_MAX), das::LineInfo());
+		addIEx("DISTANCE_FRONT_TO_BACK_MIN", "BGFX_TOPOLOGY_SORT_DISTANCE_FRONT_TO_BACK_MIN", int64_t(bgfx_topology_sort_t::BGFX_TOPOLOGY_SORT_DISTANCE_FRONT_TO_BACK_MIN), das::LineInfo());
+		addIEx("DISTANCE_FRONT_TO_BACK_AVG", "BGFX_TOPOLOGY_SORT_DISTANCE_FRONT_TO_BACK_AVG", int64_t(bgfx_topology_sort_t::BGFX_TOPOLOGY_SORT_DISTANCE_FRONT_TO_BACK_AVG), das::LineInfo());
+		addIEx("DISTANCE_FRONT_TO_BACK_MAX", "BGFX_TOPOLOGY_SORT_DISTANCE_FRONT_TO_BACK_MAX", int64_t(bgfx_topology_sort_t::BGFX_TOPOLOGY_SORT_DISTANCE_FRONT_TO_BACK_MAX), das::LineInfo());
+		addIEx("DISTANCE_BACK_TO_FRONT_MIN", "BGFX_TOPOLOGY_SORT_DISTANCE_BACK_TO_FRONT_MIN", int64_t(bgfx_topology_sort_t::BGFX_TOPOLOGY_SORT_DISTANCE_BACK_TO_FRONT_MIN), das::LineInfo());
+		addIEx("DISTANCE_BACK_TO_FRONT_AVG", "BGFX_TOPOLOGY_SORT_DISTANCE_BACK_TO_FRONT_AVG", int64_t(bgfx_topology_sort_t::BGFX_TOPOLOGY_SORT_DISTANCE_BACK_TO_FRONT_AVG), das::LineInfo());
+		addIEx("DISTANCE_BACK_TO_FRONT_MAX", "BGFX_TOPOLOGY_SORT_DISTANCE_BACK_TO_FRONT_MAX", int64_t(bgfx_topology_sort_t::BGFX_TOPOLOGY_SORT_DISTANCE_BACK_TO_FRONT_MAX), das::LineInfo());
+		addIEx("COUNT", "BGFX_TOPOLOGY_SORT_COUNT", int64_t(bgfx_topology_sort_t::BGFX_TOPOLOGY_SORT_COUNT), das::LineInfo());
 	}
 };
 #endif
 #ifdef GLOBAL_NAMESPACE
 
-class Enumerationbgfx_render_frame : public das::Enumeration {
+class Enumerationbgfx_renderer_type : public das::Enumeration {
 public:
-    Enumerationbgfx_render_frame() : das::Enumeration("bgfx_render_frame") {
+    Enumerationbgfx_renderer_type() : das::Enumeration("bgfx_renderer_type") {
         external = true;
-        cppName = "bgfx_render_frame_t";
-        baseType = (das::Type) das::ToBasicType< das::underlying_type< bgfx_render_frame_t >::type >::type;
-		addIEx("NO_CONTEXT", "BGFX_RENDER_FRAME_NO_CONTEXT", int64_t(bgfx_render_frame_t::BGFX_RENDER_FRAME_NO_CONTEXT), das::LineInfo());
-		addIEx("RENDER", "BGFX_RENDER_FRAME_RENDER", int64_t(bgfx_render_frame_t::BGFX_RENDER_FRAME_RENDER), das::LineInfo());
-		addIEx("TIMEOUT", "BGFX_RENDER_FRAME_TIMEOUT", int64_t(bgfx_render_frame_t::BGFX_RENDER_FRAME_TIMEOUT), das::LineInfo());
-		addIEx("EXITING", "BGFX_RENDER_FRAME_EXITING", int64_t(bgfx_render_frame_t::BGFX_RENDER_FRAME_EXITING), das::LineInfo());
-		addIEx("COUNT", "BGFX_RENDER_FRAME_COUNT", int64_t(bgfx_render_frame_t::BGFX_RENDER_FRAME_COUNT), das::LineInfo());
+        cppName = "bgfx_renderer_type_t";
+        baseType = (das::Type) das::ToBasicType< das::underlying_type< bgfx_renderer_type_t >::type >::type;
+		addIEx("NOOP", "BGFX_RENDERER_TYPE_NOOP", int64_t(bgfx_renderer_type_t::BGFX_RENDERER_TYPE_NOOP), das::LineInfo());
+		addIEx("AGC", "BGFX_RENDERER_TYPE_AGC", int64_t(bgfx_renderer_type_t::BGFX_RENDERER_TYPE_AGC), das::LineInfo());
+		addIEx("DIRECT3D9", "BGFX_RENDERER_TYPE_DIRECT3D9", int64_t(bgfx_renderer_type_t::BGFX_RENDERER_TYPE_DIRECT3D9), das::LineInfo());
+		addIEx("DIRECT3D11", "BGFX_RENDERER_TYPE_DIRECT3D11", int64_t(bgfx_renderer_type_t::BGFX_RENDERER_TYPE_DIRECT3D11), das::LineInfo());
+		addIEx("DIRECT3D12", "BGFX_RENDERER_TYPE_DIRECT3D12", int64_t(bgfx_renderer_type_t::BGFX_RENDERER_TYPE_DIRECT3D12), das::LineInfo());
+		addIEx("GNM", "BGFX_RENDERER_TYPE_GNM", int64_t(bgfx_renderer_type_t::BGFX_RENDERER_TYPE_GNM), das::LineInfo());
+		addIEx("METAL", "BGFX_RENDERER_TYPE_METAL", int64_t(bgfx_renderer_type_t::BGFX_RENDERER_TYPE_METAL), das::LineInfo());
+		addIEx("NVN", "BGFX_RENDERER_TYPE_NVN", int64_t(bgfx_renderer_type_t::BGFX_RENDERER_TYPE_NVN), das::LineInfo());
+		addIEx("OPENGLES", "BGFX_RENDERER_TYPE_OPENGLES", int64_t(bgfx_renderer_type_t::BGFX_RENDERER_TYPE_OPENGLES), das::LineInfo());
+		addIEx("OPENGL", "BGFX_RENDERER_TYPE_OPENGL", int64_t(bgfx_renderer_type_t::BGFX_RENDERER_TYPE_OPENGL), das::LineInfo());
+		addIEx("VULKAN", "BGFX_RENDERER_TYPE_VULKAN", int64_t(bgfx_renderer_type_t::BGFX_RENDERER_TYPE_VULKAN), das::LineInfo());
+		addIEx("WEBGPU", "BGFX_RENDERER_TYPE_WEBGPU", int64_t(bgfx_renderer_type_t::BGFX_RENDERER_TYPE_WEBGPU), das::LineInfo());
+		addIEx("COUNT", "BGFX_RENDERER_TYPE_COUNT", int64_t(bgfx_renderer_type_t::BGFX_RENDERER_TYPE_COUNT), das::LineInfo());
 	}
 };
 #endif
@@ -51,18 +67,46 @@ public:
 #endif
 #ifdef GLOBAL_NAMESPACE
 
-class Enumerationbgfx_uniform_type : public das::Enumeration {
+class Enumerationbgfx_occlusion_query_result : public das::Enumeration {
 public:
-    Enumerationbgfx_uniform_type() : das::Enumeration("bgfx_uniform_type") {
+    Enumerationbgfx_occlusion_query_result() : das::Enumeration("bgfx_occlusion_query_result") {
         external = true;
-        cppName = "bgfx_uniform_type_t";
-        baseType = (das::Type) das::ToBasicType< das::underlying_type< bgfx_uniform_type_t >::type >::type;
-		addIEx("SAMPLER", "BGFX_UNIFORM_TYPE_SAMPLER", int64_t(bgfx_uniform_type_t::BGFX_UNIFORM_TYPE_SAMPLER), das::LineInfo());
-		addIEx("END", "BGFX_UNIFORM_TYPE_END", int64_t(bgfx_uniform_type_t::BGFX_UNIFORM_TYPE_END), das::LineInfo());
-		addIEx("VEC4", "BGFX_UNIFORM_TYPE_VEC4", int64_t(bgfx_uniform_type_t::BGFX_UNIFORM_TYPE_VEC4), das::LineInfo());
-		addIEx("MAT3", "BGFX_UNIFORM_TYPE_MAT3", int64_t(bgfx_uniform_type_t::BGFX_UNIFORM_TYPE_MAT3), das::LineInfo());
-		addIEx("MAT4", "BGFX_UNIFORM_TYPE_MAT4", int64_t(bgfx_uniform_type_t::BGFX_UNIFORM_TYPE_MAT4), das::LineInfo());
-		addIEx("COUNT", "BGFX_UNIFORM_TYPE_COUNT", int64_t(bgfx_uniform_type_t::BGFX_UNIFORM_TYPE_COUNT), das::LineInfo());
+        cppName = "bgfx_occlusion_query_result_t";
+        baseType = (das::Type) das::ToBasicType< das::underlying_type< bgfx_occlusion_query_result_t >::type >::type;
+		addIEx("INVISIBLE", "BGFX_OCCLUSION_QUERY_RESULT_INVISIBLE", int64_t(bgfx_occlusion_query_result_t::BGFX_OCCLUSION_QUERY_RESULT_INVISIBLE), das::LineInfo());
+		addIEx("VISIBLE", "BGFX_OCCLUSION_QUERY_RESULT_VISIBLE", int64_t(bgfx_occlusion_query_result_t::BGFX_OCCLUSION_QUERY_RESULT_VISIBLE), das::LineInfo());
+		addIEx("NORESULT", "BGFX_OCCLUSION_QUERY_RESULT_NORESULT", int64_t(bgfx_occlusion_query_result_t::BGFX_OCCLUSION_QUERY_RESULT_NORESULT), das::LineInfo());
+		addIEx("COUNT", "BGFX_OCCLUSION_QUERY_RESULT_COUNT", int64_t(bgfx_occlusion_query_result_t::BGFX_OCCLUSION_QUERY_RESULT_COUNT), das::LineInfo());
+	}
+};
+#endif
+#ifdef GLOBAL_NAMESPACE
+
+class Enumerationbgfx_attrib : public das::Enumeration {
+public:
+    Enumerationbgfx_attrib() : das::Enumeration("bgfx_attrib") {
+        external = true;
+        cppName = "bgfx_attrib_t";
+        baseType = (das::Type) das::ToBasicType< das::underlying_type< bgfx_attrib_t >::type >::type;
+		addIEx("POSITION", "BGFX_ATTRIB_POSITION", int64_t(bgfx_attrib_t::BGFX_ATTRIB_POSITION), das::LineInfo());
+		addIEx("NORMAL", "BGFX_ATTRIB_NORMAL", int64_t(bgfx_attrib_t::BGFX_ATTRIB_NORMAL), das::LineInfo());
+		addIEx("TANGENT", "BGFX_ATTRIB_TANGENT", int64_t(bgfx_attrib_t::BGFX_ATTRIB_TANGENT), das::LineInfo());
+		addIEx("BITANGENT", "BGFX_ATTRIB_BITANGENT", int64_t(bgfx_attrib_t::BGFX_ATTRIB_BITANGENT), das::LineInfo());
+		addIEx("COLOR0", "BGFX_ATTRIB_COLOR0", int64_t(bgfx_attrib_t::BGFX_ATTRIB_COLOR0), das::LineInfo());
+		addIEx("COLOR1", "BGFX_ATTRIB_COLOR1", int64_t(bgfx_attrib_t::BGFX_ATTRIB_COLOR1), das::LineInfo());
+		addIEx("COLOR2", "BGFX_ATTRIB_COLOR2", int64_t(bgfx_attrib_t::BGFX_ATTRIB_COLOR2), das::LineInfo());
+		addIEx("COLOR3", "BGFX_ATTRIB_COLOR3", int64_t(bgfx_attrib_t::BGFX_ATTRIB_COLOR3), das::LineInfo());
+		addIEx("INDICES", "BGFX_ATTRIB_INDICES", int64_t(bgfx_attrib_t::BGFX_ATTRIB_INDICES), das::LineInfo());
+		addIEx("WEIGHT", "BGFX_ATTRIB_WEIGHT", int64_t(bgfx_attrib_t::BGFX_ATTRIB_WEIGHT), das::LineInfo());
+		addIEx("TEXCOORD0", "BGFX_ATTRIB_TEXCOORD0", int64_t(bgfx_attrib_t::BGFX_ATTRIB_TEXCOORD0), das::LineInfo());
+		addIEx("TEXCOORD1", "BGFX_ATTRIB_TEXCOORD1", int64_t(bgfx_attrib_t::BGFX_ATTRIB_TEXCOORD1), das::LineInfo());
+		addIEx("TEXCOORD2", "BGFX_ATTRIB_TEXCOORD2", int64_t(bgfx_attrib_t::BGFX_ATTRIB_TEXCOORD2), das::LineInfo());
+		addIEx("TEXCOORD3", "BGFX_ATTRIB_TEXCOORD3", int64_t(bgfx_attrib_t::BGFX_ATTRIB_TEXCOORD3), das::LineInfo());
+		addIEx("TEXCOORD4", "BGFX_ATTRIB_TEXCOORD4", int64_t(bgfx_attrib_t::BGFX_ATTRIB_TEXCOORD4), das::LineInfo());
+		addIEx("TEXCOORD5", "BGFX_ATTRIB_TEXCOORD5", int64_t(bgfx_attrib_t::BGFX_ATTRIB_TEXCOORD5), das::LineInfo());
+		addIEx("TEXCOORD6", "BGFX_ATTRIB_TEXCOORD6", int64_t(bgfx_attrib_t::BGFX_ATTRIB_TEXCOORD6), das::LineInfo());
+		addIEx("TEXCOORD7", "BGFX_ATTRIB_TEXCOORD7", int64_t(bgfx_attrib_t::BGFX_ATTRIB_TEXCOORD7), das::LineInfo());
+		addIEx("COUNT", "BGFX_ATTRIB_COUNT", int64_t(bgfx_attrib_t::BGFX_ATTRIB_COUNT), das::LineInfo());
 	}
 };
 #endif
@@ -85,23 +129,6 @@ public:
 #endif
 #ifdef GLOBAL_NAMESPACE
 
-class Enumerationbgfx_fatal : public das::Enumeration {
-public:
-    Enumerationbgfx_fatal() : das::Enumeration("bgfx_fatal") {
-        external = true;
-        cppName = "bgfx_fatal_t";
-        baseType = (das::Type) das::ToBasicType< das::underlying_type< bgfx_fatal_t >::type >::type;
-		addIEx("DEBUG_CHECK", "BGFX_FATAL_DEBUG_CHECK", int64_t(bgfx_fatal_t::BGFX_FATAL_DEBUG_CHECK), das::LineInfo());
-		addIEx("INVALID_SHADER", "BGFX_FATAL_INVALID_SHADER", int64_t(bgfx_fatal_t::BGFX_FATAL_INVALID_SHADER), das::LineInfo());
-		addIEx("UNABLE_TO_INITIALIZE", "BGFX_FATAL_UNABLE_TO_INITIALIZE", int64_t(bgfx_fatal_t::BGFX_FATAL_UNABLE_TO_INITIALIZE), das::LineInfo());
-		addIEx("UNABLE_TO_CREATE_TEXTURE", "BGFX_FATAL_UNABLE_TO_CREATE_TEXTURE", int64_t(bgfx_fatal_t::BGFX_FATAL_UNABLE_TO_CREATE_TEXTURE), das::LineInfo());
-		addIEx("DEVICE_LOST", "BGFX_FATAL_DEVICE_LOST", int64_t(bgfx_fatal_t::BGFX_FATAL_DEVICE_LOST), das::LineInfo());
-		addIEx("COUNT", "BGFX_FATAL_COUNT", int64_t(bgfx_fatal_t::BGFX_FATAL_COUNT), das::LineInfo());
-	}
-};
-#endif
-#ifdef GLOBAL_NAMESPACE
-
 class Enumerationbgfx_topology_convert : public das::Enumeration {
 public:
     Enumerationbgfx_topology_convert() : das::Enumeration("bgfx_topology_convert") {
@@ -119,25 +146,68 @@ public:
 #endif
 #ifdef GLOBAL_NAMESPACE
 
-class Enumerationbgfx_topology_sort : public das::Enumeration {
+class Enumerationbgfx_view_mode : public das::Enumeration {
 public:
-    Enumerationbgfx_topology_sort() : das::Enumeration("bgfx_topology_sort") {
+    Enumerationbgfx_view_mode() : das::Enumeration("bgfx_view_mode") {
         external = true;
-        cppName = "bgfx_topology_sort_t";
-        baseType = (das::Type) das::ToBasicType< das::underlying_type< bgfx_topology_sort_t >::type >::type;
-		addIEx("DIRECTION_FRONT_TO_BACK_MIN", "BGFX_TOPOLOGY_SORT_DIRECTION_FRONT_TO_BACK_MIN", int64_t(bgfx_topology_sort_t::BGFX_TOPOLOGY_SORT_DIRECTION_FRONT_TO_BACK_MIN), das::LineInfo());
-		addIEx("DIRECTION_FRONT_TO_BACK_AVG", "BGFX_TOPOLOGY_SORT_DIRECTION_FRONT_TO_BACK_AVG", int64_t(bgfx_topology_sort_t::BGFX_TOPOLOGY_SORT_DIRECTION_FRONT_TO_BACK_AVG), das::LineInfo());
-		addIEx("DIRECTION_FRONT_TO_BACK_MAX", "BGFX_TOPOLOGY_SORT_DIRECTION_FRONT_TO_BACK_MAX", int64_t(bgfx_topology_sort_t::BGFX_TOPOLOGY_SORT_DIRECTION_FRONT_TO_BACK_MAX), das::LineInfo());
-		addIEx("DIRECTION_BACK_TO_FRONT_MIN", "BGFX_TOPOLOGY_SORT_DIRECTION_BACK_TO_FRONT_MIN", int64_t(bgfx_topology_sort_t::BGFX_TOPOLOGY_SORT_DIRECTION_BACK_TO_FRONT_MIN), das::LineInfo());
-		addIEx("DIRECTION_BACK_TO_FRONT_AVG", "BGFX_TOPOLOGY_SORT_DIRECTION_BACK_TO_FRONT_AVG", int64_t(bgfx_topology_sort_t::BGFX_TOPOLOGY_SORT_DIRECTION_BACK_TO_FRONT_AVG), das::LineInfo());
-		addIEx("DIRECTION_BACK_TO_FRONT_MAX", "BGFX_TOPOLOGY_SORT_DIRECTION_BACK_TO_FRONT_MAX", int64_t(bgfx_topology_sort_t::BGFX_TOPOLOGY_SORT_DIRECTION_BACK_TO_FRONT_MAX), das::LineInfo());
-		addIEx("DISTANCE_FRONT_TO_BACK_MIN", "BGFX_TOPOLOGY_SORT_DISTANCE_FRONT_TO_BACK_MIN", int64_t(bgfx_topology_sort_t::BGFX_TOPOLOGY_SORT_DISTANCE_FRONT_TO_BACK_MIN), das::LineInfo());
-		addIEx("DISTANCE_FRONT_TO_BACK_AVG", "BGFX_TOPOLOGY_SORT_DISTANCE_FRONT_TO_BACK_AVG", int64_t(bgfx_topology_sort_t::BGFX_TOPOLOGY_SORT_DISTANCE_FRONT_TO_BACK_AVG), das::LineInfo());
-		addIEx("DISTANCE_FRONT_TO_BACK_MAX", "BGFX_TOPOLOGY_SORT_DISTANCE_FRONT_TO_BACK_MAX", int64_t(bgfx_topology_sort_t::BGFX_TOPOLOGY_SORT_DISTANCE_FRONT_TO_BACK_MAX), das::LineInfo());
-		addIEx("DISTANCE_BACK_TO_FRONT_MIN", "BGFX_TOPOLOGY_SORT_DISTANCE_BACK_TO_FRONT_MIN", int64_t(bgfx_topology_sort_t::BGFX_TOPOLOGY_SORT_DISTANCE_BACK_TO_FRONT_MIN), das::LineInfo());
-		addIEx("DISTANCE_BACK_TO_FRONT_AVG", "BGFX_TOPOLOGY_SORT_DISTANCE_BACK_TO_FRONT_AVG", int64_t(bgfx_topology_sort_t::BGFX_TOPOLOGY_SORT_DISTANCE_BACK_TO_FRONT_AVG), das::LineInfo());
-		addIEx("DISTANCE_BACK_TO_FRONT_MAX", "BGFX_TOPOLOGY_SORT_DISTANCE_BACK_TO_FRONT_MAX", int64_t(bgfx_topology_sort_t::BGFX_TOPOLOGY_SORT_DISTANCE_BACK_TO_FRONT_MAX), das::LineInfo());
-		addIEx("COUNT", "BGFX_TOPOLOGY_SORT_COUNT", int64_t(bgfx_topology_sort_t::BGFX_TOPOLOGY_SORT_COUNT), das::LineInfo());
+        cppName = "bgfx_view_mode_t";
+        baseType = (das::Type) das::ToBasicType< das::underlying_type< bgfx_view_mode_t >::type >::type;
+		addIEx("DEFAULT", "BGFX_VIEW_MODE_DEFAULT", int64_t(bgfx_view_mode_t::BGFX_VIEW_MODE_DEFAULT), das::LineInfo());
+		addIEx("SEQUENTIAL", "BGFX_VIEW_MODE_SEQUENTIAL", int64_t(bgfx_view_mode_t::BGFX_VIEW_MODE_SEQUENTIAL), das::LineInfo());
+		addIEx("DEPTH_ASCENDING", "BGFX_VIEW_MODE_DEPTH_ASCENDING", int64_t(bgfx_view_mode_t::BGFX_VIEW_MODE_DEPTH_ASCENDING), das::LineInfo());
+		addIEx("DEPTH_DESCENDING", "BGFX_VIEW_MODE_DEPTH_DESCENDING", int64_t(bgfx_view_mode_t::BGFX_VIEW_MODE_DEPTH_DESCENDING), das::LineInfo());
+		addIEx("COUNT", "BGFX_VIEW_MODE_COUNT", int64_t(bgfx_view_mode_t::BGFX_VIEW_MODE_COUNT), das::LineInfo());
+	}
+};
+#endif
+#ifdef GLOBAL_NAMESPACE
+
+class Enumerationbgfx_backbuffer_ratio : public das::Enumeration {
+public:
+    Enumerationbgfx_backbuffer_ratio() : das::Enumeration("bgfx_backbuffer_ratio") {
+        external = true;
+        cppName = "bgfx_backbuffer_ratio_t";
+        baseType = (das::Type) das::ToBasicType< das::underlying_type< bgfx_backbuffer_ratio_t >::type >::type;
+		addIEx("EQUAL", "BGFX_BACKBUFFER_RATIO_EQUAL", int64_t(bgfx_backbuffer_ratio_t::BGFX_BACKBUFFER_RATIO_EQUAL), das::LineInfo());
+		addIEx("HALF", "BGFX_BACKBUFFER_RATIO_HALF", int64_t(bgfx_backbuffer_ratio_t::BGFX_BACKBUFFER_RATIO_HALF), das::LineInfo());
+		addIEx("QUARTER", "BGFX_BACKBUFFER_RATIO_QUARTER", int64_t(bgfx_backbuffer_ratio_t::BGFX_BACKBUFFER_RATIO_QUARTER), das::LineInfo());
+		addIEx("EIGHTH", "BGFX_BACKBUFFER_RATIO_EIGHTH", int64_t(bgfx_backbuffer_ratio_t::BGFX_BACKBUFFER_RATIO_EIGHTH), das::LineInfo());
+		addIEx("SIXTEENTH", "BGFX_BACKBUFFER_RATIO_SIXTEENTH", int64_t(bgfx_backbuffer_ratio_t::BGFX_BACKBUFFER_RATIO_SIXTEENTH), das::LineInfo());
+		addIEx("DOUBLE", "BGFX_BACKBUFFER_RATIO_DOUBLE", int64_t(bgfx_backbuffer_ratio_t::BGFX_BACKBUFFER_RATIO_DOUBLE), das::LineInfo());
+		addIEx("COUNT", "BGFX_BACKBUFFER_RATIO_COUNT", int64_t(bgfx_backbuffer_ratio_t::BGFX_BACKBUFFER_RATIO_COUNT), das::LineInfo());
+	}
+};
+#endif
+#ifdef GLOBAL_NAMESPACE
+
+class Enumerationbgfx_render_frame : public das::Enumeration {
+public:
+    Enumerationbgfx_render_frame() : das::Enumeration("bgfx_render_frame") {
+        external = true;
+        cppName = "bgfx_render_frame_t";
+        baseType = (das::Type) das::ToBasicType< das::underlying_type< bgfx_render_frame_t >::type >::type;
+		addIEx("NO_CONTEXT", "BGFX_RENDER_FRAME_NO_CONTEXT", int64_t(bgfx_render_frame_t::BGFX_RENDER_FRAME_NO_CONTEXT), das::LineInfo());
+		addIEx("RENDER", "BGFX_RENDER_FRAME_RENDER", int64_t(bgfx_render_frame_t::BGFX_RENDER_FRAME_RENDER), das::LineInfo());
+		addIEx("TIMEOUT", "BGFX_RENDER_FRAME_TIMEOUT", int64_t(bgfx_render_frame_t::BGFX_RENDER_FRAME_TIMEOUT), das::LineInfo());
+		addIEx("EXITING", "BGFX_RENDER_FRAME_EXITING", int64_t(bgfx_render_frame_t::BGFX_RENDER_FRAME_EXITING), das::LineInfo());
+		addIEx("COUNT", "BGFX_RENDER_FRAME_COUNT", int64_t(bgfx_render_frame_t::BGFX_RENDER_FRAME_COUNT), das::LineInfo());
+	}
+};
+#endif
+#ifdef GLOBAL_NAMESPACE
+
+class Enumerationbgfx_attrib_type : public das::Enumeration {
+public:
+    Enumerationbgfx_attrib_type() : das::Enumeration("bgfx_attrib_type") {
+        external = true;
+        cppName = "bgfx_attrib_type_t";
+        baseType = (das::Type) das::ToBasicType< das::underlying_type< bgfx_attrib_type_t >::type >::type;
+		addIEx("UINT8", "BGFX_ATTRIB_TYPE_UINT8", int64_t(bgfx_attrib_type_t::BGFX_ATTRIB_TYPE_UINT8), das::LineInfo());
+		addIEx("UINT10", "BGFX_ATTRIB_TYPE_UINT10", int64_t(bgfx_attrib_type_t::BGFX_ATTRIB_TYPE_UINT10), das::LineInfo());
+		addIEx("INT16", "BGFX_ATTRIB_TYPE_INT16", int64_t(bgfx_attrib_type_t::BGFX_ATTRIB_TYPE_INT16), das::LineInfo());
+		addIEx("HALF", "BGFX_ATTRIB_TYPE_HALF", int64_t(bgfx_attrib_type_t::BGFX_ATTRIB_TYPE_HALF), das::LineInfo());
+		addIEx("FLOAT", "BGFX_ATTRIB_TYPE_FLOAT", int64_t(bgfx_attrib_type_t::BGFX_ATTRIB_TYPE_FLOAT), das::LineInfo());
+		addIEx("COUNT", "BGFX_ATTRIB_TYPE_COUNT", int64_t(bgfx_attrib_type_t::BGFX_ATTRIB_TYPE_COUNT), das::LineInfo());
 	}
 };
 #endif
@@ -347,36 +417,6 @@ public:
 #endif
 #ifdef GLOBAL_NAMESPACE
 
-class Enumerationbgfx_attrib : public das::Enumeration {
-public:
-    Enumerationbgfx_attrib() : das::Enumeration("bgfx_attrib") {
-        external = true;
-        cppName = "bgfx_attrib_t";
-        baseType = (das::Type) das::ToBasicType< das::underlying_type< bgfx_attrib_t >::type >::type;
-		addIEx("POSITION", "BGFX_ATTRIB_POSITION", int64_t(bgfx_attrib_t::BGFX_ATTRIB_POSITION), das::LineInfo());
-		addIEx("NORMAL", "BGFX_ATTRIB_NORMAL", int64_t(bgfx_attrib_t::BGFX_ATTRIB_NORMAL), das::LineInfo());
-		addIEx("TANGENT", "BGFX_ATTRIB_TANGENT", int64_t(bgfx_attrib_t::BGFX_ATTRIB_TANGENT), das::LineInfo());
-		addIEx("BITANGENT", "BGFX_ATTRIB_BITANGENT", int64_t(bgfx_attrib_t::BGFX_ATTRIB_BITANGENT), das::LineInfo());
-		addIEx("COLOR0", "BGFX_ATTRIB_COLOR0", int64_t(bgfx_attrib_t::BGFX_ATTRIB_COLOR0), das::LineInfo());
-		addIEx("COLOR1", "BGFX_ATTRIB_COLOR1", int64_t(bgfx_attrib_t::BGFX_ATTRIB_COLOR1), das::LineInfo());
-		addIEx("COLOR2", "BGFX_ATTRIB_COLOR2", int64_t(bgfx_attrib_t::BGFX_ATTRIB_COLOR2), das::LineInfo());
-		addIEx("COLOR3", "BGFX_ATTRIB_COLOR3", int64_t(bgfx_attrib_t::BGFX_ATTRIB_COLOR3), das::LineInfo());
-		addIEx("INDICES", "BGFX_ATTRIB_INDICES", int64_t(bgfx_attrib_t::BGFX_ATTRIB_INDICES), das::LineInfo());
-		addIEx("WEIGHT", "BGFX_ATTRIB_WEIGHT", int64_t(bgfx_attrib_t::BGFX_ATTRIB_WEIGHT), das::LineInfo());
-		addIEx("TEXCOORD0", "BGFX_ATTRIB_TEXCOORD0", int64_t(bgfx_attrib_t::BGFX_ATTRIB_TEXCOORD0), das::LineInfo());
-		addIEx("TEXCOORD1", "BGFX_ATTRIB_TEXCOORD1", int64_t(bgfx_attrib_t::BGFX_ATTRIB_TEXCOORD1), das::LineInfo());
-		addIEx("TEXCOORD2", "BGFX_ATTRIB_TEXCOORD2", int64_t(bgfx_attrib_t::BGFX_ATTRIB_TEXCOORD2), das::LineInfo());
-		addIEx("TEXCOORD3", "BGFX_ATTRIB_TEXCOORD3", int64_t(bgfx_attrib_t::BGFX_ATTRIB_TEXCOORD3), das::LineInfo());
-		addIEx("TEXCOORD4", "BGFX_ATTRIB_TEXCOORD4", int64_t(bgfx_attrib_t::BGFX_ATTRIB_TEXCOORD4), das::LineInfo());
-		addIEx("TEXCOORD5", "BGFX_ATTRIB_TEXCOORD5", int64_t(bgfx_attrib_t::BGFX_ATTRIB_TEXCOORD5), das::LineInfo());
-		addIEx("TEXCOORD6", "BGFX_ATTRIB_TEXCOORD6", int64_t(bgfx_attrib_t::BGFX_ATTRIB_TEXCOORD6), das::LineInfo());
-		addIEx("TEXCOORD7", "BGFX_ATTRIB_TEXCOORD7", int64_t(bgfx_attrib_t::BGFX_ATTRIB_TEXCOORD7), das::LineInfo());
-		addIEx("COUNT", "BGFX_ATTRIB_COUNT", int64_t(bgfx_attrib_t::BGFX_ATTRIB_COUNT), das::LineInfo());
-	}
-};
-#endif
-#ifdef GLOBAL_NAMESPACE
-
 class Enumerationbgfx_texture_format : public das::Enumeration {
 public:
     Enumerationbgfx_texture_format() : das::Enumeration("bgfx_texture_format") {
@@ -474,75 +514,35 @@ public:
 #endif
 #ifdef GLOBAL_NAMESPACE
 
-class Enumerationbgfx_attrib_type : public das::Enumeration {
+class Enumerationbgfx_uniform_type : public das::Enumeration {
 public:
-    Enumerationbgfx_attrib_type() : das::Enumeration("bgfx_attrib_type") {
+    Enumerationbgfx_uniform_type() : das::Enumeration("bgfx_uniform_type") {
         external = true;
-        cppName = "bgfx_attrib_type_t";
-        baseType = (das::Type) das::ToBasicType< das::underlying_type< bgfx_attrib_type_t >::type >::type;
-		addIEx("UINT8", "BGFX_ATTRIB_TYPE_UINT8", int64_t(bgfx_attrib_type_t::BGFX_ATTRIB_TYPE_UINT8), das::LineInfo());
-		addIEx("UINT10", "BGFX_ATTRIB_TYPE_UINT10", int64_t(bgfx_attrib_type_t::BGFX_ATTRIB_TYPE_UINT10), das::LineInfo());
-		addIEx("INT16", "BGFX_ATTRIB_TYPE_INT16", int64_t(bgfx_attrib_type_t::BGFX_ATTRIB_TYPE_INT16), das::LineInfo());
-		addIEx("HALF", "BGFX_ATTRIB_TYPE_HALF", int64_t(bgfx_attrib_type_t::BGFX_ATTRIB_TYPE_HALF), das::LineInfo());
-		addIEx("FLOAT", "BGFX_ATTRIB_TYPE_FLOAT", int64_t(bgfx_attrib_type_t::BGFX_ATTRIB_TYPE_FLOAT), das::LineInfo());
-		addIEx("COUNT", "BGFX_ATTRIB_TYPE_COUNT", int64_t(bgfx_attrib_type_t::BGFX_ATTRIB_TYPE_COUNT), das::LineInfo());
+        cppName = "bgfx_uniform_type_t";
+        baseType = (das::Type) das::ToBasicType< das::underlying_type< bgfx_uniform_type_t >::type >::type;
+		addIEx("SAMPLER", "BGFX_UNIFORM_TYPE_SAMPLER", int64_t(bgfx_uniform_type_t::BGFX_UNIFORM_TYPE_SAMPLER), das::LineInfo());
+		addIEx("END", "BGFX_UNIFORM_TYPE_END", int64_t(bgfx_uniform_type_t::BGFX_UNIFORM_TYPE_END), das::LineInfo());
+		addIEx("VEC4", "BGFX_UNIFORM_TYPE_VEC4", int64_t(bgfx_uniform_type_t::BGFX_UNIFORM_TYPE_VEC4), das::LineInfo());
+		addIEx("MAT3", "BGFX_UNIFORM_TYPE_MAT3", int64_t(bgfx_uniform_type_t::BGFX_UNIFORM_TYPE_MAT3), das::LineInfo());
+		addIEx("MAT4", "BGFX_UNIFORM_TYPE_MAT4", int64_t(bgfx_uniform_type_t::BGFX_UNIFORM_TYPE_MAT4), das::LineInfo());
+		addIEx("COUNT", "BGFX_UNIFORM_TYPE_COUNT", int64_t(bgfx_uniform_type_t::BGFX_UNIFORM_TYPE_COUNT), das::LineInfo());
 	}
 };
 #endif
 #ifdef GLOBAL_NAMESPACE
 
-class Enumerationbgfx_occlusion_query_result : public das::Enumeration {
+class Enumerationbgfx_fatal : public das::Enumeration {
 public:
-    Enumerationbgfx_occlusion_query_result() : das::Enumeration("bgfx_occlusion_query_result") {
+    Enumerationbgfx_fatal() : das::Enumeration("bgfx_fatal") {
         external = true;
-        cppName = "bgfx_occlusion_query_result_t";
-        baseType = (das::Type) das::ToBasicType< das::underlying_type< bgfx_occlusion_query_result_t >::type >::type;
-		addIEx("INVISIBLE", "BGFX_OCCLUSION_QUERY_RESULT_INVISIBLE", int64_t(bgfx_occlusion_query_result_t::BGFX_OCCLUSION_QUERY_RESULT_INVISIBLE), das::LineInfo());
-		addIEx("VISIBLE", "BGFX_OCCLUSION_QUERY_RESULT_VISIBLE", int64_t(bgfx_occlusion_query_result_t::BGFX_OCCLUSION_QUERY_RESULT_VISIBLE), das::LineInfo());
-		addIEx("NORESULT", "BGFX_OCCLUSION_QUERY_RESULT_NORESULT", int64_t(bgfx_occlusion_query_result_t::BGFX_OCCLUSION_QUERY_RESULT_NORESULT), das::LineInfo());
-		addIEx("COUNT", "BGFX_OCCLUSION_QUERY_RESULT_COUNT", int64_t(bgfx_occlusion_query_result_t::BGFX_OCCLUSION_QUERY_RESULT_COUNT), das::LineInfo());
-	}
-};
-#endif
-#ifdef GLOBAL_NAMESPACE
-
-class Enumerationbgfx_renderer_type : public das::Enumeration {
-public:
-    Enumerationbgfx_renderer_type() : das::Enumeration("bgfx_renderer_type") {
-        external = true;
-        cppName = "bgfx_renderer_type_t";
-        baseType = (das::Type) das::ToBasicType< das::underlying_type< bgfx_renderer_type_t >::type >::type;
-		addIEx("NOOP", "BGFX_RENDERER_TYPE_NOOP", int64_t(bgfx_renderer_type_t::BGFX_RENDERER_TYPE_NOOP), das::LineInfo());
-		addIEx("AGC", "BGFX_RENDERER_TYPE_AGC", int64_t(bgfx_renderer_type_t::BGFX_RENDERER_TYPE_AGC), das::LineInfo());
-		addIEx("DIRECT3D9", "BGFX_RENDERER_TYPE_DIRECT3D9", int64_t(bgfx_renderer_type_t::BGFX_RENDERER_TYPE_DIRECT3D9), das::LineInfo());
-		addIEx("DIRECT3D11", "BGFX_RENDERER_TYPE_DIRECT3D11", int64_t(bgfx_renderer_type_t::BGFX_RENDERER_TYPE_DIRECT3D11), das::LineInfo());
-		addIEx("DIRECT3D12", "BGFX_RENDERER_TYPE_DIRECT3D12", int64_t(bgfx_renderer_type_t::BGFX_RENDERER_TYPE_DIRECT3D12), das::LineInfo());
-		addIEx("GNM", "BGFX_RENDERER_TYPE_GNM", int64_t(bgfx_renderer_type_t::BGFX_RENDERER_TYPE_GNM), das::LineInfo());
-		addIEx("METAL", "BGFX_RENDERER_TYPE_METAL", int64_t(bgfx_renderer_type_t::BGFX_RENDERER_TYPE_METAL), das::LineInfo());
-		addIEx("NVN", "BGFX_RENDERER_TYPE_NVN", int64_t(bgfx_renderer_type_t::BGFX_RENDERER_TYPE_NVN), das::LineInfo());
-		addIEx("OPENGLES", "BGFX_RENDERER_TYPE_OPENGLES", int64_t(bgfx_renderer_type_t::BGFX_RENDERER_TYPE_OPENGLES), das::LineInfo());
-		addIEx("OPENGL", "BGFX_RENDERER_TYPE_OPENGL", int64_t(bgfx_renderer_type_t::BGFX_RENDERER_TYPE_OPENGL), das::LineInfo());
-		addIEx("VULKAN", "BGFX_RENDERER_TYPE_VULKAN", int64_t(bgfx_renderer_type_t::BGFX_RENDERER_TYPE_VULKAN), das::LineInfo());
-		addIEx("WEBGPU", "BGFX_RENDERER_TYPE_WEBGPU", int64_t(bgfx_renderer_type_t::BGFX_RENDERER_TYPE_WEBGPU), das::LineInfo());
-		addIEx("COUNT", "BGFX_RENDERER_TYPE_COUNT", int64_t(bgfx_renderer_type_t::BGFX_RENDERER_TYPE_COUNT), das::LineInfo());
-	}
-};
-#endif
-#ifdef GLOBAL_NAMESPACE
-
-class Enumerationbgfx_backbuffer_ratio : public das::Enumeration {
-public:
-    Enumerationbgfx_backbuffer_ratio() : das::Enumeration("bgfx_backbuffer_ratio") {
-        external = true;
-        cppName = "bgfx_backbuffer_ratio_t";
-        baseType = (das::Type) das::ToBasicType< das::underlying_type< bgfx_backbuffer_ratio_t >::type >::type;
-		addIEx("EQUAL", "BGFX_BACKBUFFER_RATIO_EQUAL", int64_t(bgfx_backbuffer_ratio_t::BGFX_BACKBUFFER_RATIO_EQUAL), das::LineInfo());
-		addIEx("HALF", "BGFX_BACKBUFFER_RATIO_HALF", int64_t(bgfx_backbuffer_ratio_t::BGFX_BACKBUFFER_RATIO_HALF), das::LineInfo());
-		addIEx("QUARTER", "BGFX_BACKBUFFER_RATIO_QUARTER", int64_t(bgfx_backbuffer_ratio_t::BGFX_BACKBUFFER_RATIO_QUARTER), das::LineInfo());
-		addIEx("EIGHTH", "BGFX_BACKBUFFER_RATIO_EIGHTH", int64_t(bgfx_backbuffer_ratio_t::BGFX_BACKBUFFER_RATIO_EIGHTH), das::LineInfo());
-		addIEx("SIXTEENTH", "BGFX_BACKBUFFER_RATIO_SIXTEENTH", int64_t(bgfx_backbuffer_ratio_t::BGFX_BACKBUFFER_RATIO_SIXTEENTH), das::LineInfo());
-		addIEx("DOUBLE", "BGFX_BACKBUFFER_RATIO_DOUBLE", int64_t(bgfx_backbuffer_ratio_t::BGFX_BACKBUFFER_RATIO_DOUBLE), das::LineInfo());
-		addIEx("COUNT", "BGFX_BACKBUFFER_RATIO_COUNT", int64_t(bgfx_backbuffer_ratio_t::BGFX_BACKBUFFER_RATIO_COUNT), das::LineInfo());
+        cppName = "bgfx_fatal_t";
+        baseType = (das::Type) das::ToBasicType< das::underlying_type< bgfx_fatal_t >::type >::type;
+		addIEx("DEBUG_CHECK", "BGFX_FATAL_DEBUG_CHECK", int64_t(bgfx_fatal_t::BGFX_FATAL_DEBUG_CHECK), das::LineInfo());
+		addIEx("INVALID_SHADER", "BGFX_FATAL_INVALID_SHADER", int64_t(bgfx_fatal_t::BGFX_FATAL_INVALID_SHADER), das::LineInfo());
+		addIEx("UNABLE_TO_INITIALIZE", "BGFX_FATAL_UNABLE_TO_INITIALIZE", int64_t(bgfx_fatal_t::BGFX_FATAL_UNABLE_TO_INITIALIZE), das::LineInfo());
+		addIEx("UNABLE_TO_CREATE_TEXTURE", "BGFX_FATAL_UNABLE_TO_CREATE_TEXTURE", int64_t(bgfx_fatal_t::BGFX_FATAL_UNABLE_TO_CREATE_TEXTURE), das::LineInfo());
+		addIEx("DEVICE_LOST", "BGFX_FATAL_DEVICE_LOST", int64_t(bgfx_fatal_t::BGFX_FATAL_DEVICE_LOST), das::LineInfo());
+		addIEx("COUNT", "BGFX_FATAL_COUNT", int64_t(bgfx_fatal_t::BGFX_FATAL_COUNT), das::LineInfo());
 	}
 };
 #endif
