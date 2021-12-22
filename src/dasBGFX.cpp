@@ -1,48 +1,35 @@
+// this file is generated via daScript automatic C++ binder
+// all user modifications will be lost after this file is re-generated
+
 #include "daScript/misc/platform.h"
-
-#include "daScript/daScript.h"
+#include "daScript/ast/ast.h"
+#include "daScript/ast/ast_interop.h"
+#include "daScript/ast/ast_handle.h"
 #include "daScript/ast/ast_typefactory_bind.h"
-
-#include "need_bgfx.h"
-
-using namespace das;
-
-IMPLEMENT_EXTERNAL_TYPE_FACTORY(bgfx_encoder_s,bgfx_encoder_s);
-
-#define GLOBAL_NAMESPACE
-#include "module_bgfx.enum.cpp_inc"
-#include "module_bgfx.ann.cpp_inc"
-
-#include <bx/debug.h>
-
-
+#include "daScript/simulate/bind_enum.h"
+#include "dasBGFX.h"
+#include "need_dasBGFX.h"
+#include "dasBGFX.struct.impl.inc"
 namespace das {
-
-Module_BGFX::Module_BGFX() : Module("bgfx") {
-    lib.addModule(this);
-    lib.addBuiltInModule();
-    addAnnotation(make_smart<DummyTypeAnnotation>("bgfx_encoder_s", "bgfx_encoder_s",1,1));
-    #include "module_bgfx.enum.inc"
-    #include "module_bgfx.ann.inc"
-    #include "module_bgfx.const_inc"
-#ifdef _MSC_VER
-    addConstant(*this,"BGFX_SHADERC_NAME","shaderc.exe");
-#elif defined(__APPLE__)
-    addConstant(*this,"BGFX_SHADERC_NAME","shaderc-osx");
-#elif defined(__linux__)
-    addConstant(*this,"BGFX_SHADERC_NAME","shaderc-ubuntu");
-#else
-     addConstant(*this,"BGFX_SHADERC_NAME","shaderc.exe");
-#endif
-    initFunctions();
+#include "dasBGFX.enum.class.inc"
+#include "dasBGFX.struct.class.inc"
+Module_dasBGFX::Module_dasBGFX() : Module("bgfx") {
+	lib.addModule(this);
+	lib.addBuiltInModule();
 }
-
-ModuleAotType Module_BGFX::aotRequire ( TextWriter & tw ) const {
-    tw << "#include \"../modules/dasBGFX/src/dasBGFX.h\"\n";
-    return ModuleAotType::cpp;
+bool Module_dasBGFX::initDependencies() {
+	if ( initialized ) return true;
+	initialized = true;
+	#include "dasBGFX.const.inc"
+	#include "dasBGFX.enum.add.inc"
+	#include "dasBGFX.dummy.add.inc"
+	#include "dasBGFX.struct.add.inc"
+	#include "dasBGFX.struct.postadd.inc"
+	#include "dasBGFX.alias.add.inc"
+	#include "dasBGFX.func.reg.inc"
+	initMain();
+	return true;
 }
-
 }
-
-REGISTER_MODULE_IN_NAMESPACE(Module_BGFX,das);
+REGISTER_MODULE_IN_NAMESPACE(Module_dasBGFX,das);
 

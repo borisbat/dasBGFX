@@ -1,14 +1,12 @@
 #include "daScript/misc/platform.h"
-
 #include "daScript/daScript.h"
 #include "daScript/ast/ast_typefactory_bind.h"
-
-#include "need_bgfx.h"
-
-using namespace das;
+#include "dasBGFX.h"
+#include "need_dasBGFX.h"
 
 #define GLOBAL_NAMESPACE
 #include <bx/debug.h>
+#include <bx/math.h>
 
 namespace das {
 
@@ -53,14 +51,16 @@ void Das_bgfx_init_debug ( bgfx_init_s & init ) {
     vtbl.trace_vargs = callbacks::traceVargs;
 }
 
-void Module_BGFX::initFunctions() {
-    initFunctions_0();
-    initFunctions_1();
-    initFunctions_2();
-    initFunctions_3();
-    initFunctions_4();
-    initFunctions_5();
-    initFunctions_6();
+void Module_dasBGFX::initMain () {
+#ifdef _MSC_VER
+    addConstant(*this,"BGFX_SHADERC_NAME","shaderc.exe");
+#elif defined(__APPLE__)
+    addConstant(*this,"BGFX_SHADERC_NAME","shaderc-osx");
+#elif defined(__linux__)
+    addConstant(*this,"BGFX_SHADERC_NAME","shaderc-ubuntu");
+#else
+     addConstant(*this,"BGFX_SHADERC_NAME","shaderc.exe");
+#endif
     // extras
     addExtern<DAS_BIND_FUN(Das_bgfx_dbg_text_printf)>(*this, lib, "bgfx_dbg_text_printf",SideEffects::worstDefault, "Das_bgfx_dbg_text_printf")
         ->args({"_x","_y","_attr","text"});
@@ -88,7 +88,11 @@ void Module_BGFX::initFunctions() {
     }
 }
 
+ModuleAotType Module_dasBGFX::aotRequire ( TextWriter & tw ) const {
+    tw << "#include \"../modules/dasBGFX/src/aot_dasBGFX.h\"\n";
+    return ModuleAotType::cpp;
 }
 
+}
 
 

@@ -92,26 +92,37 @@ IF ((NOT DAS_BGFX_INCLUDED) AND ((NOT ${DAS_BGFX_DISABLED}) OR (NOT DEFINED DAS_
     ENDIF()
 
 	# libDasModuleBGFX
-	SET(DAS_BGFX_MODULE_SRC
-		${DAS_BGFX_DIR}/src/dasBGFX.h
-		${DAS_BGFX_DIR}/src/dasBGFX.cpp
-		${DAS_BGFX_DIR}/src/dasBGFX.func.cpp
-		${DAS_BGFX_DIR}/src/need_bgfx.h
-		${DAS_BGFX_DIR}/src/module_bgfx.ann.cpp_inc
-		${DAS_BGFX_DIR}/src/module_bgfx.ann.inc
-		${DAS_BGFX_DIR}/src/module_bgfx.enum.cpp_inc
-		${DAS_BGFX_DIR}/src/module_bgfx.enum.inc
-		${DAS_BGFX_DIR}/src/module_bgfx.h
-		${DAS_BGFX_DIR}/src/module_bgfx.inc
-		${DAS_BGFX_DIR}/src/module_bgfx.method.inc
-		#split
-		${DAS_BGFX_DIR}/src/module_bgfx_split_0.cpp
-		${DAS_BGFX_DIR}/src/module_bgfx_split_1.cpp
-		${DAS_BGFX_DIR}/src/module_bgfx_split_2.cpp
-		${DAS_BGFX_DIR}/src/module_bgfx_split_3.cpp
-		${DAS_BGFX_DIR}/src/module_bgfx_split_4.cpp
-		${DAS_BGFX_DIR}/src/module_bgfx_split_5.cpp
-		${DAS_BGFX_DIR}/src/module_bgfx_split_6.cpp
+	SET(DAS_BGFX_BIND_DIR ${DAS_BGFX_DIR})
+	SET(DAS_BGFX_BIND_MODULE_SRC
+		${DAS_BGFX_BIND_DIR}/src/need_dasBGFX.h
+		${DAS_BGFX_BIND_DIR}/src/dasBGFX.h
+		${DAS_BGFX_BIND_DIR}/src/dasBGFX.cpp
+	# user include
+		${DAS_BGFX_BIND_DIR}/src/dasBGFX.main.cpp
+	# generated binding includes
+		${DAS_BGFX_BIND_DIR}/src/dasBGFX.alias.add.inc
+		${DAS_BGFX_BIND_DIR}/src/dasBGFX.dummy.add.inc
+		${DAS_BGFX_BIND_DIR}/src/dasBGFX.enum.add.inc
+		${DAS_BGFX_BIND_DIR}/src/dasBGFX.enum.class.inc
+		${DAS_BGFX_BIND_DIR}/src/dasBGFX.enum.decl.inc
+		${DAS_BGFX_BIND_DIR}/src/dasBGFX.struct.add.inc
+		${DAS_BGFX_BIND_DIR}/src/dasBGFX.struct.postadd.inc
+		${DAS_BGFX_BIND_DIR}/src/dasBGFX.struct.class.inc
+		${DAS_BGFX_BIND_DIR}/src/dasBGFX.struct.decl.inc
+		${DAS_BGFX_BIND_DIR}/src/dasBGFX.struct.impl.inc
+		${DAS_BGFX_BIND_DIR}/src/dasBGFX.struct.cast.inc
+		${DAS_BGFX_BIND_DIR}/src/dasBGFX.const.inc
+	# generated functions
+		${DAS_BGFX_BIND_DIR}/src/dasBGFX.func_1.cpp
+		${DAS_BGFX_BIND_DIR}/src/dasBGFX.func_2.cpp
+		${DAS_BGFX_BIND_DIR}/src/dasBGFX.func_3.cpp
+		${DAS_BGFX_BIND_DIR}/src/dasBGFX.func_4.cpp
+		${DAS_BGFX_BIND_DIR}/src/dasBGFX.func_5.cpp
+		${DAS_BGFX_BIND_DIR}/src/dasBGFX.func_6.cpp
+		${DAS_BGFX_BIND_DIR}/src/dasBGFX.func_7.cpp
+		${DAS_BGFX_BIND_DIR}/src/dasBGFX.func_8.cpp
+		${DAS_BGFX_BIND_DIR}/src/dasBGFX.func_9.cpp
+		${DAS_BGFX_BIND_DIR}/src/dasBGFX.func_10.cpp
 	)
 
 	IF(APPLE)
@@ -119,9 +130,9 @@ IF ((NOT DAS_BGFX_INCLUDED) AND ((NOT ${DAS_BGFX_DISABLED}) OR (NOT DEFINED DAS_
 	ENDIF()
 
 	ADD_MODULE_LIB(libDasModuleBGFX)
-	ADD_MODULE_CPP(BGFX)
+	ADD_MODULE_CPP(dasBGFX)
 	# ADD_MODULE_NATIVE(stbimage_boost)
-	ADD_LIBRARY(libDasModuleBGFX ${DAS_BGFX_MODULE_SRC} ${LIB_BGFX_SRC})
+	ADD_LIBRARY(libDasModuleBGFX ${DAS_BGFX_BIND_MODULE_SRC} ${LIB_BGFX_SRC})
 	TARGET_LINK_LIBRARIES(libDasModuleBGFX ${BGFX_LIBRARIES})
 	# ADD_DEPENDENCIES(libDasModuleBGFX)
 	target_compile_definitions(libDasModuleBGFX PUBLIC -DBIMG_DECODE_ASTC=0)

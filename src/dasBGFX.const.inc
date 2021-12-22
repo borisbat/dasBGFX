@@ -1,3 +1,6 @@
+// this file is generated via daScript automatic C++ binder
+// all user modifications will be lost after this file is re-generated
+
 addConstant<int32_t>(*this,"BGFX_STATE_DEPTH_TEST_SHIFT",int32_t(4));
 addConstant<int32_t>(*this,"BGFX_STATE_BLEND_SHIFT",int32_t(12));
 addConstant<int32_t>(*this,"BGFX_STATE_BLEND_EQUATION_SHIFT",int32_t(28));
