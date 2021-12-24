@@ -14,12 +14,12 @@ namespace das {
 #include "dasBGFX.enum.class.inc"
 #include "dasBGFX.struct.class.inc"
 Module_dasBGFX::Module_dasBGFX() : Module("bgfx") {
-	lib.addModule(this);
-	lib.addBuiltInModule();
 }
 bool Module_dasBGFX::initDependencies() {
 	if ( initialized ) return true;
 	initialized = true;
+	lib.addModule(this);
+	lib.addBuiltInModule();
 	#include "dasBGFX.const.inc"
 	#include "dasBGFX.enum.add.inc"
 	#include "dasBGFX.dummy.add.inc"

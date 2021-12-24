@@ -90,6 +90,8 @@ void Module_dasBGFX::initMain () {
 
 ModuleAotType Module_dasBGFX::aotRequire ( TextWriter & tw ) const {
     tw << "#include \"../modules/dasBGFX/src/aot_dasBGFX.h\"\n";
+    tw << "#include \"daScript/simulate/bind_enum.h\"\n";
+    tw << "#include \"../modules/dasBGFX/src/dasBGFX.enum.decl.cast.inc\"\n";
     return ModuleAotType::cpp;
 }
 

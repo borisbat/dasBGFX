@@ -105,6 +105,7 @@ IF ((NOT DAS_BGFX_INCLUDED) AND ((NOT ${DAS_BGFX_DISABLED}) OR (NOT DEFINED DAS_
 		${DAS_BGFX_BIND_DIR}/src/dasBGFX.enum.add.inc
 		${DAS_BGFX_BIND_DIR}/src/dasBGFX.enum.class.inc
 		${DAS_BGFX_BIND_DIR}/src/dasBGFX.enum.decl.inc
+		${DAS_BGFX_BIND_DIR}/src/dasBGFX.enum.decl.cast.inc
 		${DAS_BGFX_BIND_DIR}/src/dasBGFX.struct.add.inc
 		${DAS_BGFX_BIND_DIR}/src/dasBGFX.struct.postadd.inc
 		${DAS_BGFX_BIND_DIR}/src/dasBGFX.struct.class.inc

@@ -2,7 +2,7 @@
 // all user modifications will be lost after this file is re-generated
 
 struct bgfx_dynamic_index_buffer_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_dynamic_index_buffer_handle_s> {
-	bgfx_dynamic_index_buffer_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_dynamic_index_buffer_handle_s", ml) {
+	bgfx_dynamic_index_buffer_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_dynamic_index_buffer_handle_s", ml, "bgfx_dynamic_index_buffer_handle_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(idx)>("idx","idx");
@@ -10,7 +10,7 @@ struct bgfx_dynamic_index_buffer_handle_s_GeneratedAnnotation : ManagedStructure
 };
 
 struct bgfx_dynamic_vertex_buffer_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_dynamic_vertex_buffer_handle_s> {
-	bgfx_dynamic_vertex_buffer_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_dynamic_vertex_buffer_handle_s", ml) {
+	bgfx_dynamic_vertex_buffer_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_dynamic_vertex_buffer_handle_s", ml, "bgfx_dynamic_vertex_buffer_handle_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(idx)>("idx","idx");
@@ -18,7 +18,7 @@ struct bgfx_dynamic_vertex_buffer_handle_s_GeneratedAnnotation : ManagedStructur
 };
 
 struct bgfx_frame_buffer_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_frame_buffer_handle_s> {
-	bgfx_frame_buffer_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_frame_buffer_handle_s", ml) {
+	bgfx_frame_buffer_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_frame_buffer_handle_s", ml, "bgfx_frame_buffer_handle_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(idx)>("idx","idx");
@@ -26,7 +26,7 @@ struct bgfx_frame_buffer_handle_s_GeneratedAnnotation : ManagedStructureAnnotati
 };
 
 struct bgfx_index_buffer_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_index_buffer_handle_s> {
-	bgfx_index_buffer_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_index_buffer_handle_s", ml) {
+	bgfx_index_buffer_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_index_buffer_handle_s", ml, "bgfx_index_buffer_handle_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(idx)>("idx","idx");
@@ -34,7 +34,7 @@ struct bgfx_index_buffer_handle_s_GeneratedAnnotation : ManagedStructureAnnotati
 };
 
 struct bgfx_indirect_buffer_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_indirect_buffer_handle_s> {
-	bgfx_indirect_buffer_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_indirect_buffer_handle_s", ml) {
+	bgfx_indirect_buffer_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_indirect_buffer_handle_s", ml, "bgfx_indirect_buffer_handle_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(idx)>("idx","idx");
@@ -42,7 +42,7 @@ struct bgfx_indirect_buffer_handle_s_GeneratedAnnotation : ManagedStructureAnnot
 };
 
 struct bgfx_occlusion_query_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_occlusion_query_handle_s> {
-	bgfx_occlusion_query_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_occlusion_query_handle_s", ml) {
+	bgfx_occlusion_query_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_occlusion_query_handle_s", ml, "bgfx_occlusion_query_handle_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(idx)>("idx","idx");
@@ -50,7 +50,7 @@ struct bgfx_occlusion_query_handle_s_GeneratedAnnotation : ManagedStructureAnnot
 };
 
 struct bgfx_program_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_program_handle_s> {
-	bgfx_program_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_program_handle_s", ml) {
+	bgfx_program_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_program_handle_s", ml, "bgfx_program_handle_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(idx)>("idx","idx");
@@ -58,7 +58,7 @@ struct bgfx_program_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bg
 };
 
 struct bgfx_shader_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_shader_handle_s> {
-	bgfx_shader_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_shader_handle_s", ml) {
+	bgfx_shader_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_shader_handle_s", ml, "bgfx_shader_handle_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(idx)>("idx","idx");
@@ -66,7 +66,7 @@ struct bgfx_shader_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgf
 };
 
 struct bgfx_texture_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_texture_handle_s> {
-	bgfx_texture_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_texture_handle_s", ml) {
+	bgfx_texture_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_texture_handle_s", ml, "bgfx_texture_handle_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(idx)>("idx","idx");
@@ -74,7 +74,7 @@ struct bgfx_texture_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bg
 };
 
 struct bgfx_uniform_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_uniform_handle_s> {
-	bgfx_uniform_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_uniform_handle_s", ml) {
+	bgfx_uniform_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_uniform_handle_s", ml, "bgfx_uniform_handle_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(idx)>("idx","idx");
@@ -82,7 +82,7 @@ struct bgfx_uniform_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bg
 };
 
 struct bgfx_vertex_buffer_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_vertex_buffer_handle_s> {
-	bgfx_vertex_buffer_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_vertex_buffer_handle_s", ml) {
+	bgfx_vertex_buffer_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_vertex_buffer_handle_s", ml, "bgfx_vertex_buffer_handle_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(idx)>("idx","idx");
@@ -90,7 +90,7 @@ struct bgfx_vertex_buffer_handle_s_GeneratedAnnotation : ManagedStructureAnnotat
 };
 
 struct bgfx_vertex_layout_handle_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_vertex_layout_handle_s> {
-	bgfx_vertex_layout_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_vertex_layout_handle_s", ml) {
+	bgfx_vertex_layout_handle_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_vertex_layout_handle_s", ml, "bgfx_vertex_layout_handle_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(idx)>("idx","idx");
@@ -98,7 +98,7 @@ struct bgfx_vertex_layout_handle_s_GeneratedAnnotation : ManagedStructureAnnotat
 };
 
 struct bgfx_caps_gpu_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_caps_gpu_s> {
-	bgfx_caps_gpu_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_caps_gpu_s", ml) {
+	bgfx_caps_gpu_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_caps_gpu_s", ml, "bgfx_caps_gpu_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(vendorId)>("vendorId","vendorId");
@@ -107,7 +107,7 @@ struct bgfx_caps_gpu_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_cap
 };
 
 struct bgfx_caps_limits_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_caps_limits_s> {
-	bgfx_caps_limits_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_caps_limits_s", ml) {
+	bgfx_caps_limits_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_caps_limits_s", ml, "bgfx_caps_limits_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(maxDrawCalls)>("maxDrawCalls","maxDrawCalls");
@@ -138,7 +138,7 @@ struct bgfx_caps_limits_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_
 };
 
 struct bgfx_caps_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_caps_s> {
-	bgfx_caps_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_caps_s", ml) {
+	bgfx_caps_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_caps_s", ml, "bgfx_caps_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(rendererType)>("rendererType","rendererType");
@@ -155,7 +155,7 @@ struct bgfx_caps_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_caps_s>
 };
 
 struct bgfx_internal_data_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_internal_data_s> {
-	bgfx_internal_data_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_internal_data_s", ml) {
+	bgfx_internal_data_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_internal_data_s", ml, "bgfx_internal_data_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(caps)>("caps","caps");
@@ -164,7 +164,7 @@ struct bgfx_internal_data_s_GeneratedAnnotation : ManagedStructureAnnotation<bgf
 };
 
 struct bgfx_platform_data_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_platform_data_s> {
-	bgfx_platform_data_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_platform_data_s", ml) {
+	bgfx_platform_data_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_platform_data_s", ml, "bgfx_platform_data_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(ndt)>("ndt","ndt");
@@ -176,7 +176,7 @@ struct bgfx_platform_data_s_GeneratedAnnotation : ManagedStructureAnnotation<bgf
 };
 
 struct bgfx_resolution_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_resolution_s> {
-	bgfx_resolution_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_resolution_s", ml) {
+	bgfx_resolution_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_resolution_s", ml, "bgfx_resolution_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(format)>("format","format");
@@ -189,7 +189,7 @@ struct bgfx_resolution_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_r
 };
 
 struct bgfx_init_limits_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_init_limits_s> {
-	bgfx_init_limits_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_init_limits_s", ml) {
+	bgfx_init_limits_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_init_limits_s", ml, "bgfx_init_limits_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(maxEncoders)>("maxEncoders","maxEncoders");
@@ -200,7 +200,7 @@ struct bgfx_init_limits_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_
 };
 
 struct bgfx_init_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_init_s> {
-	bgfx_init_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_init_s", ml) {
+	bgfx_init_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_init_s", ml, "bgfx_init_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(type)>("_type","type");
@@ -216,7 +216,7 @@ struct bgfx_init_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_init_s>
 };
 
 struct bgfx_memory_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_memory_s> {
-	bgfx_memory_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_memory_s", ml) {
+	bgfx_memory_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_memory_s", ml, "bgfx_memory_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(data)>("data","data");
@@ -225,7 +225,7 @@ struct bgfx_memory_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_memor
 };
 
 struct bgfx_transient_index_buffer_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_transient_index_buffer_s> {
-	bgfx_transient_index_buffer_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_transient_index_buffer_s", ml) {
+	bgfx_transient_index_buffer_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_transient_index_buffer_s", ml, "bgfx_transient_index_buffer_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(data)>("data","data");
@@ -237,7 +237,7 @@ struct bgfx_transient_index_buffer_s_GeneratedAnnotation : ManagedStructureAnnot
 };
 
 struct bgfx_transient_vertex_buffer_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_transient_vertex_buffer_s> {
-	bgfx_transient_vertex_buffer_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_transient_vertex_buffer_s", ml) {
+	bgfx_transient_vertex_buffer_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_transient_vertex_buffer_s", ml, "bgfx_transient_vertex_buffer_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(data)>("data","data");
@@ -250,7 +250,7 @@ struct bgfx_transient_vertex_buffer_s_GeneratedAnnotation : ManagedStructureAnno
 };
 
 struct bgfx_instance_data_buffer_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_instance_data_buffer_s> {
-	bgfx_instance_data_buffer_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_instance_data_buffer_s", ml) {
+	bgfx_instance_data_buffer_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_instance_data_buffer_s", ml, "bgfx_instance_data_buffer_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(data)>("data","data");
@@ -263,7 +263,7 @@ struct bgfx_instance_data_buffer_s_GeneratedAnnotation : ManagedStructureAnnotat
 };
 
 struct bgfx_texture_info_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_texture_info_s> {
-	bgfx_texture_info_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_texture_info_s", ml) {
+	bgfx_texture_info_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_texture_info_s", ml, "bgfx_texture_info_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(format)>("format","format");
@@ -279,7 +279,7 @@ struct bgfx_texture_info_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx
 };
 
 struct bgfx_uniform_info_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_uniform_info_s> {
-	bgfx_uniform_info_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_uniform_info_s", ml) {
+	bgfx_uniform_info_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_uniform_info_s", ml, "bgfx_uniform_info_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(name)>("name","name");
@@ -289,7 +289,7 @@ struct bgfx_uniform_info_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx
 };
 
 struct bgfx_attachment_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_attachment_s> {
-	bgfx_attachment_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_attachment_s", ml) {
+	bgfx_attachment_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_attachment_s", ml, "bgfx_attachment_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(access)>("access","access");
@@ -302,7 +302,7 @@ struct bgfx_attachment_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_a
 };
 
 struct bgfx_transform_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_transform_s> {
-	bgfx_transform_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_transform_s", ml) {
+	bgfx_transform_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_transform_s", ml, "bgfx_transform_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(data)>("data","data");
@@ -311,7 +311,7 @@ struct bgfx_transform_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_tr
 };
 
 struct bgfx_view_stats_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_view_stats_s> {
-	bgfx_view_stats_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_view_stats_s", ml) {
+	bgfx_view_stats_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_view_stats_s", ml, "bgfx_view_stats_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(name)>("name","name");
@@ -324,7 +324,7 @@ struct bgfx_view_stats_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_v
 };
 
 struct bgfx_encoder_stats_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_encoder_stats_s> {
-	bgfx_encoder_stats_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_encoder_stats_s", ml) {
+	bgfx_encoder_stats_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_encoder_stats_s", ml, "bgfx_encoder_stats_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(cpuTimeBegin)>("cpuTimeBegin","cpuTimeBegin");
@@ -333,7 +333,7 @@ struct bgfx_encoder_stats_s_GeneratedAnnotation : ManagedStructureAnnotation<bgf
 };
 
 struct bgfx_stats_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_stats_s> {
-	bgfx_stats_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_stats_s", ml) {
+	bgfx_stats_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_stats_s", ml, "bgfx_stats_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(cpuTimeFrame)>("cpuTimeFrame","cpuTimeFrame");
@@ -379,7 +379,7 @@ struct bgfx_stats_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_stats_
 };
 
 struct bgfx_vertex_layout_s_GeneratedAnnotation : ManagedStructureAnnotation<bgfx_vertex_layout_s> {
-	bgfx_vertex_layout_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_vertex_layout_s", ml) {
+	bgfx_vertex_layout_s_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("bgfx_vertex_layout_s", ml, "bgfx_vertex_layout_s") {
 	}
 	void init () {
 		addField<DAS_BIND_MANAGED_FIELD(hash)>("hash","hash");
