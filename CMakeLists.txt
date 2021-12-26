@@ -185,18 +185,4 @@ IF ((NOT DAS_BGFX_INCLUDED) AND ((NOT ${DAS_BGFX_DISABLED}) OR (NOT DEFINED DAS_
 		SETUP_CPP11(libDasModuleBGFXImgui)
 		ADD_MODULE_CPP(BGFXImgui)
  	ENDIF()
-
-	IF(WIN32)
-		# GENERATE BGFIX
-		DAS_CPP_BIND_AST(
-			BGFX_GENERATE
-			generate_bgfx.das
-			${DAS_BGFX_DIR}/src/bgfx_headers.h
-			${DAS_BGFX_DIR}/src/module_bgfx
-			${DAS_BGFX_DIR}/src
-			"${DAS_BGFX_INCLUDE_DIR}"
-			"${DAS_BGFX_INCLUDE_DIR}/bgfx/defines.h"
-		)
-	ENDIF()
-
 ENDIF()
