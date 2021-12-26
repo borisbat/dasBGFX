@@ -26,9 +26,9 @@ void Module_dasBGFX::initFunctions_8() {
 	addExtern< void (*)(const bgfx_platform_data_s *) , bgfx_set_platform_data >(*this,lib,"bgfx_set_platform_data",SideEffects::worstDefault,"bgfx_set_platform_data")
 		->args({"_data"});
 	addExtern< const bgfx_internal_data_s * (*)() , bgfx_get_internal_data >(*this,lib,"bgfx_get_internal_data",SideEffects::worstDefault,"bgfx_get_internal_data");
-	addExtern< unsigned long long (*)(bgfx_texture_handle_s,unsigned long long) , bgfx_override_internal_texture_ptr >(*this,lib,"bgfx_override_internal_texture_ptr",SideEffects::worstDefault,"bgfx_override_internal_texture_ptr")
+	addExtern< uintptr_t (*)(bgfx_texture_handle_s,uintptr_t) , bgfx_override_internal_texture_ptr >(*this,lib,"bgfx_override_internal_texture_ptr",SideEffects::worstDefault,"bgfx_override_internal_texture_ptr")
 		->args({"_handle","_ptr"});
-	addExtern< unsigned long long (*)(bgfx_texture_handle_s,unsigned short,unsigned short,unsigned char,bgfx_texture_format,unsigned long long) , bgfx_override_internal_texture >(*this,lib,"bgfx_override_internal_texture",SideEffects::worstDefault,"bgfx_override_internal_texture")
+	addExtern< uintptr_t (*)(bgfx_texture_handle_s,unsigned short,unsigned short,unsigned char,bgfx_texture_format,unsigned long long) , bgfx_override_internal_texture >(*this,lib,"bgfx_override_internal_texture",SideEffects::worstDefault,"bgfx_override_internal_texture")
 		->args({"_handle","_width","_height","_numMips","_format","_flags"});
 	addExtern< void (*)(const char *) , bgfx_set_marker >(*this,lib,"bgfx_set_marker",SideEffects::worstDefault,"bgfx_set_marker")
 		->args({"_marker"});
