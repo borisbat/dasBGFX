@@ -28,11 +28,11 @@ void Module_dasBGFX::initFunctions_8() {
 	addExtern< const bgfx_internal_data_s * (*)() , bgfx_get_internal_data >(*this,lib,"bgfx_get_internal_data",SideEffects::worstDefault,"bgfx_get_internal_data");
 	addExtern< uintptr_t (*)(bgfx_texture_handle_s,uintptr_t) , bgfx_override_internal_texture_ptr >(*this,lib,"bgfx_override_internal_texture_ptr",SideEffects::worstDefault,"bgfx_override_internal_texture_ptr")
 		->args({"_handle","_ptr"});
-	addExtern< uintptr_t (*)(bgfx_texture_handle_s,unsigned short,unsigned short,unsigned char,bgfx_texture_format,unsigned long long) , bgfx_override_internal_texture >(*this,lib,"bgfx_override_internal_texture",SideEffects::worstDefault,"bgfx_override_internal_texture")
+	addExtern< uintptr_t (*)(bgfx_texture_handle_s,unsigned short,unsigned short,unsigned char,bgfx_texture_format,uint64_t) , bgfx_override_internal_texture >(*this,lib,"bgfx_override_internal_texture",SideEffects::worstDefault,"bgfx_override_internal_texture")
 		->args({"_handle","_width","_height","_numMips","_format","_flags"});
 	addExtern< void (*)(const char *) , bgfx_set_marker >(*this,lib,"bgfx_set_marker",SideEffects::worstDefault,"bgfx_set_marker")
 		->args({"_marker"});
-	addExtern< void (*)(unsigned long long,unsigned int) , bgfx_set_state >(*this,lib,"bgfx_set_state",SideEffects::worstDefault,"bgfx_set_state")
+	addExtern< void (*)(uint64_t,unsigned int) , bgfx_set_state >(*this,lib,"bgfx_set_state",SideEffects::worstDefault,"bgfx_set_state")
 		->args({"_state","_rgba"});
 	addExtern< void (*)(bgfx_occlusion_query_handle_s,bool) , bgfx_set_condition >(*this,lib,"bgfx_set_condition",SideEffects::worstDefault,"bgfx_set_condition")
 		->args({"_handle","_visible"});

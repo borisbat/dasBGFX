@@ -23,7 +23,7 @@ void Module_dasBGFX::initFunctions_6() {
 		->args({"_encoder"});
 	addExtern< void (*)(bgfx_encoder_s *,const char *) , bgfx_encoder_set_marker >(*this,lib,"bgfx_encoder_set_marker",SideEffects::worstDefault,"bgfx_encoder_set_marker")
 		->args({"_this","_marker"});
-	addExtern< void (*)(bgfx_encoder_s *,unsigned long long,unsigned int) , bgfx_encoder_set_state >(*this,lib,"bgfx_encoder_set_state",SideEffects::worstDefault,"bgfx_encoder_set_state")
+	addExtern< void (*)(bgfx_encoder_s *,uint64_t,unsigned int) , bgfx_encoder_set_state >(*this,lib,"bgfx_encoder_set_state",SideEffects::worstDefault,"bgfx_encoder_set_state")
 		->args({"_this","_state","_rgba"});
 	addExtern< void (*)(bgfx_encoder_s *,bgfx_occlusion_query_handle_s,bool) , bgfx_encoder_set_condition >(*this,lib,"bgfx_encoder_set_condition",SideEffects::worstDefault,"bgfx_encoder_set_condition")
 		->args({"_this","_handle","_visible"});
