@@ -96,7 +96,8 @@ def private generate_bgfx_bind_uniform(fnMain:FunctionPtr; var fn:FunctionPtr)
                                 elif arg.name=="readonly" && arg.basicType==Type tBool
                                     access = "READ"
                             cll_uni.arguments |> emplace_new() <| new [[ExprConstUInt() at=vv.at, value=uint(stage)]]
-                            let access_enum_t = typeinfo(ast_typedecl type<bgfx_access>).enumType
+                            var inscope access_enum <- typeinfo(ast_typedecl type<bgfx_access>)
+                            let access_enum_t = access_enum.enumType
                             cll_uni.arguments |> emplace_new() <| new [[ExprConstEnumeration() at=vv.at, enumType:=access_enum_t, value:=access]]
                     cll_uni.arguments |> emplace_new() <| new [[ExprVar() at=vv.at, name:=vv.name]]
                     blk.list |>emplace(cll_uni)

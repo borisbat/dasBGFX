@@ -95,7 +95,7 @@ class BgfxVertexBuffer : AstStructureAnnotation
         ]]
         fn.arguments |> emplace_new() <| new [[Variable() at=st.at,
             name := "render_type",
-            _type <- clone_type() <| typeinfo(ast_typedecl type<bgfx_renderer_type>),
+            _type <- typeinfo(ast_typedecl type<bgfx_renderer_type>),
             init <- new [[ExprCall() at=st.at, name:="bgfx_get_renderer_type"]]
         ]]
         var qblk <- quote() <|
@@ -107,8 +107,10 @@ class BgfxVertexBuffer : AstStructureAnnotation
         var blk <- new [[ExprBlock() at=st.at]]
         var saddr <- new [[ExprCall() at=st.at, name:="safe_addr"]]
         saddr.arguments |> emplace_new <| new [[ExprVar() at=st.at, name:="pcv_decl"]]
-        let bgfx_attr_enum_t = typeinfo(ast_typedecl type<bgfx_attrib>).enumType
-        let bgfx_attr_type_enum_t = typeinfo(ast_typedecl type<bgfx_attrib_type>).enumType
+        var inscope bgfx_attr_enum <- typeinfo(ast_typedecl type<bgfx_attrib>)
+        var inscope bgfx_attr_type_enum <- typeinfo(ast_typedecl type<bgfx_attrib_type>)
+        let bgfx_attr_enum_t = bgfx_attr_enum.enumType
+        let bgfx_attr_type_enum_t = bgfx_attr_type_enum.enumType
         for fld in st.fields
             var semantics = find_arg("semantics", fld.annotation) ?as tString ?? ""
             if semantics==""
