@@ -26,7 +26,7 @@ void bgfx_imgui_end_frame() {
 }
 
 void bgfx_imgui_push_font(uint32_t fidx, Context * context, LineInfoArg * at ) {
-    if ( fidx>=BgfxImguiFont::Enum::Count) context->throw_error_at(*at, "invalid font index");
+    if ( fidx>=BgfxImguiFont::Enum::Count) context->throw_error_at(at, "invalid font index");
     imguiPushFont((BgfxImguiFont::Enum)fidx);
 }
 
