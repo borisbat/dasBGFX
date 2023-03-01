@@ -54,14 +54,14 @@ def private generate_bgfx_bind_uniform(fnMain:FunctionPtr; var fn:FunctionPtr)
     var blk <- new [[ExprBlock() at=fn.at]]
     collect_dependencies(fnMain) <| $ ( vfun, vvar )
         for vv in vvar
-            if find_arg("uniform", vv.annotation) is tBool
+            if vv.annotation |> find_arg("uniform") is tBool
                 if "{vv._module.name}" |> find("glsl_") == -1
                     var cll_uni <- new [[ExprCall() at=vv.at, name:="bgfx_any_uniform"]]
                     cll_uni.arguments |> emplace_new() <| new [[ExprConstString() at=vv.at, value:=vv.name]]
                     if vv._type.baseType==Type tStructure
                         let sname = string(vv._type.structType.name)
                         if sname|>find("sampler")!=-1
-                            let stage = (find_arg("stage",vv.annotation) ?as tInt) ?? 0
+                            let stage = vv.annotation |> find_arg("stage") ?as tInt ?? 0
                             var sampler_flags = 0u
                             for arg in vv.annotation
                                 if arg.name=="sampler" && arg.basicType==Type tString
@@ -88,7 +88,7 @@ def private generate_bgfx_bind_uniform(fnMain:FunctionPtr; var fn:FunctionPtr)
                             cll_uni.arguments |> emplace_new() <| new [[ExprConstUInt() at=vv.at, value=uint(stage)]]
                             cll_uni.arguments |> emplace_new() <| new [[ExprConstUInt() at=vv.at, value=sampler_flags]]
                         if sname|>find("image")!=-1
-                            let stage = (find_arg("stage",vv.annotation) ?as tInt) ?? 0
+                            let stage = vv.annotation |> find_arg("stage") ?as tInt ?? 0
                             var access = "READWRITE"
                             for arg in vv.annotation
                                 if arg.name=="writeonly" && arg.basicType==Type tBool

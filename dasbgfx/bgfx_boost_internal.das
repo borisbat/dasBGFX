@@ -35,7 +35,7 @@ def get_shader_const_name ( arg:ExpressionPtr; var errors:das_string )
         return ""
     for ann in aAddr.func.annotations
         if ann.annotation.name=="bgfx_vertex_program" || ann.annotation.name=="bgfx_fragment_program" || ann.annotation.name=="bgfx_compute_program"
-            let cname = find_arg("name",ann.arguments) ?as tString ?? ""
+            let cname = ann.arguments |> find_arg("name") ?as tString ?? ""
             if cname==""
                 return "{aAddr.func.name}`shader_text"
             else
@@ -112,7 +112,7 @@ class BgfxVertexBuffer : AstStructureAnnotation
         let bgfx_attr_enum_t = bgfx_attr_enum.enumType
         let bgfx_attr_type_enum_t = bgfx_attr_type_enum.enumType
         for fld in st.fields
-            var semantics = find_arg("semantics", fld.annotation) ?as tString ?? ""
+            var semantics = fld.annotation |> find_arg("semantics") ?as tString ?? ""
             if semantics==""
                 let fldname = to_upper(string(fld.name))
                 if glsl_supported_semantics |> key_exists(fldname)
