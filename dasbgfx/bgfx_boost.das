@@ -308,6 +308,15 @@ def bgfx_load_image_from_file ( fname:string implicit; canfail:bool=false )
         stbi_image_free(data)
         return texture_id
 
+def bgfx_load_image_from_file ( fname:string implicit; dir1,dir2:string; can_fail:bool=false )
+    var img = bgfx_load_image_from_file("{dir1}/{fname}", true)
+    if img.idx==uint16(0xffff)
+        img = bgfx_load_image_from_file("{dir2}/{fname}", true)
+    if !can_fail && img.idx==uint16(0xffff)
+        let reason = stbi_failure_reason();
+        panic(reason)
+    return img
+
 var private transpose_uniform_mat = false
 
 def public bgfx_init ( winw,winh:int; rt:bgfx_renderer_type = bgfx_renderer_type COUNT; dbgfx:bool = false )

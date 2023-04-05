@@ -160,6 +160,32 @@ IF ((NOT DAS_BGFX_INCLUDED) AND ((NOT ${DAS_BGFX_DISABLED}) OR (NOT DEFINED DAS_
 	ADD_MODULE_DAS(dasbgfx dasbgfx glsl_bgfx)
 	ADD_MODULE_DAS(dasbgfx dasbgfx glsl_internal_bgfx)
 
+    install(DIRECTORY ${PROJECT_SOURCE_DIR}/modules/dasBGFX/bin
+        DESTINATION modules/dasBGFX
+        FILES_MATCHING
+        PATTERN "*.*"
+    )
+    install(FILES ${PROJECT_SOURCE_DIR}/modules/dasBGFX/bgfx/bgfx/src/bgfx_shader.sh
+        DESTINATION modules/dasBGFX/bgfx/bgfx/src
+    )
+    install(FILES ${PROJECT_SOURCE_DIR}/modules/dasBGFX/bgfx/bgfx/src/bgfx_compute.sh
+        DESTINATION modules/dasBGFX/bgfx/bgfx/src
+    )
+
+    install(DIRECTORY ${PROJECT_SOURCE_DIR}/modules/dasBGFX/dasbgfx
+        DESTINATION modules/dasBGFX
+        FILES_MATCHING
+        PATTERN "*.das"
+    )
+
+    file(GLOB DAS_BGFX_EXAMPLES
+        ${PROJECT_SOURCE_DIR}/modules/dasBGFX/examples/*.das
+    )
+
+    install(FILES ${DAS_BGFX_EXAMPLES}
+        DESTINATION examples/bgfx
+    )
+
 	SET(DAS_IMGUI_DIR ${CMAKE_SOURCE_DIR}/modules/dasImgui)
 	IF(EXISTS "${DAS_IMGUI_DIR}/CMakeLists.txt")
 		MESSAGE("Adding BGFX support for IMGUI")

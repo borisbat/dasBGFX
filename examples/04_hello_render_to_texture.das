@@ -85,7 +85,9 @@ def main
     var ibh = bgfx_create_index_buffer(bgfx_make_ref(indices), BGFX_BUFFER_INDEX32)
     var program = bgfx_create_shader_program(@@vs_main,@@fs_main)
     var display_program = bgfx_create_shader_program(@@vs_display_main,@@fs_display_main)
-    var texture = bgfx_load_image_from_file("{get_das_root()}/modules/dasBgfx/examples/image.png")
+    var texture = bgfx_load_image_from_file("image.png",
+        "{get_das_root()}/modules/dasBgfx/examples",
+        "{get_das_root()}/examples/media")
     var frame_buffer = bgfx_create_frame_buffer(256u, 256u, bgfx_texture_format RGBA8, BGFX_TEXTURE_NONE)
     bgfx_set_view_name(VIEW_MAIN, "main")
     bgfx_set_view_clear(VIEW_MAIN, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, RGBA_TO_BGFX_UCOLOR(0.2,0.2,0.2,1.0), 1.0f, 0u)

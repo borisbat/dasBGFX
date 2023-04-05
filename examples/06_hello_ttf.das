@@ -23,7 +23,12 @@ def main
     bgfx_init(1280,720) //,bgfx_renderer_type OPENGL)
     glfwSetWindowTitle(window, "BGFX - Hello ttf - {bgfx_get_renderer_type()}")
     bgfx_create_ttf_objects()
-    let font <- load_ttf("{get_das_root()}/modules/dasBGFX/bgfx/bgfx/examples/runtime/font/droidsansmono.ttf")
+    let font <- load_ttf([
+      fname = "droidsansmono.ttf",
+      path1 = "{get_das_root()}/modules/dasBGFX/bgfx/bgfx/examples/runtime/font",
+      path2 = "{get_das_root()}/examples/media",
+      canfail = true
+    ])
     var hw_text <- font |> create_quads("Hello, world")
     bgfx_set_view_clear(0u, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, RGBA_TO_BGFX_UCOLOR(0.2,0.2,0.2,1.0), 1.0f, 0u)
     let dim = quads_dim(hw_text)
