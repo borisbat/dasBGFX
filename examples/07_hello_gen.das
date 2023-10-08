@@ -79,19 +79,19 @@ def main
         v_projection = bgfx_mat_projection(45., float(display_w), float(display_h), 0.1, 50., bgfx_get_caps().homogeneousDepth,false)
         f_tex := checkerboard_texture
         // cube
-        v_model = compose(float4(-3,0,0,0), rot, float4(1.0))
+        v_model = compose(float3(-3,0,0), rot, float3(1.0))
         vs_preview_bind_uniform()
         fs_preview_bind_uniform()
         bgfx_set_state(BGFX_STATE_DEFAULT,0u)
         bgfx_draw_geometry_fragment(0u, program, cube)
         // sphere
-        v_model = compose(float4(0,0,0,0), rot, float4(1.0))
+        v_model = compose(float3(0,0,0), rot, float3(1.0))
         vs_preview_bind_uniform()
         fs_preview_bind_uniform()
         bgfx_set_state(BGFX_STATE_DEFAULT,0u)
         bgfx_draw_geometry_fragment(0u, program, sphere)
         // cylinder
-        v_model = compose(float4(3,0,0,0), rot, float4(1.0))
+        v_model = compose(float3(3,0,0), rot, float3(1.0))
         vs_preview_bind_uniform()
         fs_preview_bind_uniform()
         bgfx_set_state(BGFX_STATE_DEFAULT,0u)
