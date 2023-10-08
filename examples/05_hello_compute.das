@@ -140,7 +140,7 @@ def main
         bgfx_set_view_rect(0u, 0u, 0u, uint(display_w), uint(display_h))
         var c_mat : CMat
         let rot = quat_from_unit_vec_ang(normalize(float3(1.,0.,0.)), PI*0.25)
-        c_mat.a = compose(float4(0.), rot, float4(1.))
+        c_mat.a = compose(float3(0.), rot, float3(1.))
         c_mat.b = translation(float3(1.,2.,3.))
         identity(c_mat.c)
         identity(c_mat.d)
