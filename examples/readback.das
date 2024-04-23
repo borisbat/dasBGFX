@@ -154,7 +154,7 @@ def main
         if t > 10lf
             glfwSetTime(t - 10lf)
         v_view = look_at_rh(float3(0,0,10),float3(0,0,0),float3(0,1,0))
-        v_model = compose(float(0,0,0), float4(0,0,0,0), float3(1.0))
+        v_model = compose(float3(0,0,0), float4(0,0,0,0), float3(1.0))
         v_projection = bgfx_mat_projection(45., float(display_w), float(display_h), 0.1, 50., bgfx_get_caps().homogeneousDepth,false)
         v_pvm = v_projection * v_view * v_model
         c_mat.a = v_model

@@ -109,7 +109,7 @@ def main
             glfwSetTime(t - 10lf)
         let rot = quat_from_unit_vec_ang(normalize(float3(1.,1.,0.)), float(t)*PI*2.*0.1)
         v_view = look_at_rh(float3(0,0,10),float3(0,0,0),float3(0,1,0))
-        v_model = compose(float3(0,0,0,0), rot, float3(1.0))
+        v_model = compose(float3(0,0,0), rot, float3(1.0))
         v_projection = bgfx_mat_projection(45., float(display_w), float(display_h), 0.1, 50., bgfx_get_caps().homogeneousDepth,false)
         bgfx_set_vertex_buffer(0u, vbh)
         bgfx_set_index_buffer(ibh)
