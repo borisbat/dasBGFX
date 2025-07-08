@@ -28,6 +28,7 @@ def main {
 
     var pd : bgfx_platform_data_s
     pd.nwh = glfwGetNativeWindow(window)
+    pd.ndt = glfwGetNativeDisplay();  // Need only on linux
     bgfx_set_platform_data(safe_addr(pd))
 
     var init : bgfx_init_s

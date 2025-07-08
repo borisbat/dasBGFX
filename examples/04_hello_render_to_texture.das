@@ -87,6 +87,7 @@ def main {
     }
     var pd : bgfx_platform_data_s
     pd.nwh = glfwGetNativeWindow(window)
+    pd.ndt = glfwGetNativeDisplay();  // Need only on linux
     bgfx_set_platform_data(safe_addr(pd))
     bgfx_init(1280, 720)
     // bgfx_init(1280,720,bgfx_renderer_type DIRECT3D12)
@@ -98,7 +99,7 @@ def main {
     var program = bgfx_create_shader_program(@@vs_main, @@fs_main)
     var display_program = bgfx_create_shader_program(@@vs_display_main, @@fs_display_main)
     var texture = bgfx_load_image_from_file("image.png",
-        "{get_das_root()}/modules/dasBgfx/examples",
+        "{get_das_root()}/modules/dasBGFX/examples",
         "{get_das_root()}/examples/media")
     var frame_buffer = bgfx_create_frame_buffer(256u, 256u, bgfx_texture_format.RGBA8, BGFX_TEXTURE_NONE)
     bgfx_set_view_name(VIEW_MAIN, "main")
